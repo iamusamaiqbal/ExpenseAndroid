@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_Home"
+            android:icon="@drawable/ic_baseline_home_24"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_Record"
+            android:icon="@drawable/ic_baseline_receipt_24"
+            android:title="Record" />
+        <item
+            android:id="@+id/nav_Budgets"
+            android:icon="@drawable/budget_24"
+            android:title="Budgets" />
+        <item
+            android:id="@+id/nav_Debts"
+            android:icon="@drawable/ic_baseline_aspect_ratio_24"
+            android:title="Debts" />
+        <item
+            android:id="@+id/nav_Goals"
+            android:icon="@drawable/goal"
+            android:title="Goals" />
+
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_shopping_list"
+            android:icon="@drawable/shopping_list"
+            android:title="s List" />
+        <item
+            android:id="@+id/nav_warranties"
+            android:icon="@drawable/warranti"
+            android:title="Warranties" />
+        <item
+            android:id="@+id/nav_loyalty_card"
+            android:icon="@drawable/loyelty_card"
+            android:title="Loyalty Card" />
+        <item
+            android:id="@+id/nav_currency_rate"
+            android:icon="@drawable/currensy"
+            android:title="Currency Rate" />
+        <item
+            android:id="@+id/nav_group_sharing"
+            android:icon="@drawable/sharring"
+            android:title="Group Sharing" />
+
+
+    </group>
+
+    <item android:title="others">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_wallet_life"
+                    android:icon="@drawable/wallet_life"
+                    android:title="Wallet Life" />
+                <item
+                    android:id="@+id/nav_export"
+                    android:icon="@drawable/ic_baseline_exit_to_app_24"
+                    android:title="Export" />
+                <item
+                    android:id="@+id/nav_location"
+                    android:icon="@drawable/ic_baseline_location_on_24"
+                    android:title="Location" />
+            </group>
+        </menu>
+    </item>
+
+
+</menu>

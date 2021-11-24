@@ -1,0 +1,91 @@
+package com.example.moneywallet;
+
+import android.graphics.Color;
+import android.os.Build;
+import android.os.Bundle;
+
+import androidx.annotation.RequiresApi;
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class spending_statistic extends Fragment {
+
+    SQLiteHandler database;
+
+    List<PieEntry> entries = new ArrayList<>();
+    List<Integer> categories;
+    List<TransactionModel> transactionList ;
+    ArrayList<Integer> colors;
+
+    int total = 0;
+
+    final int[] MY_COLORS = {
+            Color.rgb(192, 0, 0),
+            Color.rgb(255, 0, 0),
+            Color.rgb(255, 192, 0),
+            Color.rgb(127, 127, 127),
+            Color.rgb(146, 208, 80),
+            Color.rgb(0, 176, 80),
+            Color.rgb(79, 129, 189)};
+
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_spending_statistic, container, false);
+
+
+
+        PieChart chart = view.findViewById(R.id.SpendingPieChart);
+        database = new SQLiteHandler(getActivity());
+        transactionList = new ArrayList<>();
+        colors = new ArrayList<>();
+        categories = new ArrayList<>();
+
+
+        transactionList = database.getAllTransaction();
+
+        transactionList.forEach(transactionModel -> {
+
+
+            if (!categories.contains(transactionModel.cid)) {
+                total = database.getSumByCat(SQLiteHandler.KEY_AMOUNT,transactionModel.cid);
+                entries.add(new PieEntry(total*1f));
+                categories.add(transactionModel.cid);
+            }
+        });
+
+        for (int c : MY_COLORS) colors.add(c);
+
+        PieDataSet set = new PieDataSet(entries, " Total : "+5000);
+        PieData data = new PieData(set);
+        set.setColors(colors);
+        chart.animateXY(5000, 5000);
+        chart.setDrawHoleEnabled(false);
+        chart.setDrawHoleEnabled(true);
+        chart.setData(data);
+
+
+        return view;
+    }
+}

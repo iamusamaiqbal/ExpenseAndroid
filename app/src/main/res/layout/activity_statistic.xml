@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".debit">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/stat_tool"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/calculater">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Statistic"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/search" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_stat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/stat_tool"
+        android:background="@color/white"
+        app:tabIndicatorColor="@color/calculater"
+        app:tabMode="scrollable"
+        app:tabSelectedTextColor="@color/calculater"
+        app:tabTextColor="@color/black"
+        tools:ignore="UnknownId">
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab_item_stat_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Balance" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab_item_stat_2"
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:text="Outlook" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab_item_stat_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cash-flow" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab_item_stat_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Spending" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab_item_stat_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Credit" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab_item_stat_6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reports" />
+
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tab_stat"
+        android:id="@+id/viewpage_stat"
+        />
+
+</RelativeLayout>
