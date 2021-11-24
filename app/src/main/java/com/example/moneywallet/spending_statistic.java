@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
@@ -28,6 +29,8 @@ public class spending_statistic extends Fragment {
     List<Integer> categories;
     List<TransactionModel> transactionList ;
     ArrayList<Integer> colors;
+    MyListAdapter adapter;
+    ListView listView;
 
     int total = 0;
 
@@ -57,6 +60,7 @@ public class spending_statistic extends Fragment {
 
 
         PieChart chart = view.findViewById(R.id.SpendingPieChart);
+        listView = view.findViewById(R.id.SpendingListView);
         database = new SQLiteHandler(getActivity());
         transactionList = new ArrayList<>();
         colors = new ArrayList<>();
@@ -64,6 +68,11 @@ public class spending_statistic extends Fragment {
 
 
         transactionList = database.getAllTransaction();
+
+        TransactionModel[] transactionArray = transactionList.toArray(new TransactionModel[0]);
+
+        adapter = new MyListAdapter(getActivity(), transactionArray);
+        listView.setAdapter(adapter);
 
         transactionList.forEach(transactionModel -> {
 

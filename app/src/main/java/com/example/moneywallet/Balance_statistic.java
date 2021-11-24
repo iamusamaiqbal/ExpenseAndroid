@@ -12,9 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import java.util.ArrayList;
@@ -72,6 +75,43 @@ public class Balance_statistic extends Fragment {
 //            }
 //        });
 
+        final ArrayList<String> xAxisLabel = new ArrayList<>();
+        xAxisLabel.add("Mon");
+        xAxisLabel.add("Tue");
+        xAxisLabel.add("Wed");
+        xAxisLabel.add("Thu");
+        xAxisLabel.add("Fri");
+        xAxisLabel.add("Sat");
+        xAxisLabel.add("Sun");
+
+
+        XAxis xAxis = lineChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+
+        xAxis.setDrawGridLines(false);
+        xAxis.setValueFormatter(new IAxisValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+                String label = "";
+                if(value == 100)
+                    label = xAxisLabel.get(0);
+                else if(value == 200)
+                    label = xAxisLabel.get(1);
+                else if(value == 300)
+                    label = xAxisLabel.get(2);
+                else if(value == 400)
+                    label = xAxisLabel.get(3);
+                else if(value == 500)
+                    label = xAxisLabel.get(4);
+                else if(value == 600)
+                    label = xAxisLabel.get(5);
+                else if(value == 700)
+                    label = xAxisLabel.get(6);
+                else if(value == 800)
+                    label = xAxisLabel.get(7);
+                return label;
+            }
+        });
 
         ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
 

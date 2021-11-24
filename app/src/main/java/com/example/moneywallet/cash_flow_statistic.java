@@ -15,12 +15,16 @@ import android.widget.Button;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
@@ -81,16 +85,16 @@ public class cash_flow_statistic extends Fragment {
 //            }
 //        });
 
-        NoOfEmp.add(new BarEntry(300f, 0));
-        NoOfEmp.add(new BarEntry(600f, 1));
-        NoOfEmp.add(new BarEntry(900f, 2));
-        NoOfEmp.add(new BarEntry(1200f, 3));
-        NoOfEmp.add(new BarEntry(1500f, 4));
-        NoOfEmp.add(new BarEntry(1800f, 5));
-        NoOfEmp.add(new BarEntry(2100f, 6));
-        NoOfEmp.add(new BarEntry(2400f, 7));
-        NoOfEmp.add(new BarEntry(2700f, 8));
-        NoOfEmp.add(new BarEntry(3000f, 9));
+        NoOfEmp.add(new BarEntry(300f, 1));
+        NoOfEmp.add(new BarEntry(600f, 2));
+        NoOfEmp.add(new BarEntry(900f, 3));
+        NoOfEmp.add(new BarEntry(1200f, 4));
+        NoOfEmp.add(new BarEntry(1500f, 5));
+        NoOfEmp.add(new BarEntry(1800f, 6));
+        NoOfEmp.add(new BarEntry(2100f, 7));
+//        NoOfEmp.add(new BarEntry(2400f, 7));
+//        NoOfEmp.add(new BarEntry(2700f, 8));
+//        NoOfEmp.add(new BarEntry(3000f, 9));
 
         cashFlowBars(NoOfEmp);
 
@@ -138,6 +142,44 @@ public class cash_flow_statistic extends Fragment {
 
             LineData data12 = new LineData(dataSets);
 
+            final ArrayList<String> xAxisLabel = new ArrayList<>();
+            xAxisLabel.add("Mon");
+            xAxisLabel.add("Tue");
+            xAxisLabel.add("Wed");
+            xAxisLabel.add("Thu");
+            xAxisLabel.add("Fri");
+            xAxisLabel.add("Sat");
+            xAxisLabel.add("Sun");
+
+
+            XAxis xAxis = lineChart.getXAxis();
+            xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+
+            xAxis.setDrawGridLines(false);
+            xAxis.setValueFormatter(new IAxisValueFormatter() {
+                @Override
+                public String getFormattedValue(float value, AxisBase axis) {
+                    String label = "";
+                    if(value == 100)
+                        label = xAxisLabel.get(0);
+                    else if(value == 200)
+                        label = xAxisLabel.get(1);
+                    else if(value == 300)
+                        label = xAxisLabel.get(2);
+                    else if(value == 400)
+                        label = xAxisLabel.get(3);
+                    else if(value == 500)
+                        label = xAxisLabel.get(4);
+                    else if(value == 600)
+                        label = xAxisLabel.get(5);
+                    else if(value == 700)
+                        label = xAxisLabel.get(6);
+                    else if(value == 800)
+                        label = xAxisLabel.get(7);
+                    return label;
+                }
+            });
+
             lineChart.setData(data12);
 
         });
@@ -170,17 +212,48 @@ public class cash_flow_statistic extends Fragment {
             lineDataSet1.setDrawFilled(true);
             lineDataSet1.setFillColor(Color.RED);
 
-
-            final ArrayList<String> labels = new ArrayList<String>();
-            labels.add("12AM");
-            labels.add("06AM");
-            labels.add("12PM");
-            labels.add("06PM");
-            labels.add("12AM");
-
-
             dataSets.add(lineDataSet1);
             LineData data12 = new LineData(dataSets);
+
+            final ArrayList<String> xAxisLabel = new ArrayList<>();
+            xAxisLabel.add("Mon");
+            xAxisLabel.add("Tue");
+            xAxisLabel.add("Wed");
+            xAxisLabel.add("Thu");
+            xAxisLabel.add("Fri");
+            xAxisLabel.add("Sat");
+            xAxisLabel.add("Sun");
+
+
+            XAxis xAxis = lineChart.getXAxis();
+            xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+
+            xAxis.setDrawGridLines(false);
+            xAxis.setValueFormatter(new IAxisValueFormatter() {
+                @Override
+                public String getFormattedValue(float value, AxisBase axis) {
+                    String label = "";
+                    if(value == 100)
+                        label = xAxisLabel.get(0);
+                    else if(value == 200)
+                        label = xAxisLabel.get(1);
+                    else if(value == 300)
+                        label = xAxisLabel.get(2);
+                    else if(value == 400)
+                        label = xAxisLabel.get(3);
+                    else if(value == 500)
+                        label = xAxisLabel.get(4);
+                    else if(value == 600)
+                        label = xAxisLabel.get(5);
+                    else if(value == 700)
+                        label = xAxisLabel.get(6);
+                    else if(value == 800)
+                        label = xAxisLabel.get(7);
+                    return label;
+                }
+            });
+
+
             lineChart.setData(data12);
 
         });
@@ -214,6 +287,44 @@ public class cash_flow_statistic extends Fragment {
             dataSets.add(lineDataSet2);
             LineData data12 = new LineData(dataSets);
 
+            final ArrayList<String> xAxisLabel = new ArrayList<>();
+            xAxisLabel.add("Mon");
+            xAxisLabel.add("Tue");
+            xAxisLabel.add("Wed");
+            xAxisLabel.add("Thu");
+            xAxisLabel.add("Fri");
+            xAxisLabel.add("Sat");
+            xAxisLabel.add("Sun");
+
+
+            XAxis xAxis = lineChart.getXAxis();
+            xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+
+            xAxis.setDrawGridLines(false);
+            xAxis.setValueFormatter(new IAxisValueFormatter() {
+                @Override
+                public String getFormattedValue(float value, AxisBase axis) {
+                    String label = "";
+                    if(value == 100)
+                        label = xAxisLabel.get(0);
+                    else if(value == 200)
+                        label = xAxisLabel.get(1);
+                    else if(value == 300)
+                        label = xAxisLabel.get(2);
+                    else if(value == 400)
+                        label = xAxisLabel.get(3);
+                    else if(value == 500)
+                        label = xAxisLabel.get(4);
+                    else if(value == 600)
+                        label = xAxisLabel.get(5);
+                    else if(value == 700)
+                        label = xAxisLabel.get(6);
+                    else if(value == 800)
+                        label = xAxisLabel.get(7);
+                    return label;
+                }
+            });
+
 
             lineChart.setData(data12);
         });
@@ -224,9 +335,17 @@ public class cash_flow_statistic extends Fragment {
 
     public void cashFlowBars(ArrayList NoOfEmp){
 
-        String[] xAxisLables = new String[]{"1","2", "3", "4", "5","6","7"};
 
-        barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(xAxisLables));
+        final ArrayList<String> xAxisLabel = new ArrayList<>();
+        xAxisLabel.add("Mon");
+        xAxisLabel.add("Tue");
+        xAxisLabel.add("Wed");
+        xAxisLabel.add("Thu");
+        xAxisLabel.add("Fri");
+        xAxisLabel.add("Sat");
+        xAxisLabel.add("Sun");
+
+
 
         BarDataSet bardataset = new BarDataSet(NoOfEmp, "Expenses");
         barChart.animateY(5000);
@@ -234,6 +353,30 @@ public class cash_flow_statistic extends Fragment {
         data2.setBarWidth(100f);
         bardataset.setColors(ColorTemplate.COLORFUL_COLORS);
         barChart.setData(data2);
+
+        XAxis xAxis = barChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setValueFormatter(new IAxisValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+                String label = "";
+                if(value == 300)
+                    label = xAxisLabel.get(0);
+                else if(value == 600)
+                    label = xAxisLabel.get(1);
+                else if(value == 900)
+                    label = xAxisLabel.get(2);
+                else if(value == 1200)
+                    label = xAxisLabel.get(3);
+                else if(value == 1500)
+                    label = xAxisLabel.get(4);
+                else if(value == 1800)
+                    label = xAxisLabel.get(5);
+                else if(value == 2100)
+                    label = xAxisLabel.get(6);
+                return label;
+            }
+        });
     }
     public void cashFlowLine(ArrayList<Entry> yCash,ArrayList<ILineDataSet> dataSets){
         yCash.add(new Entry(0f,0));
@@ -265,6 +408,44 @@ public class cash_flow_statistic extends Fragment {
         dataSets.add(lineDataSet1);
 
         LineData data12 = new LineData(dataSets);
+
+        final ArrayList<String> xAxisLabel = new ArrayList<>();
+        xAxisLabel.add("Mon");
+        xAxisLabel.add("Tue");
+        xAxisLabel.add("Wed");
+        xAxisLabel.add("Thu");
+        xAxisLabel.add("Fri");
+        xAxisLabel.add("Sat");
+        xAxisLabel.add("Sun");
+
+
+        XAxis xAxis = lineChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+
+        xAxis.setDrawGridLines(false);
+        xAxis.setValueFormatter(new IAxisValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+                String label = "";
+                if(value == 100)
+                    label = xAxisLabel.get(0);
+                else if(value == 200)
+                    label = xAxisLabel.get(1);
+                else if(value == 300)
+                    label = xAxisLabel.get(2);
+                else if(value == 400)
+                    label = xAxisLabel.get(3);
+                else if(value == 500)
+                    label = xAxisLabel.get(4);
+                else if(value == 600)
+                    label = xAxisLabel.get(5);
+                else if(value == 700)
+                    label = xAxisLabel.get(6);
+                else if(value == 800)
+                    label = xAxisLabel.get(7);
+                return label;
+            }
+        });
 
         lineChart.setData(data12);
     }
