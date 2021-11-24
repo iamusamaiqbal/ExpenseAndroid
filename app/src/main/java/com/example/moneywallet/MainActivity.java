@@ -92,23 +92,28 @@ ImageView imageView2;
                         Toast.makeText(MainActivity.this, "budget clicked", Toast.LENGTH_SHORT).show();
                         return true;
                     case R.id.nav_Debts:
-//                        Intent intent=new Intent(MainActivity.this,accounts.class);
-//                        startActivity(intent);
+                        Intent debt=new Intent(MainActivity.this,debit.class);
+                        startActivity(debt);
                         Toast.makeText(MainActivity.this, "debts clicked", Toast.LENGTH_SHORT).show();
                         return true;
                     case R.id.nav_Goals:
-//                        Intent intent=new Intent(MainActivity.this,accounts.class);
-//                        startActivity(intent);
+                        Intent gool=new Intent(MainActivity.this,Goals.class);
+                        startActivity(gool);
                         Toast.makeText(MainActivity.this, "goals clicked", Toast.LENGTH_SHORT).show();
                         return true;
+                    case R.id.nav_Statistic:
+                        Intent stat=new Intent(MainActivity.this,statistic.class);
+                        startActivity(stat);
+                        Toast.makeText(MainActivity.this, "stat clicked", Toast.LENGTH_SHORT).show();
+                        return true;
                     case R.id.nav_shopping_list:
-//                        Intent intent=new Intent(MainActivity.this,accounts.class);
-//                        startActivity(intent);
+                        Intent sh=new Intent(MainActivity.this,shopping_list.class);
+                        startActivity(sh);
                         Toast.makeText(MainActivity.this, "shopping list clicked", Toast.LENGTH_SHORT).show();
                         return true;
                     case R.id.nav_warranties:
-//                        Intent intent=new Intent(MainActivity.this,accounts.class);
-//                        startActivity(intent);
+                        Intent warr=new Intent(MainActivity.this,warranty.class);
+                        startActivity(warr);
                         Toast.makeText(MainActivity.this, "warranties clicked", Toast.LENGTH_SHORT).show();
                         return true;
                     case R.id.nav_loyalty_card:

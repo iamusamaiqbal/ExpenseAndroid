@@ -22,6 +22,11 @@
             android:icon="@drawable/goal"
             android:title="Goals" />
 
+        <item
+            android:id="@+id/nav_Statistic"
+            android:icon="@drawable/ic_baseline_auto_graph_24"
+            android:title="Statistic" />
+
     </group>
     <group android:checkableBehavior="single">
         <item

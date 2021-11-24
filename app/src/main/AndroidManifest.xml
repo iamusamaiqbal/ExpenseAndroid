@@ -10,6 +10,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MoneyWallet">
         <activity
+            android:name=".shopping_list"
+            android:exported="false" />
+        <activity
+            android:name=".warranty"
+            android:exported="false" />
+        <activity
+            android:name=".Goals"
+            android:exported="false" />
+        <activity
+            android:name=".debit"
+            android:exported="false" />
+        <activity
+            android:name=".custom_category_list"
+            android:exported="false" />
+        <activity
+            android:name=".Add_Warranty"
+            android:exported="false" />
+        <activity
             android:name=".BudgetDetailActivity"
             android:exported="true" />
         <activity

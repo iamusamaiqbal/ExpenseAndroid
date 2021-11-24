@@ -3,6 +3,7 @@ package com.example.moneywallet;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +23,7 @@ import java.util.Locale;
 public class new_record extends AppCompatActivity implements View.OnClickListener {
     Button incomeBtn, expenseBtn, transferBtn, one, two, three, four, five, six, seven, eight, nine, zero;
     Button divide, multiply, add, minus, equal,clear;
+    Button catt_cal;
     ImageButton saveRecord;
     TextView textView;
     Date date;
@@ -29,7 +31,7 @@ public class new_record extends AppCompatActivity implements View.OnClickListene
     SQLiteHandler database;
 
     boolean isIncome, isExpense, isTransfer, isAdd, isSubtract, isDivide,isMultiply;
-    int firstValue=0,secondValue=0,result=0;
+    long firstValue=0,secondValue=0,result=0;
 
 
 
@@ -38,6 +40,11 @@ public class new_record extends AppCompatActivity implements View.OnClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_record);
+        catt_cal=findViewById(R.id.catt_cal);
+        catt_cal.setOnClickListener(v -> {
+            Intent intent =new Intent(new_record.this,custom_category_list.class);
+            startActivity(intent);
+        });
 
         clear = findViewById(R.id.clear_btn);
         incomeBtn = findViewById(R.id.button11);
@@ -89,7 +96,7 @@ public class new_record extends AppCompatActivity implements View.OnClickListene
 
         saveRecord.setOnClickListener(v -> {
             if(result!=0){
-                saveTransaction(result);
+                saveTransaction(Integer.parseInt(String.valueOf(result)));
             }
             int total = database.getSum(SQLiteHandler.KEY_AMOUNT);
             Log.e("Total",""+total);
