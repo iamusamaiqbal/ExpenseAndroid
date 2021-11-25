@@ -21,7 +21,7 @@
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/clear_btn"
+                android:id="@+id/clear_btn12"
                 style="@style/TextAppearance.AppCompat.Widget.Button.Borderless.Colored"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

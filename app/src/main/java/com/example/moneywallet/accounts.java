@@ -33,21 +33,28 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class accounts extends Fragment {
     String[] mobileArray = {"dadsd", "dsdadada", "sdsddsdsdasd"};
     MyListAdapter adapter;
     ListView listView;
     Button showMore, pieChartShowMore;
+    Date date;
+    LocalDate dateTime;
 
     int sum;
+    String StringDate;
 
     SQLiteHandler database;
 
     List<TransactionModel> transactionList = new ArrayList<>();
-    List<Integer> cat = new ArrayList<>();
+    List<String> cat = new ArrayList<>();
 
 
     List<PieEntry> entries = new ArrayList<>();
@@ -72,7 +79,7 @@ public class accounts extends Fragment {
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -84,6 +91,12 @@ public class accounts extends Fragment {
         listView = v.findViewById(R.id.list_view_account);
         showMore = v.findViewById(R.id.show_more);
         pieChartShowMore = v.findViewById(R.id.PieChartShowMore);
+        date = new Date();
+
+        String dateInString = date.toString();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E MMM dd HH:mm:ss 'GMT'z yyyy", Locale.ENGLISH);
+        dateTime = LocalDate.parse(dateInString, formatter);
+
 
         database = new SQLiteHandler(getActivity());
         sum = database.getSum(SQLiteHandler.KEY_AMOUNT);
@@ -106,37 +119,38 @@ public class accounts extends Fragment {
         );
 
         showMore.setOnClickListener(v1 -> {
-            Intent intent = new Intent(getActivity(),TransactionActivity.class);
+            Intent intent = new Intent(getActivity(), TransactionActivity.class);
             startActivity(intent);
         });
 
         pieChartShowMore.setOnClickListener(v1 -> {
-            Intent intent = new Intent(getActivity(),statistic.class);
+            Intent intent = new Intent(getActivity(), statistic.class);
             getContext().startActivity(intent);
         });
 
         transactionList.forEach(transactionModel -> {
-            if (!cat.contains(transactionModel.cid)){
-                cat.add(transactionModel.cid);
+            if (transactionModel.isExpense == 1) {
+                if (!cat.contains(transactionModel.cat)) {
+                    cat.add(transactionModel.cat);
+                }
             }
         });
 
 
         cat.forEach(cat -> {
-            int total = database.getSumByCat(SQLiteHandler.KEY_AMOUNT,cat);
-            float result = total*100/sum;
+            int total = database.getSumByCat(SQLiteHandler.KEY_AMOUNT, cat);
+            float result = total * 100 / sum;
 
-            entries.add(new PieEntry(result*1f));
+            entries.add(new PieEntry(result * 1f, "" + cat));
         });
 
         //PieChart
 
-        PieDataSet set = new PieDataSet(entries, " Total : "+sum);
+        PieDataSet set = new PieDataSet(entries, " Total : " + sum);
         PieData data = new PieData(set);
         set.setColors(colors);
         chart.setDrawHoleEnabled(false);
         chart.setData(data);
-
 
 
         //LineChart
@@ -144,53 +158,105 @@ public class accounts extends Fragment {
         ArrayList<Entry> yExpense = new ArrayList<>();
         ArrayList<Entry> yIncome = new ArrayList<>();
 
-        yExpense.add(new Entry(0f,0));
-        yIncome.add(new Entry(0f,0));
+//        yExpense.add(new Entry(0f, 0));
+//        yIncome.add(new Entry(0f, 0));
+//
+//        transactionList.forEach(transactionModel -> {
+//
+//            LocalDate dateTime = LocalDate.parse(transactionModel.date);
+//
+//            if ((dateTime.isEqual(LocalDate.now()) || dateTime.isAfter(LocalDate.parse(budget.start))) && (dateTime.isEqual(LocalDate.parse(budget.end)) || dateTime.isBefore(LocalDate.parse(budget.end)))) {
+//                if(!dates.contains(dateTime.toString())){
+//                    total=database.getSumByDate(SQLiteHandler.KEY_AMOUNT,dateTime.toString());
+//                    transactions.add(new BarEntry( transactionModel.id*400f, total*1));
+//                    dates.add(dateTime.toString());
+//                }
+//            }
+//        });
 
-        transactionList.forEach(amount -> {
-            if(amount.isExpense == 1){
-                yExpense.add(new Entry(amount.id*100f,amount.amount*1));
-            } else {
-                yIncome.add(new Entry(amount.id*100f,amount.amount*1));
+
+        int j=0;
+        for (int i = 6; i >-1; i--) {
+
+            LocalDate day = dateTime.minusDays(i);
+            int totalExp = database.getSumByDateExpense(SQLiteHandler.KEY_AMOUNT, day.toString());
+
+            int totalInc = database.getSumByDateIncome(SQLiteHandler.KEY_AMOUNT, day.toString());
+
+            if(totalExp!=0){
+
+                yExpense.add(new Entry(j*100f, totalExp* 1));
+
             }
-        });
+            if(totalInc!=0){
+                yIncome.add(new Entry(j* 100f, totalInc * 1));
+            }
 
-        final ArrayList<String> xAxisLabel = new ArrayList<>();
-        xAxisLabel.add("Mon");
-        xAxisLabel.add("Tue");
-        xAxisLabel.add("Wed");
-        xAxisLabel.add("Thu");
-        xAxisLabel.add("Fri");
-        xAxisLabel.add("Sat");
-        xAxisLabel.add("Sun");
+            Log.e("ERRRRRRRRRRRRRRr", "" + totalExp +" "+totalInc);
+            j+=1;
+        }
+
+//        transactionList.forEach(amount -> {
+//            if (amount.isExpense == 1) {
+//                yExpense.add(new Entry(amount.id * 100f, amount.amount * 1));
+//            } else {
+//                yIncome.add(new Entry(amount.id * 100f, amount.amount * 1));
+//            }
+//        });
+
+//        final ArrayList<String> xAxisLabel = new ArrayList<>();
+//        xAxisLabel.add("Mon");
+//        xAxisLabel.add("Tue");
+//        xAxisLabel.add("Wed");
+//        xAxisLabel.add("Thu");
+//        xAxisLabel.add("Fri");
+//        xAxisLabel.add("Sat");
+//        xAxisLabel.add("Sun");
 
 
         XAxis xAxis = lineChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
 
         xAxis.setDrawGridLines(false);
-        xAxis.setValueFormatter(new IAxisValueFormatter() {
-            @Override
-            public String getFormattedValue(float value, AxisBase axis) {
-                String label = "";
-                if(value == 100)
-                    label = xAxisLabel.get(0);
-                else if(value == 200)
-                    label = xAxisLabel.get(1);
-                else if(value == 300)
-                    label = xAxisLabel.get(2);
-                else if(value == 400)
-                    label = xAxisLabel.get(3);
-                else if(value == 500)
-                    label = xAxisLabel.get(4);
-                else if(value == 600)
-                    label = xAxisLabel.get(5);
-                else if(value == 700)
-                    label = xAxisLabel.get(6);
-                else if(value == 800)
-                    label = xAxisLabel.get(7);
-                return label;
+        xAxis.setValueFormatter((value, axis) -> {
+            String label = "";
+            if (value == 0) {
+                LocalDate day = dateTime.minusDays(6);
+                DateTimeFormatter fLocalDate = DateTimeFormatter.ofPattern("E");
+                StringDate = day.format(fLocalDate);
+                label = StringDate;
+            } else if (value == 100) {
+                LocalDate day = dateTime.minusDays(5);
+                DateTimeFormatter fLocalDate = DateTimeFormatter.ofPattern("E");
+                StringDate = day.format(fLocalDate);
+                label = StringDate;
+            } else if (value == 200) {
+                LocalDate day = dateTime.minusDays(4);
+                DateTimeFormatter fLocalDate = DateTimeFormatter.ofPattern("E");
+                StringDate = day.format(fLocalDate);
+                label = StringDate;
+            } else if (value == 300) {
+                LocalDate day = dateTime.minusDays(3);
+                DateTimeFormatter fLocalDate = DateTimeFormatter.ofPattern("E");
+                StringDate = day.format(fLocalDate);
+                label = StringDate;
+            } else if (value == 400) {
+                LocalDate day = dateTime.minusDays(2);
+                DateTimeFormatter fLocalDate = DateTimeFormatter.ofPattern("E");
+                StringDate = day.format(fLocalDate);
+                label = StringDate;
+            } else if (value == 500) {
+                LocalDate day = dateTime.minusDays(1);
+                DateTimeFormatter fLocalDate = DateTimeFormatter.ofPattern("E");
+                StringDate = day.format(fLocalDate);
+                label = StringDate;
+            } else if (value == 600) {
+                DateTimeFormatter fLocalDate = DateTimeFormatter.ofPattern("E");
+                StringDate = dateTime.format(fLocalDate);
+                label = StringDate;
+
             }
+            return label;
         });
 
 
@@ -206,7 +272,6 @@ public class accounts extends Fragment {
         lineDataSet1.setCircleColor(Color.MAGENTA);
         lineDataSet1.setLineWidth(1);
         lineDataSet1.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-
 
 
         LineDataSet lineDataSet2 = new LineDataSet(yIncome, "Income");

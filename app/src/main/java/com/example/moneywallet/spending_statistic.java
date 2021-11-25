@@ -26,7 +26,7 @@ public class spending_statistic extends Fragment {
     SQLiteHandler database;
 
     List<PieEntry> entries = new ArrayList<>();
-    List<Integer> categories;
+    List<String> categories;
     List<TransactionModel> transactionList ;
     ArrayList<Integer> colors;
     MyListAdapter adapter;
@@ -77,10 +77,10 @@ public class spending_statistic extends Fragment {
         transactionList.forEach(transactionModel -> {
 
 
-            if (!categories.contains(transactionModel.cid)) {
-                total = database.getSumByCat(SQLiteHandler.KEY_AMOUNT,transactionModel.cid);
+            if (!categories.contains(transactionModel.cat)) {
+                total = database.getSumByCat(SQLiteHandler.KEY_AMOUNT,transactionModel.cat);
                 entries.add(new PieEntry(total*1f));
-                categories.add(transactionModel.cid);
+                categories.add(transactionModel.cat);
             }
         });
 

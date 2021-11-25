@@ -50,16 +50,32 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         String output = dateTime.format( fLocalDate) ;
 
         holder.amount.setText(""+transactionList[position].amount);
-        holder.title.setText(""+transactionList[position].id);
+        holder.title.setText(""+transactionList[position].cat);
         holder.date.setText(output);
         holder.day.setText(output);
 
-        if (transactionList[position].cid==1) {
-            holder.imageView.setImageResource(R.drawable.shopping_list);
-        } else if (transactionList[position].cid==6) {
-            holder.imageView.setImageResource(R.drawable.sharring);
-        } else if (transactionList[position].cid==8) {
-            holder.imageView.setImageResource(R.drawable.loyelty_card);
+        if (transactionList[position].cat.equals("Food & Drinks")) {
+            holder.imageView.setImageResource(R.drawable.ic_dinner);
+        } else if (transactionList[position].cat.equals("Shopping")) {
+            holder.imageView.setImageResource(R.drawable.ic_shoppinggg);
+        } else if (transactionList[position].cat.equals("Housing")) {
+            holder.imageView.setImageResource(R.drawable.ic_house);
+        } else if (transactionList[position].cat.equals("Transportation")) {
+            holder.imageView.setImageResource(R.drawable.ic_bus);
+        } else if (transactionList[position].cat.equals("Vehicle")) {
+            holder.imageView.setImageResource(R.drawable.ic_carrrr);
+        } else if (transactionList[position].cat.equals("Life & Entertainment")) {
+            holder.imageView.setImageResource(R.drawable.ic_entertainment);
+        } else if (transactionList[position].cat.equals("Communication")) {
+            holder.imageView.setImageResource(R.drawable.ic_laptop_svgrepo_com);
+        } else if (transactionList[position].cat.equals("Financial Expenses")) {
+            holder.imageView.setImageResource(R.drawable.ic_investment_svgrepo_com);
+        } else if (transactionList[position].cat.equals("Investments")) {
+            holder.imageView.setImageResource(R.drawable.ic_investment);
+        } else if (transactionList[position].cat.equals("Income")) {
+            holder.imageView.setImageResource(R.drawable.ic_incom);
+        } else if (transactionList[position].cat.equals("Other")) {
+            holder.imageView.setImageResource(R.drawable.ic_other);
         } else {
             holder.imageView.setImageResource(R.drawable.setting_back);
         }

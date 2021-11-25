@@ -34,7 +34,7 @@ public class BudgetDetailActivity extends AppCompatActivity {
     List<TransactionModel> transactionList ;
     ArrayList<Integer> colors;
     List<String> dates;
-    List<Integer> categories;
+    List<String> categories;
     BudgetModel budget;
     int total = 0,id=0;
 
@@ -131,10 +131,10 @@ public class BudgetDetailActivity extends AppCompatActivity {
         transactionList.forEach(transactionModel -> {
 
 
-            if (!categories.contains(transactionModel.cid)) {
-                total = database.getSumByCat(SQLiteHandler.KEY_AMOUNT,transactionModel.cid);
+            if (!categories.contains(transactionModel.cat)) {
+                total = database.getSumByCat(SQLiteHandler.KEY_AMOUNT,transactionModel.cat);
                 entries.add(new PieEntry(total*1f));
-                categories.add(transactionModel.cid);
+                categories.add(transactionModel.cat);
             }
         });
 

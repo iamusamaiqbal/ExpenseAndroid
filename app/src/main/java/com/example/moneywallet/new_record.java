@@ -24,7 +24,7 @@ public class new_record extends AppCompatActivity implements View.OnClickListene
     Button incomeBtn, expenseBtn, transferBtn, one, two, three, four, five, six, seven, eight, nine, zero;
     Button divide, multiply, add, minus, equal,clear;
     Button catt_cal;
-    ImageButton saveRecord;
+    ImageButton saveRecord,delete,goBack;
     TextView textView;
     Date date;
 
@@ -40,13 +40,11 @@ public class new_record extends AppCompatActivity implements View.OnClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_record);
-        catt_cal=findViewById(R.id.catt_cal);
-        catt_cal.setOnClickListener(v -> {
-            Intent intent =new Intent(new_record.this,custom_category_list.class);
-            startActivity(intent);
-        });
 
-        clear = findViewById(R.id.clear_btn);
+        catt_cal=findViewById(R.id.catt_cal);
+        goBack = findViewById(R.id.imageButton2);
+        delete = findViewById(R.id.imageButton3);
+        clear = findViewById(R.id.clear_btn12);
         incomeBtn = findViewById(R.id.button11);
         expenseBtn = findViewById(R.id.button12);
         transferBtn = findViewById(R.id.button13);
@@ -95,11 +93,38 @@ public class new_record extends AppCompatActivity implements View.OnClickListene
         date = new Date();
 
         saveRecord.setOnClickListener(v -> {
-            if(result!=0){
-                saveTransaction(Integer.parseInt(String.valueOf(result)));
+            if(!textView.getText().toString().isEmpty()){
+                if(result!=0){
+                    saveTransaction((int) Long.parseLong(String.valueOf(result)));
+                } else{
+                    saveTransaction((int) Long.parseLong(textView.getText().toString()));
+                }
+            } else {
+                Log.e("Input","Text field is empty");
             }
+
             int total = database.getSum(SQLiteHandler.KEY_AMOUNT);
             Log.e("Total",""+total);
+        });
+
+        goBack.setOnClickListener(v -> {
+            onBackPressed();
+        });
+
+        clear.setOnClickListener(v -> textView.setText(""));
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String s = textView.getText().toString();
+                s = s.substring(0, s.length() - 1);
+                textView.setText(s);
+            }
+        });
+
+        catt_cal.setOnClickListener(v -> {
+            Intent intent =new Intent(new_record.this,custom_category_list.class);
+            startActivity(intent);
         });
 
     }
@@ -189,9 +214,6 @@ public class new_record extends AppCompatActivity implements View.OnClickListene
                 isIncome = false;
                 isTransfer = true;
                 break;
-            case R.id.clear_btn:
-                textView.setText("");
-                break;
             case R.id.equal_btn:
 
                 if(firstValue != 0){
@@ -239,7 +261,7 @@ public class new_record extends AppCompatActivity implements View.OnClickListene
 
         if(isIncome){
 
-            TransactionModel transaction = new TransactionModel(1, res, 0, 0, 1, dateTime.toString());
+            TransactionModel transaction = new TransactionModel(Constants.transactionCategory, res, 0, 0, 1, dateTime.toString());
             database.addTransaction(transaction);
 
             Toast.makeText(getApplicationContext(), "Done", Toast.LENGTH_SHORT).show();
@@ -250,7 +272,7 @@ public class new_record extends AppCompatActivity implements View.OnClickListene
 
         } else if(isTransfer){
 
-            TransactionModel transaction = new TransactionModel(1, res, 1, 0, 0, dateTime.toString());
+            TransactionModel transaction = new TransactionModel(Constants.transactionCategory, res, 1, 0, 0, dateTime.toString());
             database.addTransaction(transaction);
 
             Toast.makeText(getApplicationContext(), "Done", Toast.LENGTH_SHORT).show();
@@ -261,7 +283,7 @@ public class new_record extends AppCompatActivity implements View.OnClickListene
 
         } else if(isExpense){
 
-            TransactionModel transaction = new TransactionModel(1, res, 0, 1, 0, dateTime.toString());
+            TransactionModel transaction = new TransactionModel(Constants.transactionCategory, res, 0, 1, 0, dateTime.toString());
             database.addTransaction(transaction);
 
             Toast.makeText(getApplicationContext(), "Done", Toast.LENGTH_SHORT).show();

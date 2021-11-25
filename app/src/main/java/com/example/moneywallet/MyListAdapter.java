@@ -47,18 +47,34 @@ class MyListAdapter extends ArrayAdapter<TransactionModel> {
         TextView subtitleText = rowView.findViewById(R.id.textView3);
         ImageView imageView = rowView.findViewById(R.id.imageView3);
 
-        title.setText(""+mylist[position].id);
+        title.setText(""+mylist[position].cat);
         amount.setText(""+mylist[position].amount);
         subtitleText.setText(output);
 
         //System.out.println(s);
 
-        if (mylist[position].cid==1) {
-            imageView.setImageResource(R.drawable.shopping_list);
-        } else if (mylist[position].cid==6) {
-            imageView.setImageResource(R.drawable.sharring);
-        } else if (mylist[position].cid==8) {
-            imageView.setImageResource(R.drawable.loyelty_card);
+        if (mylist[position].cat.equals("Food & Drinks")) {
+            imageView.setImageResource(R.drawable.ic_dinner);
+        } else if (mylist[position].cat.equals("Shopping")) {
+            imageView.setImageResource(R.drawable.ic_shoppinggg);
+        } else if (mylist[position].cat.equals("Housing")) {
+            imageView.setImageResource(R.drawable.ic_house);
+        } else if (mylist[position].cat.equals("Transportation")) {
+            imageView.setImageResource(R.drawable.ic_bus);
+        } else if (mylist[position].cat.equals("Vehicle")) {
+            imageView.setImageResource(R.drawable.ic_carrrr);
+        } else if (mylist[position].cat.equals("Life & Entertainment")) {
+            imageView.setImageResource(R.drawable.ic_entertainment);
+        } else if (mylist[position].cat.equals("Communication")) {
+            imageView.setImageResource(R.drawable.ic_laptop_svgrepo_com);
+        } else if (mylist[position].cat.equals("Financial Expenses")) {
+            imageView.setImageResource(R.drawable.ic_investment_svgrepo_com);
+        } else if (mylist[position].cat.equals("Investments")) {
+            imageView.setImageResource(R.drawable.ic_investment);
+        } else if (mylist[position].cat.equals("Income")) {
+            imageView.setImageResource(R.drawable.ic_incom);
+        } else if (mylist[position].cat.equals("Other")) {
+            imageView.setImageResource(R.drawable.ic_other);
         } else {
             imageView.setImageResource(R.drawable.setting_back);
         }

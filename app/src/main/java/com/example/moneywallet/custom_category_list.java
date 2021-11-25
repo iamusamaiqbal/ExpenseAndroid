@@ -25,8 +25,7 @@ public class custom_category_list extends AppCompatActivity {
         arrayList.add(new person(R.drawable.ic_bus,"Transportation"));
         arrayList.add(new person(R.drawable.ic_carrrr,"Vehicle"));
         arrayList.add(new person(R.drawable.ic_entertainment,"Life & Entertainment"));
-        arrayList.add(new person(R.drawable.ic_laptop_svgrepo_com,"Communication,PC"));
-
+        arrayList.add(new person(R.drawable.ic_laptop_svgrepo_com,"Communication"));
         arrayList.add(new person(R.drawable.ic_investment_svgrepo_com,"Financial Expenses"));
         arrayList.add(new person(R.drawable.ic_investment,"Investments"));
         arrayList.add(new person(R.drawable.ic_incom,"Income"));
@@ -35,6 +34,10 @@ public class custom_category_list extends AppCompatActivity {
 
 
         personAdapter personAdapter=new personAdapter(this,R.layout.custom_list_row,arrayList);
+        custom_list_category.setOnItemClickListener((parent, view, position, id) -> {
+            Constants.transactionCategory = arrayList.get(position).name;
+            onBackPressed();
+        });
         custom_list_category.setAdapter(personAdapter);
 
     }

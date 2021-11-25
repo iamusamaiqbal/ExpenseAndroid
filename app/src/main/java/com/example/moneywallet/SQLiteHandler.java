@@ -16,6 +16,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     public static String TABLE_TRANSACTION = "TransactionTable";
 
     public static String KEY_TID = "id";
+    public static String KEY_CAT = "cat";
     public static String KEY_AMOUNT = "amount";
     public static String KEY_ISEXPENSE = "isexpense";
     public static String KEY_ISINCOME = "isincome";
@@ -41,7 +42,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 
 
     public SQLiteHandler(@Nullable Context context) {
-        super(context, "ExpenseDB3", null, 1);
+        super(context, "ExpenseDB4", null, 1);
     }
 
     @Override
@@ -50,12 +51,11 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         String CREATE_EXPENSE_TABLE = "CREATE TABLE " + TABLE_TRANSACTION + "("
                 + KEY_TID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + KEY_AMOUNT + " INTEGER,"
-                + KEY_CID + " INTEGER,"
+                + KEY_CAT + " VARCHAR(20),"
                 + KEY_ISEXPENSE + " BOOLEAN,"
                 + KEY_ISINCOME + " BOOLEAN,"
                 + KEY_ISTRANSFER + " BOOLEAN,"
-                + KEY_DATE + " DATETIME,"
-                + " FOREIGN KEY(" + KEY_CID + ") REFERENCES " + TABLE_CATEGORY + "(" + KEY_CID + "))";
+                + KEY_DATE + " DATETIME)";
 
         String CREATE_CATEGORY_TABLE = "CREATE TABLE " + TABLE_CATEGORY + "("
                 + KEY_CID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -65,13 +65,12 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         String CREATE_BUDGET_TABLE = "CREATE TABLE " + TABLE_BUDGET + "("
                 + KEY_BID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + KEY_BAMOUNT + " INTEGER,"
-                + KEY_CID + " INTEGER,"
+                + KEY_CAT + " VARCHAR(20),"
                 + KEY_BNAME + " VARCHAR(20),"
                 + KEY_BACCOUNT + " VARCHAR(10),"
                 + KEY_BCURRENCY + " VARCHAR(5),"
                 + KEY_BSTARTDATE + " VARCHAR(30),"
-                + KEY_BENDDATE + " VARCHAR(30),"
-                + " FOREIGN KEY( " + KEY_CID + " ) REFERENCES " + TABLE_CATEGORY + "( " + KEY_CID + " ))";
+                + KEY_BENDDATE + " VARCHAR(30))";
 
         db.execSQL(CREATE_EXPENSE_TABLE);
         db.execSQL(CREATE_CATEGORY_TABLE);
@@ -91,7 +90,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
         values.put(KEY_AMOUNT, transactionModel.amount);
-        values.put(KEY_CID, transactionModel.cid);
+        values.put(KEY_CAT, transactionModel.cat);
         values.put(KEY_ISEXPENSE, transactionModel.isExpense);
         values.put(KEY_ISINCOME, transactionModel.isIncome);
         values.put(KEY_ISTRANSFER, transactionModel.isTransfer);
@@ -129,7 +128,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         assert cursor != null;
         TransactionModel transaction = new TransactionModel(
                 cursor.getInt(cursor.getColumnIndexOrThrow(KEY_TID)),
-                cursor.getInt(cursor.getColumnIndexOrThrow(KEY_CID)),
+                cursor.getString(cursor.getColumnIndexOrThrow(KEY_CAT)),
                 cursor.getInt(cursor.getColumnIndexOrThrow(KEY_AMOUNT)),
                 cursor.getInt(cursor.getColumnIndexOrThrow(KEY_ISEXPENSE)),
                 cursor.getInt(cursor.getColumnIndexOrThrow(KEY_ISINCOME)),
@@ -154,7 +153,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
             do {
                 TransactionModel transaction = new TransactionModel(
                         cursor.getInt(cursor.getColumnIndexOrThrow(KEY_TID)),
-                        cursor.getInt(cursor.getColumnIndexOrThrow(KEY_CID)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(KEY_CAT)),
                         cursor.getInt(cursor.getColumnIndexOrThrow(KEY_AMOUNT)),
                         cursor.getInt(cursor.getColumnIndexOrThrow(KEY_ISTRANSFER)),
                         cursor.getInt(cursor.getColumnIndexOrThrow(KEY_ISEXPENSE)),
@@ -168,20 +167,20 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         return transactionList;
     }
 
-    public List<TransactionModel> getAllTransactionByCat(int id) {
+    public List<TransactionModel> getAllTransactionByCat(String column) {
         List<TransactionModel> transactionList = new ArrayList<TransactionModel>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_TRANSACTION + " WHERE "+ KEY_CID +" =? ORDER BY " + KEY_DATE;
+        String selectQuery = "SELECT  * FROM " + TABLE_TRANSACTION + " WHERE "+ KEY_CAT +" =? ORDER BY " + KEY_DATE;
 
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, new String[]{String.valueOf(id)});
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{column});
 
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
                 TransactionModel transaction = new TransactionModel(
                         cursor.getInt(cursor.getColumnIndexOrThrow(KEY_TID)),
-                        cursor.getInt(cursor.getColumnIndexOrThrow(KEY_CID)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(KEY_CAT)),
                         cursor.getInt(cursor.getColumnIndexOrThrow(KEY_AMOUNT)),
                         cursor.getInt(cursor.getColumnIndexOrThrow(KEY_ISEXPENSE)),
                         cursor.getInt(cursor.getColumnIndexOrThrow(KEY_ISINCOME)),
@@ -216,11 +215,11 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         }
     }
 
-    public int getSumByCat(String sum, int id){
-        String selectQuery = "SELECT (SUM(" +sum+ ")) AS total FROM " + TABLE_TRANSACTION + " WHERE "+KEY_CID+" =? ORDER BY " + KEY_DATE;
+    public int getSumByCat(String sum, String column){
+        String selectQuery = "SELECT (SUM(" +sum+ ")) AS total FROM " + TABLE_TRANSACTION + " WHERE "+KEY_CAT+" =? ORDER BY " + KEY_DATE;
 
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, new String[]{String.valueOf(id)});
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{column});
         if (cursor.moveToFirst()){
             return cursor.getInt(cursor.getColumnIndexOrThrow("total"));
         } else {
@@ -230,6 +229,30 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 
     public int getSumByDate(String sum, String date){
         String selectQuery = "SELECT (SUM(" +sum+ ")) AS total FROM " + TABLE_TRANSACTION + " WHERE DATE ("+KEY_DATE+") =? ORDER BY " + KEY_DATE;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{date});
+        if (cursor.moveToFirst()){
+            return cursor.getInt(cursor.getColumnIndexOrThrow("total"));
+        } else {
+            return 0;
+        }
+    }
+
+    public int getSumByDateExpense(String sum, String date){
+        String selectQuery = "SELECT (SUM(" +sum+ ")) AS total FROM " + TABLE_TRANSACTION + " WHERE DATE ("+KEY_DATE+") =? AND ("+ KEY_ISEXPENSE+ ") = 1 ORDER BY " + KEY_DATE;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{date});
+        if (cursor.moveToFirst()){
+            return cursor.getInt(cursor.getColumnIndexOrThrow("total"));
+        } else {
+            return 0;
+        }
+    }
+
+    public int getSumByDateIncome(String sum, String date){
+        String selectQuery = "SELECT (SUM(" +sum+ ")) AS total FROM " + TABLE_TRANSACTION + " WHERE DATE ("+KEY_DATE+") =? AND ("+ KEY_ISINCOME +") = 1 ORDER BY " + KEY_DATE;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, new String[]{date});
