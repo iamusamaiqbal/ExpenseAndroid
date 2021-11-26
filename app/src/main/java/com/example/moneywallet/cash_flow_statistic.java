@@ -89,6 +89,7 @@ public class cash_flow_statistic extends Fragment {
         dateTime = LocalDate.parse(dateInString, formatter);
 
         transactionList = database.getAllTransaction();
+
         /*========================================= total ===========================================*/
 
         transactionList.forEach(transactionModel -> {
@@ -101,9 +102,10 @@ public class cash_flow_statistic extends Fragment {
             }
         });
 
+        incomeProgress.setMax(1000);
+        expenseProgress.setMax(1000);
         incomeProgress.setProgress(totalIncome);
         expenseProgress.setProgress(totalExpense);
-
 
 
         /*========================================= Bar Chart ========================================*/

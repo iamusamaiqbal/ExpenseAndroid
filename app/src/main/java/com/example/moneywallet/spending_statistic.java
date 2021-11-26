@@ -32,7 +32,7 @@ public class spending_statistic extends Fragment {
     MyListAdapter adapter;
     ListView listView;
 
-    int total = 0;
+    int total = 0,sum=0;
 
     final int[] MY_COLORS = {
             Color.rgb(192, 0, 0),
@@ -73,20 +73,21 @@ public class spending_statistic extends Fragment {
 
         adapter = new MyListAdapter(getActivity(), transactionArray);
         listView.setAdapter(adapter);
+        sum = database.getSum(SQLiteHandler.KEY_AMOUNT);
 
         transactionList.forEach(transactionModel -> {
 
 
             if (!categories.contains(transactionModel.cat)) {
                 total = database.getSumByCat(SQLiteHandler.KEY_AMOUNT,transactionModel.cat);
-                entries.add(new PieEntry(total*1f));
+                entries.add(new PieEntry(total*1f,""+transactionModel.cat));
                 categories.add(transactionModel.cat);
             }
         });
 
         for (int c : MY_COLORS) colors.add(c);
 
-        PieDataSet set = new PieDataSet(entries, " Total : "+5000);
+        PieDataSet set = new PieDataSet(entries, " Total : "+sum);
         PieData data = new PieData(set);
         set.setColors(colors);
         chart.animateXY(5000, 5000);
