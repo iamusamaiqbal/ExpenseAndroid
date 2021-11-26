@@ -59,7 +59,7 @@ public class Balance_statistic extends Fragment {
 
         ArrayList<Entry> yExpense = new ArrayList<>();
         ArrayList<Entry> yIncome = new ArrayList<>();
-        
+
 
         String dateInString = date.toString();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E MMM dd HH:mm:ss 'GMT'z yyyy", Locale.ENGLISH);
@@ -85,36 +85,6 @@ public class Balance_statistic extends Fragment {
             Log.e("ERRRRRRRRRRRRRRr", "" + totalExp +" "+totalInc);
             j+=1;
         }
-
-
-//        int p =0;
-//
-//        for(int i=0; i<transactionList.size();i++){
-//
-//            int t = p - transactionList.get(i).amount;
-//
-//            yExpense.add(new Entry(transactionList.get(i).id*100f,t*1));
-//
-//            p=transactionList.get(i).amount;
-//        }
-
-//        transactionList.forEach(amount -> {
-//
-//            if(amount.isExpense == 1){
-//                yExpense.add(new Entry(amount.id*100f,amount.amount*-1));
-//            } else {
-//                yExpense.add(new Entry(amount.id*100f,amount.amount*1));
-//            }
-//        });
-
-//        final ArrayList<String> xAxisLabel = new ArrayList<>();
-//        xAxisLabel.add("Mon");
-//        xAxisLabel.add("Tue");
-//        xAxisLabel.add("Wed");
-//        xAxisLabel.add("Thu");
-//        xAxisLabel.add("Fri");
-//        xAxisLabel.add("Sat");
-//        xAxisLabel.add("Sun");
 
 
         XAxis xAxis = lineChart.getXAxis();
@@ -167,7 +137,7 @@ public class Balance_statistic extends Fragment {
         LineDataSet lineDataSet1 = new LineDataSet(yExpense, "Expense");
         lineDataSet1.setValueTextSize(10);
         lineDataSet1.setDrawCircleHole(false);
-        lineDataSet1.setColor(Color.BLUE);
+        lineDataSet1.setColor(Color.RED);
         lineDataSet1.setMode(LineDataSet.Mode.LINEAR);
         lineDataSet1.setDrawCircles(false);
 //        lineDataSet1.setCubicIntensity(0.15f);
@@ -175,29 +145,23 @@ public class Balance_statistic extends Fragment {
         lineDataSet1.setLineWidth(1);
         lineDataSet1.setMode(LineDataSet.Mode.CUBIC_BEZIER);
         lineDataSet1.setDrawFilled(true);
-        lineDataSet1.setFillColor(Color.BLUE);
+        lineDataSet1.setFillColor(Color.RED);
 
 
 
         LineDataSet lineDataSet2 = new LineDataSet(yIncome, "Income");
         lineDataSet2.setValueTextSize(10);
-        lineDataSet2.setDrawCircleHole(true);
+        lineDataSet2.setDrawCircleHole(false);
         lineDataSet2.setColor(Color.BLUE);
         lineDataSet2.setMode(LineDataSet.Mode.LINEAR);
-        lineDataSet2.setDrawCircles(true);
-        lineDataSet2.setCubicIntensity(0.15f);
-        lineDataSet2.setCircleColor(Color.BLUE);
+        lineDataSet2.setDrawCircles(false);
+//        lineDataSet2.setCubicIntensity(0.15f);
+//        lineDataSet2.setCircleColor(Color.BLUE);
         lineDataSet2.setLineWidth(1);
         lineDataSet2.setMode(LineDataSet.Mode.CUBIC_BEZIER);
         lineDataSet2.setDrawFilled(true);
         lineDataSet2.setFillColor(Color.BLUE);
 
-//        final ArrayList<String> labels = new ArrayList<String>();
-//        labels.add("12AM");
-//        labels.add("06AM");
-//        labels.add("12PM");
-//        labels.add("06PM");
-//        labels.add("12AM");
 
 
         dataSets.add(lineDataSet2);

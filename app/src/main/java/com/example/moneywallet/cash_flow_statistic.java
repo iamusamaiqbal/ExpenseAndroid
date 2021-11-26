@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
@@ -30,6 +31,7 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
@@ -43,9 +45,12 @@ public class cash_flow_statistic extends Fragment {
     LineChart lineChart;
     BarChart barChart;
     Button cash, expense, income;
+    ProgressBar incomeProgress,expenseProgress;
     Date date;
     LocalDate dateTime;
     String StringDate;
+
+    int totalIncome,totalExpense;
 
 
     public cash_flow_statistic() {
@@ -68,69 +73,178 @@ public class cash_flow_statistic extends Fragment {
         cash = view.findViewById(R.id.CashFlowBtn);
         income = view.findViewById(R.id.CashFlowIncomeBtn);
         expense = view.findViewById(R.id.CashFlowExpenseBtn);
+        incomeProgress=view.findViewById(R.id.CashFlowIncomeBar);
+        expenseProgress=view.findViewById(R.id.CashFlowExpenseBar);
 
         database = new SQLiteHandler(getActivity());
         transactionList = new ArrayList<>();
         barChart = view.findViewById(R.id.CashFlowBarChart);
         lineChart = view.findViewById(R.id.CashFlowPeriodLineChart);
         date = new Date();
-        ArrayList NoOfEmp = new ArrayList();
+        ArrayList months = new ArrayList();
 
-        transactionList = database.getAllTransaction();
-
-//        transactionList.forEach(transactionModel -> {
-//
-//            LocalDate dateTime = LocalDate.parse(transactionModel.date);
-//
-//            if ((dateTime.isEqual(LocalDate.now()) || dateTime.isAfter(LocalDate.parse(budget.start))) && (dateTime.isEqual(LocalDate.parse(budget.end)) || dateTime.isBefore(LocalDate.parse(budget.end)))) {
-//                if(!dates.contains(dateTime.toString())){
-//                    total=database.getSumByDate(SQLiteHandler.KEY_AMOUNT,dateTime.toString());
-//                    transactions.add(new BarEntry( transactionModel.id*400f, total*1));
-//                    dates.add(dateTime.toString());
-//                }
-//            }
-//        });
-
-        NoOfEmp.add(new BarEntry(300f, 1));
-        NoOfEmp.add(new BarEntry(600f, 2));
-        NoOfEmp.add(new BarEntry(900f, 3));
-        NoOfEmp.add(new BarEntry(1200f, 4));
-        NoOfEmp.add(new BarEntry(1500f, 5));
-        NoOfEmp.add(new BarEntry(1800f, 6));
-        NoOfEmp.add(new BarEntry(2100f, 7));
-//        NoOfEmp.add(new BarEntry(2400f, 7));
-//        NoOfEmp.add(new BarEntry(2700f, 8));
-//        NoOfEmp.add(new BarEntry(3000f, 9));
-
-        cashFlowBars(NoOfEmp);
-
-/*      ======================================== Line Chart =====================================*/
-
-        ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
-        ArrayList<Entry> yCash = new ArrayList<>();
-        ArrayList<Entry> yIncome = new ArrayList<>();
-        ArrayList<Entry> yExpense = new ArrayList<>();
 
         String dateInString = date.toString();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E MMM dd HH:mm:ss 'GMT'z yyyy", Locale.ENGLISH);
         dateTime = LocalDate.parse(dateInString, formatter);
 
+        transactionList = database.getAllTransaction();
+        /*========================================= total ===========================================*/
 
-        int j = 0;
-        for (int i = 6; i > -1; i--) {
+        transactionList.forEach(transactionModel -> {
+            if(transactionModel.isExpense ==1){
+                totalExpense+=transactionModel.amount;
+            } else if (transactionModel.isIncome==1){
+                totalIncome+=transactionModel.amount;
+            } else {
+                Log.e("ERROR","Transfer");
+            }
+        });
 
-            LocalDate day = dateTime.minusDays(i);
-            int totalExp = database.getSumByDateExpense(SQLiteHandler.KEY_AMOUNT, day.toString());
-            int totalInc = database.getSumByDateIncome(SQLiteHandler.KEY_AMOUNT, day.toString());
+        incomeProgress.setProgress(totalIncome);
+        expenseProgress.setProgress(totalExpense);
 
-            if (totalExp != 0 && totalInc != 0) {
-                yCash.add(new Entry(j * 100f, (totalExp - totalInc) * 1));
 
+
+        /*========================================= Bar Chart ========================================*/
+
+        int mi = 0;
+        int me = 0;
+
+        int mi1 = 0;
+        int me1 = 0;
+
+        int mi2 = 0;
+        int me2 = 0;
+
+        for (int i = 0; i < transactionList.size(); i++) {
+
+            LocalDate day = LocalDate.parse(transactionList.get(i).date);
+            Month mth = day.getMonth();
+
+            if (mth.equals(dateTime.getMonth())) {
+                if (transactionList.get(i).isExpense == 1) {
+                    me += transactionList.get(i).amount;
+                } else {
+                    mi += transactionList.get(i).amount;
+                }
+            } else if (mth.minus(1).equals(dateTime.getMonth())) {
+                if (transactionList.get(i).isExpense == 1) {
+                    me1 += transactionList.get(i).amount;
+                } else {
+                    mi1 += transactionList.get(i).amount;
+                }
+            } else if (mth.minus(2).equals(dateTime.getMonth())) {
+                if (transactionList.get(i).isExpense == 1) {
+                    me2 += transactionList.get(i).amount;
+                } else {
+                    mi2 += transactionList.get(i).amount;
+                }
+            } else {
+                Log.i("Old","Transaction is older");
             }
 
-            Log.e("ERRRRRRRRRRRRRRr", "" + totalExp + " " + totalInc);
-            j += 1;
         }
+
+        months.add(new BarEntry(200f, new float[]{(float) 7, (float) 88}));
+        months.add(new BarEntry(400f, new float[]{(float) 45, (float) 78}));
+        months.add(new BarEntry(600f, new float[]{(float) mi2, (float) me2}));
+        months.add(new BarEntry(800f, new float[]{(float) mi1, (float) me1}));
+        months.add(new BarEntry(1000f, new float[]{(float) mi, (float) me}));
+
+
+        XAxis xAxisb = barChart.getXAxis();
+        xAxisb.setPosition(XAxis.XAxisPosition.BOTTOM);
+
+        xAxisb.setDrawGridLines(false);
+        xAxisb.setValueFormatter((value, axis) -> {
+            String label = "";
+            if (value == 200) {
+                LocalDate day = dateTime.minusMonths(4);
+                DateTimeFormatter fLocalDate = DateTimeFormatter.ofPattern("MMM");
+                StringDate = day.format(fLocalDate);
+                label = StringDate;
+            } else if (value == 400) {
+                LocalDate day = dateTime.minusMonths(3);
+                DateTimeFormatter fLocalDate = DateTimeFormatter.ofPattern("MMM");
+                StringDate = day.format(fLocalDate);
+                label = StringDate;
+            } else if (value == 600) {
+                LocalDate day = dateTime.minusMonths(2);
+                DateTimeFormatter fLocalDate = DateTimeFormatter.ofPattern("MMM");
+                StringDate = day.format(fLocalDate);
+                label = StringDate;
+            } else if (value == 800) {
+                LocalDate day = dateTime.minusMonths(1);
+                DateTimeFormatter fLocalDate = DateTimeFormatter.ofPattern("MMM");
+                StringDate = day.format(fLocalDate);
+                label = StringDate;
+            } else if (value == 1000) {
+                DateTimeFormatter fLocalDate = DateTimeFormatter.ofPattern("MMM");
+                StringDate = dateTime.format(fLocalDate);
+                label = StringDate;
+            }
+//            } else if (value == 1200) {
+//                LocalDate day = dateTime.minusMonths(6);
+//                DateTimeFormatter fLocalDate = DateTimeFormatter.ofPattern("MMM");
+//                StringDate = day.format(fLocalDate);
+//                label = StringDate;
+//            } else if (value == 1400) {
+//                LocalDate day = dateTime.minusMonths(5);
+//                DateTimeFormatter fLocalDate = DateTimeFormatter.ofPattern("MMM");
+//                StringDate = day.format(fLocalDate);
+//                label = StringDate;
+//
+//            } else if (value == 1600) {
+//                LocalDate day = dateTime.minusMonths(4);
+//                DateTimeFormatter fLocalDate = DateTimeFormatter.ofPattern("MMM");
+//                StringDate = day.format(fLocalDate);
+//                label = StringDate;
+//
+//            } else if (value == 1800) {
+//                LocalDate day = dateTime.minusMonths(3);
+//                DateTimeFormatter fLocalDate = DateTimeFormatter.ofPattern("MMM");
+//                StringDate = day.format(fLocalDate);
+//                label = StringDate;
+//
+//            } else if (value == 2000) {
+//                LocalDate day = dateTime.minusMonths(2);
+//                DateTimeFormatter fLocalDate = DateTimeFormatter.ofPattern("MMM");
+//                StringDate = day.format(fLocalDate);
+//                label = StringDate;
+//
+//            } else if (value == 2200) {
+//                LocalDate day = dateTime.minusMonths(1);
+//                DateTimeFormatter fLocalDate = DateTimeFormatter.ofPattern("MMM");
+//                StringDate = day.format(fLocalDate);
+//                label = StringDate;
+//
+//            } else if (value == 2400) {
+//                DateTimeFormatter fLocalDate = DateTimeFormatter.ofPattern("MMM");
+//                StringDate = dateTime.format(fLocalDate);
+//                label = StringDate;
+//
+//            }
+            return label;
+        });
+
+
+        BarDataSet bardataset = new BarDataSet(months,"Cash Flow");
+        bardataset.setStackLabels(new String[]{"Income","Expenses"});
+        bardataset.setColors(Color.BLUE,Color.RED);
+
+        barChart.animateY(3000);
+        BarData data2 = new BarData(bardataset);
+        data2.setBarWidth(100f);
+        barChart.setData(data2);
+
+
+        /*      ======================================== Line Chart =====================================*/
+
+        ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
+        ArrayList<Entry> yCash = new ArrayList<>();
+        ArrayList<Entry> yIncome = new ArrayList<>();
+        ArrayList<Entry> yExpense = new ArrayList<>();
 
         cashFlowLine(yCash, dataSets);
 
@@ -274,51 +388,6 @@ public class cash_flow_statistic extends Fragment {
         return view;
     }
 
-    public void cashFlowBars(ArrayList NoOfEmp) {
-
-
-        final ArrayList<String> xAxisLabel = new ArrayList<>();
-        xAxisLabel.add("Mon");
-        xAxisLabel.add("Tue");
-        xAxisLabel.add("Wed");
-        xAxisLabel.add("Thu");
-        xAxisLabel.add("Fri");
-        xAxisLabel.add("Sat");
-        xAxisLabel.add("Sun");
-
-
-        BarDataSet bardataset = new BarDataSet(NoOfEmp, "Expenses");
-        barChart.animateY(5000);
-        BarData data2 = new BarData(bardataset);
-        data2.setBarWidth(100f);
-        bardataset.setColors(ColorTemplate.COLORFUL_COLORS);
-        barChart.setData(data2);
-
-        XAxis xAxis = barChart.getXAxis();
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setValueFormatter(new IAxisValueFormatter() {
-            @Override
-            public String getFormattedValue(float value, AxisBase axis) {
-                String label = "";
-                if (value == 300)
-                    label = xAxisLabel.get(0);
-                else if (value == 600)
-                    label = xAxisLabel.get(1);
-                else if (value == 900)
-                    label = xAxisLabel.get(2);
-                else if (value == 1200)
-                    label = xAxisLabel.get(3);
-                else if (value == 1500)
-                    label = xAxisLabel.get(4);
-                else if (value == 1800)
-                    label = xAxisLabel.get(5);
-                else if (value == 2100)
-                    label = xAxisLabel.get(6);
-                return label;
-            }
-        });
-    }
-
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void cashFlowLine(ArrayList<Entry> yCash, ArrayList<ILineDataSet> dataSets) {
         yCash.clear();
@@ -329,21 +398,22 @@ public class cash_flow_statistic extends Fragment {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E MMM dd HH:mm:ss 'GMT'z yyyy", Locale.ENGLISH);
         dateTime = LocalDate.parse(dateInString, formatter);
 
-        int jc = 0;
+        int j = 0;
         for (int i = 6; i > -1; i--) {
 
             LocalDate day = dateTime.minusDays(i);
             int totalExp = database.getSumByDateExpense(SQLiteHandler.KEY_AMOUNT, day.toString());
-
             int totalInc = database.getSumByDateIncome(SQLiteHandler.KEY_AMOUNT, day.toString());
 
             if (totalExp != 0 && totalInc != 0) {
-                yCash.add(new Entry(jc * 100f, (totalExp - totalInc) * 1));
-
+                if (totalExp > totalInc) {
+                    yCash.add(new Entry(j * 100f, (totalExp - totalInc) * -1));
+                } else {
+                    yCash.add(new Entry(j * 100f, (totalExp - totalInc) * 1));
+                }
             }
-
             Log.e("ERRRRRRRRRRRRRRr", "" + totalExp + " " + totalInc);
-            jc += 1;
+            j += 1;
         }
 
 
@@ -364,6 +434,7 @@ public class cash_flow_statistic extends Fragment {
 
         LineData data12 = new LineData(dataSets);
 
+        lineChart.animateY(3000);
         lineChart.setData(data12);
     }
 }
