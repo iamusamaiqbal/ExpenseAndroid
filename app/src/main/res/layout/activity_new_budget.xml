@@ -145,7 +145,7 @@
         app:srcCompat="@drawable/done" />
 
     <ImageButton
-        android:id="@+id/imageButton5"
+        android:id="@+id/imageButton_cross"
         android:layout_width="30dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -168,7 +168,7 @@
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/imageButton5"
+        app:layout_constraintStart_toEndOf="@+id/imageButton_cross"
         app:layout_constraintTop_toTopOf="parent" />
 
     <View

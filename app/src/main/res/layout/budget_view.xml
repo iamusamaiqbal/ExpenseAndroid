@@ -57,7 +57,7 @@
         android:id="@+id/budgetBar"
         style="@android:style/Widget.ProgressBar.Horizontal"
         android:layout_width="350dp"
-        android:layout_height="10dp"
+        android:layout_height="20dp"
         android:layout_marginTop="20dp"
         android:progress="25"
         app:layout_constraintEnd_toEndOf="parent"

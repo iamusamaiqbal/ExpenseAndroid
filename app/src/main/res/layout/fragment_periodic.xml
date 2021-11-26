@@ -6,6 +6,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".periodic">
+    <include layout="@layout/budget_view">
+
+    </include>
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -20,6 +23,7 @@
         android:padding="8dp">
 
         <com.getbase.floatingactionbutton.FloatingActionsMenu
+            android:id="@+id/floting_menu_periodic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -33,7 +37,7 @@
                 android:layout_height="wrap_content"
                 app:fab_colorNormal="@color/light_gree"
                 app:fab_icon="@drawable/ic_pen"
-                app:fab_title="New record" />
+                app:fab_title="New Budget" />
 
         </com.getbase.floatingactionbutton.FloatingActionsMenu>
     </RelativeLayout>

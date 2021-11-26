@@ -146,6 +146,11 @@ ImageView imageView2;
 //                        startActivity(intent);
                         Toast.makeText(MainActivity.this, "location clicked", Toast.LENGTH_SHORT).show();
                         return true;
+                    case R.id.nav_setting:
+                        Intent setting=new Intent(MainActivity.this,Setting.class);
+                        startActivity(setting);
+                        Toast.makeText(MainActivity.this, "setting clicked", Toast.LENGTH_SHORT).show();
+                        return true;
                 }
                 return true;
             }

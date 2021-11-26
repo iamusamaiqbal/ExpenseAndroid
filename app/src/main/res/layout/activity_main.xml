@@ -26,6 +26,7 @@
             android:id="@+id/tool_bar_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:titleTextColor="@color/white"
             android:background="@color/calculater"
             >
 
