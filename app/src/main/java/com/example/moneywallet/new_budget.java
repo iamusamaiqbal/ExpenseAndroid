@@ -3,12 +3,14 @@ package com.example.moneywallet;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -24,7 +26,7 @@ import java.util.Locale;
 public class new_budget extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     EditText budgetName, budgetAmount;
     ImageView saveBudget;
-
+    ImageButton imageButton_cross;
     String currency, category, account;
     Spinner spinner_1, spinner3, spinner4, spinner5;
 
@@ -36,13 +38,22 @@ public class new_budget extends AppCompatActivity implements AdapterView.OnItemS
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_budget);
         spinner_1 = findViewById(R.id.spinner_1);
-
+        imageButton_cross=findViewById(R.id.imageButton_cross);
         spinner3 = findViewById(R.id.spinner3);
         spinner4 = findViewById(R.id.spinner4);
         spinner5 = findViewById(R.id.accountSpinner12);
         budgetName = findViewById(R.id.editTextName);
         budgetAmount = findViewById(R.id.editTextNumberSigned);
         saveBudget = findViewById(R.id.saveBudget);
+
+        imageButton_cross.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(new_budget.this,Budget.class);
+                startActivity(intent);
+            }
+        });
+
 
         database = new SQLiteHandler(this);
 

@@ -32,7 +32,7 @@
         <item
             android:id="@+id/nav_shopping_list"
             android:icon="@drawable/shopping_list"
-            android:title="s List" />
+            android:title="Shopping List" />
         <item
             android:id="@+id/nav_warranties"
             android:icon="@drawable/warranti"
@@ -49,8 +49,6 @@
             android:id="@+id/nav_group_sharing"
             android:icon="@drawable/sharring"
             android:title="Group Sharing" />
-
-
     </group>
 
     <item android:title="others">
@@ -68,6 +66,10 @@
                     android:id="@+id/nav_location"
                     android:icon="@drawable/ic_baseline_location_on_24"
                     android:title="Location" />
+                <item
+                    android:id="@+id/nav_setting"
+                    android:icon="@drawable/ic_baseline_settings_24"
+                    android:title="Setting" />
             </group>
         </menu>
     </item>
