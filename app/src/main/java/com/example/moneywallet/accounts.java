@@ -183,14 +183,14 @@ public class accounts extends Fragment {
 
             int totalInc = database.getSumByDateIncome(SQLiteHandler.KEY_AMOUNT, day.toString());
 
-            if(totalExp!=0){
+            //if(totalExp=0){
 
                 yExpense.add(new Entry(j*100f, totalExp* 1));
 
-            }
-            if(totalInc!=0){
+            //}
+            //if(totalInc!=0){
                 yIncome.add(new Entry(j* 100f, totalInc * 1));
-            }
+            //}
 
             Log.e("ERRRRRRRRRRRRRRr", "" + totalExp +" "+totalInc);
             j+=1;

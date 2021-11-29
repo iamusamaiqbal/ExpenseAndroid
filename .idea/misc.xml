@@ -12,11 +12,9 @@
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_catogries.xml" value="0.20416666666666666" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_custom_category_list.xml" value="0.20416666666666666" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_debit.xml" value="0.19010416666666666" />
-        <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_goal_details.xml" value="0.20416666666666666" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_goals.xml" value="0.20416666666666666" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_new_budget.xml" value="0.2" />
-        <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_new_goal.xml" value="0.20416666666666666" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_new_record.xml" value="0.20416666666666666" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_setting.xml" value="0.20416666666666666" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_shopping_list.xml" value="0.19010416666666666" />
@@ -47,17 +45,22 @@
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/drawable/share.xml" value="0.1609375" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/drawable/sharring.xml" value="0.2846153846153846" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/drawable/shopping_list.xml" value="0.2846153846153846" />
+        <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/active_goal_model.xml" value="0.225" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/activity_budget.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/activity_budget_deatail.xml" value="0.14270833333333333" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/activity_budget_detail.xml" value="0.25" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/activity_catogries.xml" value="0.14270833333333333" />
+        <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/activity_goal_details.xml" value="0.25" />
+        <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/activity_goals.xml" value="0.16" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/activity_main.xml" value="0.14270833333333333" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/activity_new_budget.xml" value="0.19882246376811594" />
+        <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/activity_new_goal.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/activity_new_record.xml" value="0.14270833333333333" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/activity_transaction.xml" value="0.19882246376811594" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/budget_view.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/custom_list_row.xml" value="0.1265625" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/fragment_accounts.xml" value="0.19882246376811594" />
+        <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/fragment_active_goals.xml" value="0.1" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/fragment_balance_statistic.xml" value="0.14270833333333333" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/fragment_cash_flow_statistic.xml" value="0.14270833333333333" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/fragment_cridit_statistiic.xml" value="0.14270833333333333" />
@@ -69,6 +72,7 @@
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/haider.xml" value="0.146875" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/record_overview_tail.xml" value="0.14270833333333333" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/row.xml" value="0.146875" />
+        <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/menu/main_menu.xml" value="0.27291666666666664" />
       </map>
     </option>
   </component>

@@ -29,7 +29,7 @@
         app:srcCompat="@drawable/ic_baseline_cancel_24" />
 
     <ImageButton
-        android:id="@+id/imageButton11"
+        android:id="@+id/saveGoal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -53,7 +53,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView38"
+        android:id="@+id/goalNameLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -64,7 +64,7 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar7" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName6"
+        android:id="@+id/goalName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -75,7 +75,7 @@
         android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView38" />
+        app:layout_constraintTop_toBottomOf="@+id/goalNameLabel" />
 
     <TextView
         android:id="@+id/textView39"
@@ -87,10 +87,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.045"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName6" />
+        app:layout_constraintTop_toBottomOf="@+id/goalName" />
 
     <EditText
-        android:id="@+id/editTextNumber"
+        android:id="@+id/goalAmount"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -113,10 +113,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumber" />
+        app:layout_constraintTop_toBottomOf="@+id/goalAmount" />
 
     <EditText
-        android:id="@+id/editTextNumber2"
+        android:id="@+id/goalAlreadySaved"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -138,20 +138,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.045"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumber2" />
+        app:layout_constraintTop_toBottomOf="@+id/goalAlreadySaved" />
 
-    <EditText
-        android:id="@+id/editTextDate3"
-        android:layout_width="0dp"
+    <Button
+        android:id="@+id/calendar_btn"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:ems="10"
-        android:inputType="date"
+        android:layout_marginTop="412dp"
+        android:layout_marginBottom="48dp"
+        android:text="Calendar"
+        app:layout_constraintBottom_toTopOf="@+id/textView42"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView41" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView42"
@@ -163,10 +162,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.043"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDate3" />
+        app:layout_constraintTop_toBottomOf="@+id/calendar_btn" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName8"
+        android:id="@+id/goalNote"
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:layout_marginStart="8dp"

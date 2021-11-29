@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -98,12 +99,10 @@ public class new_budget extends AppCompatActivity implements AdapterView.OnItemS
 
 
         saveBudget.setOnClickListener(v -> {
+            Log.e("yy","yyyyyyyyyyy");
             if (!budgetName.getText().toString().isEmpty()) {
 
                 if (!budgetAmount.getText().toString().isEmpty()) {
-
-
-
                     database.addBudget(new BudgetModel(budgetName.getText().toString(), Integer.parseInt(budgetAmount.getText().toString()), 3, account, currency, currentDate.toString(), currentDatePlus7.toString()));
                     onBackPressed();
                 } else {
