@@ -29,13 +29,17 @@
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/fragment_accounts.xml" value="0.2" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/fragment_active.xml" value="0.20416666666666666" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/fragment_active_goals.xml" value="0.20416666666666666" />
+        <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/fragment_balance_statistic.xml" value="0.20416666666666666" />
+        <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/fragment_cash_flow_statistic.xml" value="0.20416666666666666" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/fragment_close.xml" value="0.19010416666666666" />
+        <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/fragment_cridit_statistiic.xml" value="0.20416666666666666" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/fragment_one_time.xml" value="0.2" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/fragment_paused_goals.xml" value="0.20416666666666666" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/fragment_periodic.xml" value="0.2" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/fragment_reached_goals.xml" value="0.20416666666666666" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/fragment_report_statistic.xml" value="0.20416666666666666" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/fragment_spending_statistic.xml" value="0.20416666666666666" />
+        <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/fragment_wallet_now.xml" value="0.20416666666666666" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/goal_model.xml" value="0.20416666666666666" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/goal_reached_model.xml" value="0.20416666666666666" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/haider.xml" value="0.2" />
