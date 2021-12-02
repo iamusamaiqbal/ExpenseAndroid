@@ -6,9 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".periodic">
-    <include layout="@layout/budget_view">
-
-    </include>
 
 
     <androidx.recyclerview.widget.RecyclerView

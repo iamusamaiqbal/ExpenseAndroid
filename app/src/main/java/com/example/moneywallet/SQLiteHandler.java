@@ -40,9 +40,18 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     public static String KEY_BSTARTDATE = "start_date";
     public static String KEY_BENDDATE = "end_date";
 
+    public static String TABLE_GOAL = "GoalTable";
+
+    public static String KEY_GID = "gid";
+    public static String KEY_GNAME = "gname";
+    public static String KEY_GAMOUNT = "gamount";
+    public static String KEY_GNOTE = "gnote";
+    public static String KEY_GDATE = "gdate";
+    public static String KEY_GALREADY_SAVED = "already_saved";
+    public static String KEY_GSTATUS = "status";
 
     public SQLiteHandler(@Nullable Context context) {
-        super(context, "ExpenseDB4", null, 1);
+        super(context, "ExpenseDB1", null, 1);
     }
 
     @Override
@@ -72,9 +81,19 @@ public class SQLiteHandler extends SQLiteOpenHelper {
                 + KEY_BSTARTDATE + " VARCHAR(30),"
                 + KEY_BENDDATE + " VARCHAR(30))";
 
+        String CREATE_GOAL_TABLE = "CREATE TABLE " + TABLE_GOAL + "("
+                + KEY_GID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + KEY_GAMOUNT + " INTEGER,"
+                + KEY_GALREADY_SAVED + " INTEGER,"
+                + KEY_GNAME + " VARCHAR(20),"
+                + KEY_GSTATUS + " VARCHAR(10),"
+                + KEY_GNOTE + " VARCHAR(20),"
+                + KEY_GDATE + " DATETIME)";
+
         db.execSQL(CREATE_EXPENSE_TABLE);
         db.execSQL(CREATE_CATEGORY_TABLE);
         db.execSQL(CREATE_BUDGET_TABLE);
+        db.execSQL(CREATE_GOAL_TABLE);
 
     }
 
@@ -170,7 +189,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     public List<TransactionModel> getAllTransactionByCat(String column) {
         List<TransactionModel> transactionList = new ArrayList<TransactionModel>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_TRANSACTION + " WHERE "+ KEY_CAT +" =? ORDER BY " + KEY_DATE;
+        String selectQuery = "SELECT  * FROM " + TABLE_TRANSACTION + " WHERE " + KEY_CAT + " =? ORDER BY " + KEY_DATE;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, new String[]{column});
@@ -203,60 +222,60 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         return flag;
     }
 
-    public int getSum(String key){
-        String selectQuery = "SELECT (SUM(" +key+ ")) AS total FROM " + TABLE_TRANSACTION + " ORDER BY " + KEY_DATE;
+    public int getSum(String key) {
+        String selectQuery = "SELECT (SUM(" + key + ")) AS total FROM " + TABLE_TRANSACTION + " ORDER BY " + KEY_DATE;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
-        if (cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             return cursor.getInt(cursor.getColumnIndexOrThrow("total"));
         } else {
             return 0;
         }
     }
 
-    public int getSumByCat(String sum, String column){
-        String selectQuery = "SELECT (SUM(" +sum+ ")) AS total FROM " + TABLE_TRANSACTION + " WHERE "+KEY_CAT+" =? ORDER BY " + KEY_DATE;
+    public int getSumByCat(String sum, String column) {
+        String selectQuery = "SELECT (SUM(" + sum + ")) AS total FROM " + TABLE_TRANSACTION + " WHERE " + KEY_CAT + " =? ORDER BY " + KEY_DATE;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, new String[]{column});
-        if (cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             return cursor.getInt(cursor.getColumnIndexOrThrow("total"));
         } else {
             return 0;
         }
     }
 
-    public int getSumByDate(String sum, String date){
-        String selectQuery = "SELECT (SUM(" +sum+ ")) AS total FROM " + TABLE_TRANSACTION + " WHERE DATE ("+KEY_DATE+") =? ORDER BY " + KEY_DATE;
+    public int getSumByDate(String sum, String date) {
+        String selectQuery = "SELECT (SUM(" + sum + ")) AS total FROM " + TABLE_TRANSACTION + " WHERE DATE (" + KEY_DATE + ") =? ORDER BY " + KEY_DATE;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, new String[]{date});
-        if (cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             return cursor.getInt(cursor.getColumnIndexOrThrow("total"));
         } else {
             return 0;
         }
     }
 
-    public int getSumByDateExpense(String sum, String date){
-        String selectQuery = "SELECT (SUM(" +sum+ ")) AS total FROM " + TABLE_TRANSACTION + " WHERE DATE ("+KEY_DATE+") =? AND ("+ KEY_ISEXPENSE+ ") = 1 ORDER BY " + KEY_DATE;
+    public int getSumByDateExpense(String sum, String date) {
+        String selectQuery = "SELECT (SUM(" + sum + ")) AS total FROM " + TABLE_TRANSACTION + " WHERE DATE (" + KEY_DATE + ") =? AND (" + KEY_ISEXPENSE + ") = 1 ORDER BY " + KEY_DATE;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, new String[]{date});
-        if (cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             return cursor.getInt(cursor.getColumnIndexOrThrow("total"));
         } else {
             return 0;
         }
     }
 
-    public int getSumByDateIncome(String sum, String date){
-        String selectQuery = "SELECT (SUM(" +sum+ ")) AS total FROM " + TABLE_TRANSACTION + " WHERE DATE ("+KEY_DATE+") =? AND ("+ KEY_ISINCOME +") = 1 ORDER BY " + KEY_DATE;
+    public int getSumByDateIncome(String sum, String date) {
+        String selectQuery = "SELECT (SUM(" + sum + ")) AS total FROM " + TABLE_TRANSACTION + " WHERE DATE (" + KEY_DATE + ") =? AND (" + KEY_ISINCOME + ") = 1 ORDER BY " + KEY_DATE;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, new String[]{date});
-        if (cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             return cursor.getInt(cursor.getColumnIndexOrThrow("total"));
         } else {
             return 0;
@@ -343,7 +362,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
         values.put(KEY_BACCOUNT, budgetModel.account);
-        values.put(KEY_CID, budgetModel.category);
+        values.put(KEY_CAT, budgetModel.category);
         values.put(KEY_BAMOUNT, budgetModel.amount);
         values.put(KEY_BCURRENCY, budgetModel.currency);
         values.put(KEY_BSTARTDATE, budgetModel.start);
@@ -359,7 +378,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
 
-        String selectQuery = "SELECT * FROM " + TABLE_BUDGET + " WHERE "+KEY_BID+" =? ";
+        String selectQuery = "SELECT * FROM " + TABLE_BUDGET + " WHERE " + KEY_BID + " =? ";
 
         Cursor cursor = db.rawQuery(selectQuery, new String[]{String.valueOf(id)});
         if (cursor != null)
@@ -370,7 +389,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
                 cursor.getInt(cursor.getColumnIndexOrThrow(KEY_BID)),
                 cursor.getString(cursor.getColumnIndexOrThrow(KEY_BNAME)),
                 cursor.getInt(cursor.getColumnIndexOrThrow(KEY_BAMOUNT)),
-                cursor.getInt(cursor.getColumnIndexOrThrow(KEY_CID)),
+                cursor.getInt(cursor.getColumnIndexOrThrow(KEY_CAT)),
                 cursor.getString(cursor.getColumnIndexOrThrow(KEY_BACCOUNT)),
                 cursor.getString(cursor.getColumnIndexOrThrow(KEY_BCURRENCY)),
                 cursor.getString(cursor.getColumnIndexOrThrow(KEY_BSTARTDATE)),
@@ -387,7 +406,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         String selectQuery = "SELECT  * FROM " + TABLE_BUDGET + " ORDER BY " + KEY_BENDDATE;
 
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery,null);
+        Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
@@ -396,7 +415,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
                         cursor.getInt(cursor.getColumnIndexOrThrow(KEY_BID)),
                         cursor.getString(cursor.getColumnIndexOrThrow(KEY_BNAME)),
                         cursor.getInt(cursor.getColumnIndexOrThrow(KEY_BAMOUNT)),
-                        cursor.getInt(cursor.getColumnIndexOrThrow(KEY_CID)),
+                        cursor.getInt(cursor.getColumnIndexOrThrow(KEY_CAT)),
                         cursor.getString(cursor.getColumnIndexOrThrow(KEY_BACCOUNT)),
                         cursor.getString(cursor.getColumnIndexOrThrow(KEY_BCURRENCY)),
                         cursor.getString(cursor.getColumnIndexOrThrow(KEY_BSTARTDATE)),
@@ -407,6 +426,100 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         }
 //        db.close();
         return budgetList;
+    }
+
+    // Gaol CRUD
+
+    public boolean addGoal(GoalModel goalModel) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_GAMOUNT, goalModel.amount);
+        values.put(KEY_GDATE, goalModel.date);
+        values.put(KEY_GNAME, goalModel.name);
+        values.put(KEY_GALREADY_SAVED, goalModel.alreadySaved);
+        values.put(KEY_GNOTE, goalModel.note);
+        values.put(KEY_GSTATUS,goalModel.status);
+
+
+         if(db.insert(TABLE_GOAL, null, values) > 0){
+             return true;
+         } else {
+             return false;
+         }
+        //db.close();
+
+    }
+
+    public List<GoalModel> getAllGoal(String column) {
+        List<GoalModel> goalList = new ArrayList<GoalModel>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_GOAL + " WHERE "+ KEY_GSTATUS +" =?  ORDER BY " + KEY_GDATE;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{column});
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                GoalModel goal = new GoalModel(
+                        cursor.getInt(cursor.getColumnIndexOrThrow(KEY_GID)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(KEY_GNAME)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(KEY_GNOTE)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(KEY_GDATE)),
+                        cursor.getInt(cursor.getColumnIndexOrThrow(KEY_GAMOUNT)),
+                        cursor.getInt(cursor.getColumnIndexOrThrow(KEY_GALREADY_SAVED)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(KEY_GSTATUS))
+                );
+                goalList.add(goal);
+            } while (cursor.moveToNext());
+        }
+        db.close();
+        return goalList;
+    }
+
+    public GoalModel getGoal(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+
+        String selectQuery = "SELECT * FROM " + TABLE_GOAL + " WHERE " + KEY_GID + " =? ";
+
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{String.valueOf(id)});
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        assert cursor != null;
+        GoalModel goal = new GoalModel(
+                cursor.getInt(cursor.getColumnIndexOrThrow(KEY_GID)),
+                cursor.getString(cursor.getColumnIndexOrThrow(KEY_GNAME)),
+                cursor.getString(cursor.getColumnIndexOrThrow(KEY_GNOTE)),
+                cursor.getString(cursor.getColumnIndexOrThrow(KEY_GDATE)),
+                cursor.getInt(cursor.getColumnIndexOrThrow(KEY_GAMOUNT)),
+                cursor.getInt(cursor.getColumnIndexOrThrow(KEY_GALREADY_SAVED)),
+                cursor.getString(cursor.getColumnIndexOrThrow(KEY_GSTATUS))
+        );
+
+        //db.close();
+        return goal;
+    }
+
+    public boolean updateGoal(GoalModel goalModel, int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_GAMOUNT, goalModel.amount);
+        values.put(KEY_GDATE, goalModel.date);
+        values.put(KEY_GNAME, goalModel.name);
+        values.put(KEY_GALREADY_SAVED, goalModel.alreadySaved);
+        values.put(KEY_GNOTE, goalModel.note);
+        values.put(KEY_GSTATUS,goalModel.status);
+
+        if(db.update(TABLE_GOAL, values, "" + KEY_GID + " = ?", new String[]{String.valueOf(id)}) >= 0){
+            db.close();
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

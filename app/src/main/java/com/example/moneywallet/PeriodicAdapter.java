@@ -68,6 +68,7 @@ public class PeriodicAdapter extends RecyclerView.Adapter<PeriodicAdapter.ViewHo
         @Override
         public void onClick(View v) {
 
+            Log.e("Errrrr","rrrrr");
             Intent intent = new Intent(v.getContext(),BudgetDetailActivity.class);
             intent.putExtra("bid",""+id);
             v.getContext().startActivity(intent);
