@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/imageButton12"
+        android:id="@+id/debtBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -28,7 +28,7 @@
         app:srcCompat="@drawable/clear" />
 
     <ImageButton
-        android:id="@+id/imageButton13"
+        android:id="@+id/debtSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -64,14 +64,14 @@
         tools:ignore="MissingConstraints">
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/debtName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Name" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/text_input_layout_2"
+        android:id="@+id/debtDescriptionIL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -83,7 +83,7 @@
         tools:ignore="MissingConstraints">
 
         <EditText
-            android:id="@+id/editText_2"
+            android:id="@+id/debtDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Description" />
@@ -98,7 +98,7 @@
         android:text="Account"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_input_layout_2" />
+        app:layout_constraintTop_toBottomOf="@+id/debtDescriptionIL" />
 
     <Spinner
         android:id="@+id/spinner5"
@@ -123,7 +123,7 @@
         app:layout_constraintTop_toBottomOf="@+id/spinner5" />
 
     <EditText
-        android:id="@+id/editTextNumberPassword"
+        android:id="@+id/debtAmount"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -143,10 +143,10 @@
         android:text="Date"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumberPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/debtAmount" />
 
     <EditText
-        android:id="@+id/editTextDate4"
+        android:id="@+id/debtDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -157,7 +157,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView48" />
 
     <TextView
-        android:id="@+id/textView49"
+        android:id="@+id/debtDueDateTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -165,10 +165,10 @@
         android:text="Due Date"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDate4" />
+        app:layout_constraintTop_toBottomOf="@+id/debtDate" />
 
     <EditText
-        android:id="@+id/editTextDate5"
+        android:id="@+id/debtDueDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -177,5 +177,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView49" />
+        app:layout_constraintTop_toBottomOf="@+id/debtDate" />
 </androidx.constraintlayout.widget.ConstraintLayout>

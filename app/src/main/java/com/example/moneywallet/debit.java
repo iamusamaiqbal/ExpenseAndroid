@@ -36,12 +36,10 @@ public class debit extends AppCompatActivity {
         });
 
 
-        new_lent_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(debit.this,i_lent_record.class);
-                startActivity(intent);
-            }
+        new_lent_btn.setOnClickListener(v -> {
+            Intent intent=new Intent(debit.this,i_lent_record.class);
+            intent.putExtra("type","lent");
+            startActivity(intent);
         });
 
 
