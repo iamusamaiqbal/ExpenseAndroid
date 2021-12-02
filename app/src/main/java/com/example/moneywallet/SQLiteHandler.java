@@ -62,8 +62,22 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     public static String KEY_DTYPE = "dtype";
     public static String KEY_DISACTIVE = "disactive";
 
+    public static String TABLE_SHOPPING = "ShoppingTable";
+
+    public static String KEY_SID = "sid";
+    public static String KEY_SNAME = "sname";
+    public static String KEY_SAMOUNT = "samount";
+    public static String KEY_SITEM = "sitem";
+
+
+    public static String TABLE_SHOPPING_ITEM = "ItemTable";
+
+    public static String KEY_IID = "iid";
+    public static String KEY_INAME = "iname";
+    public static String KEY_IAMOUNT = "iamount";
+
     public SQLiteHandler(@Nullable Context context) {
-        super(context, "ExpenseDB3", null, 1);
+        super(context, "ExpenseDB5", null, 1);
     }
 
     @Override
@@ -113,11 +127,26 @@ public class SQLiteHandler extends SQLiteOpenHelper {
                 + KEY_DISACTIVE + " INTEGER,"
                 + KEY_DDATE + " DATETIME)";
 
+        String CREATE_SHOPPING_TABLE = "CREATE TABLE " + TABLE_SHOPPING + "("
+                + KEY_SID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + KEY_SAMOUNT + " INTEGER,"
+                + KEY_SITEM + " INTEGER,"
+                + KEY_SNAME + " VARCHAR(20) )";
+
+        String CREATE_ITEM_TABLE = "CREATE TABLE " + TABLE_SHOPPING_ITEM + "("
+                + KEY_IID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + KEY_IAMOUNT + " INTEGER,"
+                + KEY_SID + " INTEGER,"
+                + KEY_INAME + " VARCHAR(20),"
+                + " FOREIGN KEY ("+ KEY_SID +") REFERENCES "+ TABLE_SHOPPING_ITEM +" ("+ KEY_SID +") ON UPDATE CASCADE ON DELETE CASCADE)";
+
         db.execSQL(CREATE_EXPENSE_TABLE);
         db.execSQL(CREATE_CATEGORY_TABLE);
         db.execSQL(CREATE_BUDGET_TABLE);
         db.execSQL(CREATE_GOAL_TABLE);
         db.execSQL(CREATE_DEBT_TABLE);
+        db.execSQL(CREATE_SHOPPING_TABLE);
+        db.execSQL(CREATE_ITEM_TABLE);
 
     }
 
@@ -452,6 +481,35 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         return budgetList;
     }
 
+    public boolean deleteBudget(int id) {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        boolean flag = db.delete(TABLE_BUDGET, KEY_BID + "=?", new String[]{String.valueOf(id)}) > 0;
+
+        db.close();
+        return flag;
+    }
+
+    public boolean updateBudget(BudgetModel budgetModel, int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_BACCOUNT, budgetModel.account);
+        values.put(KEY_CAT, budgetModel.category);
+        values.put(KEY_BAMOUNT, budgetModel.amount);
+        values.put(KEY_BCURRENCY, budgetModel.currency);
+        values.put(KEY_BSTARTDATE, budgetModel.start);
+        values.put(KEY_BENDDATE, budgetModel.end);
+        values.put(KEY_BNAME, budgetModel.name);
+
+        if (db.update(TABLE_BUDGET, values, "" + KEY_BID + " = ?", new String[]{String.valueOf(id)}) >= 0) {
+            db.close();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     // Gaol CRUD
 
     public boolean addGoal(GoalModel goalModel) {
@@ -463,14 +521,14 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         values.put(KEY_GNAME, goalModel.name);
         values.put(KEY_GALREADY_SAVED, goalModel.alreadySaved);
         values.put(KEY_GNOTE, goalModel.note);
-        values.put(KEY_GSTATUS,goalModel.status);
+        values.put(KEY_GSTATUS, goalModel.status);
 
 
-         if(db.insert(TABLE_GOAL, null, values) > 0){
-             return true;
-         } else {
-             return false;
-         }
+        if (db.insert(TABLE_GOAL, null, values) > 0) {
+            return true;
+        } else {
+            return false;
+        }
         //db.close();
 
     }
@@ -478,7 +536,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     public List<GoalModel> getAllGoal(String column) {
         List<GoalModel> goalList = new ArrayList<GoalModel>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_GOAL + " WHERE "+ KEY_GSTATUS +" =?  ORDER BY " + KEY_GDATE;
+        String selectQuery = "SELECT  * FROM " + TABLE_GOAL + " WHERE " + KEY_GSTATUS + " =?  ORDER BY " + KEY_GDATE;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, new String[]{column});
@@ -527,6 +585,15 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         return goal;
     }
 
+    public boolean deleteGoal(int id) {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        boolean flag = db.delete(TABLE_GOAL, KEY_GID + "=?", new String[]{String.valueOf(id)}) > 0;
+
+        db.close();
+        return flag;
+    }
+
     public boolean updateGoal(GoalModel goalModel, int id) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -536,9 +603,9 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         values.put(KEY_GNAME, goalModel.name);
         values.put(KEY_GALREADY_SAVED, goalModel.alreadySaved);
         values.put(KEY_GNOTE, goalModel.note);
-        values.put(KEY_GSTATUS,goalModel.status);
+        values.put(KEY_GSTATUS, goalModel.status);
 
-        if(db.update(TABLE_GOAL, values, "" + KEY_GID + " = ?", new String[]{String.valueOf(id)}) >= 0){
+        if (db.update(TABLE_GOAL, values, "" + KEY_GID + " = ?", new String[]{String.valueOf(id)}) >= 0) {
             db.close();
             return true;
         } else {
@@ -557,12 +624,12 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         values.put(KEY_DACCOUNT, debtModel.account);
         values.put(KEY_DDATE, debtModel.date);
         values.put(KEY_DDUE, debtModel.duedate);
-        values.put(KEY_DAMOUNT,debtModel.amount);
-        values.put(KEY_DTYPE,debtModel.type);
-        values.put(KEY_DISACTIVE,debtModel.isActive);
+        values.put(KEY_DAMOUNT, debtModel.amount);
+        values.put(KEY_DTYPE, debtModel.type);
+        values.put(KEY_DISACTIVE, debtModel.isActive);
 
 
-        if(db.insert(TABLE_DEBT, null, values) > 0){
+        if (db.insert(TABLE_DEBT, null, values) > 0) {
             return true;
         } else {
             return false;
@@ -571,13 +638,40 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 
     }
 
-    public List<DebtModel> getAllDebt(String column1,String column2) {
+    public DebtModel getDebt(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+
+        String selectQuery = "SELECT * FROM " + TABLE_DEBT + " WHERE " + KEY_DID + " =? ";
+
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{String.valueOf(id)});
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        assert cursor != null;
+        DebtModel debt = new DebtModel(
+                cursor.getInt(cursor.getColumnIndexOrThrow(KEY_DID)),
+                cursor.getString(cursor.getColumnIndexOrThrow(KEY_DNAME)),
+                cursor.getString(cursor.getColumnIndexOrThrow(KEY_DDES)),
+                cursor.getString(cursor.getColumnIndexOrThrow(KEY_DACCOUNT)),
+                cursor.getString(cursor.getColumnIndexOrThrow(KEY_DDATE)),
+                cursor.getString(cursor.getColumnIndexOrThrow(KEY_DDUE)),
+                cursor.getInt(cursor.getColumnIndexOrThrow(KEY_DAMOUNT)),
+                cursor.getString(cursor.getColumnIndexOrThrow(KEY_DTYPE)),
+                cursor.getInt(cursor.getColumnIndexOrThrow(KEY_DISACTIVE))
+        );
+
+        //db.close();
+        return debt;
+    }
+
+    public List<DebtModel> getAllDebt(String column1, String column2) {
         List<DebtModel> debtList = new ArrayList<DebtModel>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_DEBT + " WHERE "+ KEY_DTYPE +" =? AND "+KEY_DISACTIVE+" =?  ORDER BY " + KEY_DDATE;
+        String selectQuery = "SELECT  * FROM " + TABLE_DEBT + " WHERE " + KEY_DTYPE + " =? AND " + KEY_DISACTIVE + " =?  ORDER BY " + KEY_DDATE;
 
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, new String[]{column1,column2});
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{column1, column2});
 
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
@@ -598,6 +692,218 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         }
         db.close();
         return debtList;
+    }
+
+    public boolean deleteDebt(int id) {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        boolean flag = db.delete(TABLE_DEBT, KEY_DID + "=?", new String[]{String.valueOf(id)}) > 0;
+
+        db.close();
+        return flag;
+    }
+
+    public boolean updateDebt(DebtModel debtModel, int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_DNAME, debtModel.name);
+        values.put(KEY_DDES, debtModel.description);
+        values.put(KEY_DACCOUNT, debtModel.account);
+        values.put(KEY_DDATE, debtModel.date);
+        values.put(KEY_DDUE, debtModel.duedate);
+        values.put(KEY_DAMOUNT, debtModel.amount);
+        values.put(KEY_DTYPE, debtModel.type);
+        values.put(KEY_DISACTIVE, debtModel.isActive);
+
+        if (db.update(TABLE_DEBT, values, "" + KEY_DID + " = ?", new String[]{String.valueOf(id)}) >= 0) {
+            db.close();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //Shopping list CRUD
+
+    public boolean addShopping(ShoppingListModel shoppingListModel) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_SNAME, shoppingListModel.name);
+        values.put(KEY_SAMOUNT, shoppingListModel.amount);
+        values.put(KEY_SITEM, shoppingListModel.totalitem);
+
+
+        if (db.insert(TABLE_SHOPPING, null, values) > 0) {
+            return true;
+        } else {
+            return false;
+        }
+        //db.close();
+
+    }
+
+    public ShoppingListModel getShopping(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+
+        String selectQuery = "SELECT * FROM " + TABLE_SHOPPING + " WHERE " + KEY_SID + " =? ";
+
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{String.valueOf(id)});
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        assert cursor != null;
+        ShoppingListModel shopping = new ShoppingListModel(
+                cursor.getInt(cursor.getColumnIndexOrThrow(KEY_SID)),
+                cursor.getString(cursor.getColumnIndexOrThrow(KEY_SNAME)),
+                cursor.getInt(cursor.getColumnIndexOrThrow(KEY_SITEM)),
+                cursor.getInt(cursor.getColumnIndexOrThrow(KEY_SAMOUNT))
+        );
+
+        //db.close();
+        return shopping;
+    }
+
+    public List<ShoppingListModel> getAllShoppingList() {
+        List<ShoppingListModel> shoppingList = new ArrayList<ShoppingListModel>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_SHOPPING + " ORDER BY " + KEY_SID;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                ShoppingListModel shopping = new ShoppingListModel(
+                        cursor.getInt(cursor.getColumnIndexOrThrow(KEY_SID)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(KEY_SNAME)),
+                        cursor.getInt(cursor.getColumnIndexOrThrow(KEY_SITEM)),
+                        cursor.getInt(cursor.getColumnIndexOrThrow(KEY_SAMOUNT))
+                );
+                shoppingList.add(shopping);
+            } while (cursor.moveToNext());
+        }
+        db.close();
+        return shoppingList;
+    }
+
+    public boolean deleteShopping(int id) {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        boolean flag = db.delete(TABLE_SHOPPING, KEY_SID + "=?", new String[]{String.valueOf(id)}) > 0;
+
+        db.close();
+        return flag;
+    }
+
+    public boolean updateShopping(ShoppingListModel shoppingListModel, int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_SNAME, shoppingListModel.name);
+        values.put(KEY_SAMOUNT, shoppingListModel.amount);
+        values.put(KEY_SITEM, shoppingListModel.totalitem);
+
+        if (db.update(TABLE_SHOPPING, values, "" + KEY_SID + " = ?", new String[]{String.valueOf(id)}) >= 0) {
+            db.close();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //Shopping item CRUD
+
+    public boolean addItem(ShoppingItemModel shoppingItemModel) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_INAME, shoppingItemModel.name);
+        values.put(KEY_IAMOUNT, shoppingItemModel.amount);
+        values.put(KEY_SID, shoppingItemModel.sid);
+
+
+        if (db.insert(TABLE_SHOPPING_ITEM, null, values) > 0) {
+            return true;
+        } else {
+            return false;
+        }
+        //db.close();
+
+    }
+
+    public ShoppingItemModel getItem(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+
+        String selectQuery = "SELECT * FROM " + TABLE_SHOPPING_ITEM + " WHERE " + KEY_IID + " =? ";
+
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{String.valueOf(id)});
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        assert cursor != null;
+        ShoppingItemModel shoppingItemModel = new ShoppingItemModel(
+                cursor.getInt(cursor.getColumnIndexOrThrow(KEY_IID)),
+                cursor.getString(cursor.getColumnIndexOrThrow(KEY_INAME)),
+                cursor.getInt(cursor.getColumnIndexOrThrow(KEY_IAMOUNT)),
+                cursor.getInt(cursor.getColumnIndexOrThrow(KEY_SID))
+        );
+
+        //db.close();
+        return shoppingItemModel;
+    }
+
+    public List<ShoppingItemModel> getAllItem(String column1) {
+        List<ShoppingItemModel> shoppingList = new ArrayList<ShoppingItemModel>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_SHOPPING_ITEM + " WHERE " + KEY_SID + " =? ORDER BY " + KEY_IID;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{column1});
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                ShoppingItemModel shoppingItemModel = new ShoppingItemModel(
+                        cursor.getInt(cursor.getColumnIndexOrThrow(KEY_IID)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(KEY_INAME)),
+                        cursor.getInt(cursor.getColumnIndexOrThrow(KEY_IAMOUNT)),
+                        cursor.getInt(cursor.getColumnIndexOrThrow(KEY_SID))
+                );
+                shoppingList.add(shoppingItemModel);
+            } while (cursor.moveToNext());
+        }
+        db.close();
+        return shoppingList;
+    }
+
+    public boolean deleteItem(int id) {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        boolean flag = db.delete(TABLE_SHOPPING_ITEM, KEY_IID + "=?", new String[]{String.valueOf(id)}) > 0;
+
+        db.close();
+        return flag;
+    }
+
+    public boolean updateShopping(ShoppingItemModel shoppingItemModel, int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_INAME, shoppingItemModel.name);
+        values.put(KEY_IAMOUNT, shoppingItemModel.amount);
+        values.put(KEY_SID, shoppingItemModel.sid);
+
+        if (db.update(TABLE_SHOPPING_ITEM, values, "" + KEY_IID + " = ?", new String[]{String.valueOf(id)}) >= 0) {
+            db.close();
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }
