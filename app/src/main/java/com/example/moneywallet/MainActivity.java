@@ -24,18 +24,16 @@ import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-TabLayout tabLayout;
-ViewPager viewPager;
-TabItem tabItem1,tabItem2;
-PageAdapter pageAdapter;
-DrawerLayout drawerLayout;
-NavigationView navigationView;
-Toolbar toolbar;
-ActionBarDrawerToggle toggle;
-FloatingActionButton new_record_float;
-ImageView imageView2;
-
-
+  TabLayout tabLayout;
+  ViewPager viewPager;
+  TabItem tabItem1,tabItem2;
+  PageAdapter pageAdapter;
+  DrawerLayout drawerLayout;
+  NavigationView navigationView;
+  Toolbar toolbar;
+  ActionBarDrawerToggle toggle;
+  FloatingActionButton new_record_float;
+  ImageView imageView2;
 
 
     @Override
@@ -75,14 +73,14 @@ ImageView imageView2;
 
                 switch (item.getItemId()){
                     case R.id.nav_Home:
-//                        Intent intent=new Intent(MainActivity.this,accounts.class);
-//                        startActivity(intent);
+                        Intent intent=new Intent(MainActivity.this,MainActivity.class);
+                        startActivity(intent);
                         Toast.makeText(MainActivity.this, "home clicked", Toast.LENGTH_SHORT).show();
                         return true;
 
                     case R.id.nav_Record:
-                        Intent intent=new Intent(MainActivity.this,new_record.class);
-                        startActivity(intent);
+                        Intent record=new Intent(MainActivity.this,new_record.class);
+                        startActivity(record);
                         Toast.makeText(MainActivity.this, "record clicked", Toast.LENGTH_SHORT).show();
                         return true;
 
@@ -116,25 +114,10 @@ ImageView imageView2;
                         startActivity(warr);
                         Toast.makeText(MainActivity.this, "warranties clicked", Toast.LENGTH_SHORT).show();
                         return true;
-                    case R.id.nav_loyalty_card:
-//                        Intent intent=new Intent(MainActivity.this,accounts.class);
-//                        startActivity(intent);
-                        Toast.makeText(MainActivity.this, "loyalty card clicked", Toast.LENGTH_SHORT).show();
-                        return true;
                     case R.id.nav_currency_rate:
-//                        Intent intent=new Intent(MainActivity.this,accounts.class);
-//                        startActivity(intent);
+                        Intent curency=new Intent(MainActivity.this,Currency_rates.class);
+                        startActivity(curency);
                         Toast.makeText(MainActivity.this, "currency clicked", Toast.LENGTH_SHORT).show();
-                        return true;
-                    case R.id.nav_group_sharing:
-//                        Intent intent=new Intent(MainActivity.this,accounts.class);
-//                        startActivity(intent);
-                        Toast.makeText(MainActivity.this, "group sharing clicked", Toast.LENGTH_SHORT).show();
-                        return true;
-                    case R.id.nav_wallet_life:
-//                        Intent intent=new Intent(MainActivity.this,accounts.class);
-//                        startActivity(intent);
-                        Toast.makeText(MainActivity.this, "wallet life clicked", Toast.LENGTH_SHORT).show();
                         return true;
                     case R.id.nav_export:
 //                        Intent intent=new Intent(MainActivity.this,accounts.class);
@@ -181,9 +164,6 @@ ImageView imageView2;
         });
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
-
-
-
     }
 
     @Override
@@ -194,8 +174,6 @@ ImageView imageView2;
           super.onBackPressed();
 
       }
-
-
     }
 
     @Override

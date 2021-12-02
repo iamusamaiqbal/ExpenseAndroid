@@ -37,27 +37,21 @@
             android:id="@+id/nav_warranties"
             android:icon="@drawable/warranti"
             android:title="Warranties" />
-        <item
-            android:id="@+id/nav_loyalty_card"
-            android:icon="@drawable/loyelty_card"
-            android:title="Loyalty Card" />
+<!--        <item-->
+<!--            android:id="@+id/nav_loyalty_card"-->
+<!--            android:icon="@drawable/loyelty_card"-->
+<!--            android:title="Loyalty Card" />-->
         <item
             android:id="@+id/nav_currency_rate"
             android:icon="@drawable/currensy"
             android:title="Currency Rate" />
-        <item
-            android:id="@+id/nav_group_sharing"
-            android:icon="@drawable/sharring"
-            android:title="Group Sharing" />
+
     </group>
 
     <item android:title="others">
         <menu>
             <group android:checkableBehavior="single">
-                <item
-                    android:id="@+id/nav_wallet_life"
-                    android:icon="@drawable/wallet_life"
-                    android:title="Wallet Life" />
+
                 <item
                     android:id="@+id/nav_export"
                     android:icon="@drawable/ic_baseline_exit_to_app_24"

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/curr"
+    tools:context=".Currency_rates">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_below="@+id/curr"
+        android:id="@+id/currency_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/calculater"
+        tools:ignore="NotSibling,UnknownId">
+
+    </androidx.appcompat.widget.Toolbar>
+    <include layout="@layout/curency_model"
+        android:layout_below="@+id/currency_toolbar"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+    </include>
+
+
+</RelativeLayout>

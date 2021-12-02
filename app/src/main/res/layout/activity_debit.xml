@@ -1,66 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".debit">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/debt_tool"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/calculater"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Debts"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textSize="20sp"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/search"
-            android:layout_gravity="end"
-            android:layout_marginRight="20dp"/>
-
-    </androidx.appcompat.widget.Toolbar>
-
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_debit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/debt_tool"
-        android:background="@color/white"
-        app:tabIndicatorColor="@color/calculater"
-        app:tabSelectedTextColor="@color/calculater"
-        app:tabTextColor="@color/black"
-        tools:ignore="UnknownId">
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tab_item_debit_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Active" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tab_item_debit_2"
-            android:layout_width="wrap_content"
-
-            android:layout_height="wrap_content"
-            android:text="Close" />
-
-
-    </com.google.android.material.tabs.TabLayout>
-
-    <androidx.viewpager.widget.ViewPager
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/tab_debit"
-        android:id="@+id/viewpage_debit"
-        />
+        >
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/debt_tool"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/calculater"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Debts"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="20sp"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/search"
+                android:layout_gravity="end"
+                android:layout_marginRight="20dp"/>
 
-</RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_debit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/debt_tool"
+            android:background="@color/white"
+            app:tabIndicatorColor="@color/calculater"
+            app:tabSelectedTextColor="@color/calculater"
+            app:tabTextColor="@color/black"
+            tools:ignore="UnknownId">
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tab_item_debit_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Active" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tab_item_debit_2"
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:text="Close" />
+
+
+        </com.google.android.material.tabs.TabLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tab_debit"
+            android:id="@+id/viewpage_debit"
+            />
+
+        <com.getbase.floatingactionbutton.FloatingActionsMenu
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            app:fab_labelStyle="@style/LabelStyle"
+            app:fab_labelsPosition="left">
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/new_lent_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fab_colorNormal="@color/white"
+                app:fab_icon="@drawable/ic_i_lent"
+                app:fab_title="I Lent" />
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fab_colorNormal="@color/white"
+                app:fab_icon="@drawable/ic_i_borrow"
+                app:fab_size="mini"
+                app:fab_title="I Borrowed" />
+        </com.getbase.floatingactionbutton.FloatingActionsMenu>
+    </RelativeLayout>
+
+
+
+</androidx.drawerlayout.widget.DrawerLayout>

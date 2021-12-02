@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MoneyWallet">
         <activity
+            android:name=".i_lent_record"
+            android:exported="false" />
+        <activity
+            android:name=".Currency_rates"
+            android:exported="false" />
+        <activity
             android:name=".New_Goal"
             android:exported="false" />
         <activity

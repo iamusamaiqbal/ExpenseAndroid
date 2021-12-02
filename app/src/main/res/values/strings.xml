@@ -79,5 +79,10 @@
         <item>Female</item>
     </string-array>
 
+    <string-array name="lent">
+        <item>Cash</item>
+    </string-array>
+
+
 
 </resources>
