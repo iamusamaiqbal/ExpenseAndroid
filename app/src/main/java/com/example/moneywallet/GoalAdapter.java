@@ -63,7 +63,6 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.ViewHolder> {
 
         @Override
         public void onClick(View v) {
-
             Intent intent = new Intent(v.getContext(),Goal_details.class);
             intent.putExtra("gid",""+id);
             v.getContext().startActivity(intent);

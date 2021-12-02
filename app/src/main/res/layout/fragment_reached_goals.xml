@@ -5,9 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".Reached_goals">
 
-
-    <include layout="@layout/goal_reached_model">
-
-    </include>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/reachedRV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

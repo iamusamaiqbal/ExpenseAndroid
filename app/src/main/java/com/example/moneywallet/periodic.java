@@ -53,8 +53,6 @@ public class periodic extends Fragment {
 
         budgetList = database.getAllBudget();
 
-        Log.e("fff","ffffffffffffffffffffffffff");
-
         BudgetModel[] budgetArray = budgetList.toArray(new BudgetModel[0]);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -66,5 +64,21 @@ public class periodic extends Fragment {
 
 
         return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        budgetList = database.getAllBudget();
+
+        BudgetModel[] budgetArray = budgetList.toArray(new BudgetModel[0]);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        periodicAdapter = new PeriodicAdapter(getActivity(),budgetArray);
+
+        recyclerView.setAdapter(periodicAdapter);
+
     }
 }

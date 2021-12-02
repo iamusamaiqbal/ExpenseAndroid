@@ -430,7 +430,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 
     // Gaol CRUD
 
-    public void addGoal(GoalModel goalModel) {
+    public boolean addGoal(GoalModel goalModel) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -442,18 +442,22 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         values.put(KEY_GSTATUS,goalModel.status);
 
 
-        db.insert(TABLE_GOAL, null, values);
+         if(db.insert(TABLE_GOAL, null, values) > 0){
+             return true;
+         } else {
+             return false;
+         }
         //db.close();
 
     }
 
-    public List<GoalModel> getAllGoal() {
+    public List<GoalModel> getAllGoal(String column) {
         List<GoalModel> goalList = new ArrayList<GoalModel>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_GOAL + " ORDER BY " + KEY_GDATE;
+        String selectQuery = "SELECT  * FROM " + TABLE_GOAL + " WHERE "+ KEY_GSTATUS +" =?  ORDER BY " + KEY_GDATE;
 
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{column});
 
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
@@ -499,7 +503,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         return goal;
     }
 
-    public void updateGoal(GoalModel goalModel, int id) {
+    public boolean updateGoal(GoalModel goalModel, int id) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -510,8 +514,12 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         values.put(KEY_GNOTE, goalModel.note);
         values.put(KEY_GSTATUS,goalModel.status);
 
-        db.update(TABLE_GOAL, values, "" + KEY_GID + " = ?", new String[]{String.valueOf(id)});
-        db.close();
+        if(db.update(TABLE_GOAL, values, "" + KEY_GID + " = ?", new String[]{String.valueOf(id)}) >= 0){
+            db.close();
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

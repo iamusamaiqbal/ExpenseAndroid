@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Active_goals extends Fragment {
 
@@ -27,7 +29,6 @@ public class Active_goals extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -38,12 +39,25 @@ public class Active_goals extends Fragment {
         rv = view.findViewById(R.id.ActiveRV);
         database = new SQLiteHandler(getActivity());
 
+//        new Thread(() -> {
+//            while (true) {
+//                //do stuff....
+//                Random r = new Random();
+//                if (r.nextInt(100) == 42) {
+//                    break;
+//                }
+//            }
+//
+//            getActivity().runOnUiThread(() -> Log.e("Mian "," Thread is working"));
+//        }).start();
+
         floatingActionButton.setOnClickListener(v -> {
             Intent i = new Intent(getContext(),New_Goal.class);
+            i.putExtra("gid",""+0);
             startActivity(i);
         });
 
-        goalList = database.getAllGoal();
+        goalList = database.getAllGoal("active");
 
         GoalModel[] goalArray = goalList.toArray(new GoalModel[0]);
 
@@ -54,5 +68,20 @@ public class Active_goals extends Fragment {
         rv.setAdapter(goalAdapter);
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        goalList = database.getAllGoal("active");
+
+        GoalModel[] goalArray = goalList.toArray(new GoalModel[0]);
+
+        rv.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        goalAdapter = new GoalAdapter(getActivity(),goalArray);
+
+        rv.setAdapter(goalAdapter);
     }
 }

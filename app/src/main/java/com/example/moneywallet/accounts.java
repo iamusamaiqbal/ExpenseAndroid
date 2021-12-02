@@ -41,12 +41,12 @@ import java.util.List;
 import java.util.Locale;
 
 public class accounts extends Fragment {
-    String[] mobileArray = {"dadsd", "dsdadada", "sdsddsdsdasd"};
     MyListAdapter adapter;
     ListView listView;
     Button showMore, pieChartShowMore;
     Date date;
     LocalDate dateTime;
+    View v;
 
     int sum;
     String StringDate;
@@ -83,10 +83,7 @@ public class accounts extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_accounts, container, false);
-
-        PieChart chart = v.findViewById(R.id.pieChart);
-        LineChart lineChart = v.findViewById(R.id.lineChart);
+        v = inflater.inflate(R.layout.fragment_accounts, container, false);
 
         listView = v.findViewById(R.id.list_view_account);
         showMore = v.findViewById(R.id.show_more);
@@ -97,7 +94,23 @@ public class accounts extends Fragment {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E MMM dd HH:mm:ss 'GMT'z yyyy", Locale.ENGLISH);
         dateTime = LocalDate.parse(dateInString, formatter);
 
+        content(v);
 
+        return v;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    public void onResume() {
+        super.onResume();
+        content(v);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void content(View v) {
+
+        PieChart chart = v.findViewById(R.id.pieChart);
+        LineChart lineChart = v.findViewById(R.id.lineChart);
         database = new SQLiteHandler(getActivity());
         sum = database.getSum(SQLiteHandler.KEY_AMOUNT);
 
@@ -158,61 +171,29 @@ public class accounts extends Fragment {
         ArrayList<Entry> yExpense = new ArrayList<>();
         ArrayList<Entry> yIncome = new ArrayList<>();
 
-//        yExpense.add(new Entry(0f, 0));
-//        yIncome.add(new Entry(0f, 0));
-//
-//        transactionList.forEach(transactionModel -> {
-//
-//            LocalDate dateTime = LocalDate.parse(transactionModel.date);
-//
-//            if ((dateTime.isEqual(LocalDate.now()) || dateTime.isAfter(LocalDate.parse(budget.start))) && (dateTime.isEqual(LocalDate.parse(budget.end)) || dateTime.isBefore(LocalDate.parse(budget.end)))) {
-//                if(!dates.contains(dateTime.toString())){
-//                    total=database.getSumByDate(SQLiteHandler.KEY_AMOUNT,dateTime.toString());
-//                    transactions.add(new BarEntry( transactionModel.id*400f, total*1));
-//                    dates.add(dateTime.toString());
-//                }
-//            }
-//        });
+        yExpense.add(new Entry(100f, 0f));
+        yIncome.add(new Entry(100f, 0f));
 
-
-        int j=0;
-        for (int i = 6; i >-1; i--) {
+        int j = 0;
+        for (int i = 6; i > -1; i--) {
 
             LocalDate day = dateTime.minusDays(i);
             int totalExp = database.getSumByDateExpense(SQLiteHandler.KEY_AMOUNT, day.toString());
 
             int totalInc = database.getSumByDateIncome(SQLiteHandler.KEY_AMOUNT, day.toString());
 
-            //if(totalExp=0){
+            if (totalExp != 0) {
 
-                yExpense.add(new Entry(j*100f, totalExp* 1));
+                yExpense.add(new Entry(j * 100f, totalExp * 1));
 
-            //}
-            //if(totalInc!=0){
-                yIncome.add(new Entry(j* 100f, totalInc * 1));
-            //}
+            }
+            if (totalInc != 0) {
+                yIncome.add(new Entry(j * 100f, totalInc * 1));
+            }
 
-            Log.e("ERRRRRRRRRRRRRRr", "" + totalExp +" "+totalInc);
-            j+=1;
+            Log.e("ERRRRRRRRRRRRRRr", "" + totalExp + " " + totalInc);
+            j += 1;
         }
-
-//        transactionList.forEach(amount -> {
-//            if (amount.isExpense == 1) {
-//                yExpense.add(new Entry(amount.id * 100f, amount.amount * 1));
-//            } else {
-//                yIncome.add(new Entry(amount.id * 100f, amount.amount * 1));
-//            }
-//        });
-
-//        final ArrayList<String> xAxisLabel = new ArrayList<>();
-//        xAxisLabel.add("Mon");
-//        xAxisLabel.add("Tue");
-//        xAxisLabel.add("Wed");
-//        xAxisLabel.add("Thu");
-//        xAxisLabel.add("Fri");
-//        xAxisLabel.add("Sat");
-//        xAxisLabel.add("Sun");
-
 
         XAxis xAxis = lineChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -304,8 +285,5 @@ public class accounts extends Fragment {
 
 
         lineChart.setData(data12);
-
-
-        return v;
     }
 }
