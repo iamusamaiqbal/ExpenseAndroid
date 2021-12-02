@@ -14,7 +14,7 @@ public class debit extends AppCompatActivity {
     TabLayout tab_debit;
     ViewPager viewpager_debit;
     DebitPgeAdapter debitPageAdapter;
-    FloatingActionButton new_lent_btn;
+    FloatingActionButton new_lent_btn,new_lent_btn_2;
 
 
 
@@ -25,6 +25,15 @@ public class debit extends AppCompatActivity {
         tab_debit=findViewById(R.id.tab_debit);
         viewpager_debit=findViewById(R.id.viewpage_debit);
         new_lent_btn=findViewById(R.id.new_lent_btn);
+        new_lent_btn_2=findViewById(R.id.new_lent_btn_2);
+
+        new_lent_btn_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(debit.this,shopping_item_list.class);
+                startActivity(intent);
+            }
+        });
 
 
         new_lent_btn.setOnClickListener(new View.OnClickListener() {
