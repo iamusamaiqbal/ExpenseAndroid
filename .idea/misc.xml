@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/ExpenseAndroid/app/src/main/res/drawable/add_item_shopping_card.xml" value="0.21979166666666666" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/drawable/adjust_balance.xml" value="0.21614583333333334" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/drawable/background_label.xml" value="0.21614583333333334" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/drawable/btn_background.xml" value="0.21614583333333334" />
@@ -20,6 +21,7 @@
         <entry key="..\:/ExpenseAndroid/app/src/main/res/drawable/ic_select.xml" value="0.21614583333333334" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/drawable/indicator.xml" value="0.21614583333333334" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/active_goal_model.xml" value="0.20416666666666666" />
+        <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_add_item_shopping_list.xml" value="0.20364583333333333" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_add_warranty.xml" value="0.20416666666666666" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_budget.xml" value="0.2" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_budget_detail.xml" value="0.2" />
@@ -38,6 +40,7 @@
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_new_budget.xml" value="0.2" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_new_goal.xml" value="0.20416666666666666" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_new_record.xml" value="0.20416666666666666" />
+        <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_new_shopping_list.xml" value="0.2" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_paused_goals.xml" value="0.2" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_setting.xml" value="0.20416666666666666" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_shopping_item_list.xml" value="0.2" />
@@ -46,6 +49,7 @@
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_transaction.xml" value="0.2" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_user_profile.xml" value="0.2" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_warranty.xml" value="0.20416666666666666" />
+        <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/add_item_shooping_card_popup.xml" value="0.20364583333333333" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/add_warranty.xml" value="0.20416666666666666" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/budget_view.xml" value="0.2" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/card_model.xml" value="0.2" />

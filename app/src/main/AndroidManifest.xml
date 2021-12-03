@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MoneyWallet">
         <activity
+            android:name=".add_item_shopping_list"
+            android:exported="false" />
+        <activity
+            android:name=".New_Shopping_List"
+            android:exported="false" />
+        <activity
             android:name=".debt_add_record_list"
             android:exported="false" />
         <activity

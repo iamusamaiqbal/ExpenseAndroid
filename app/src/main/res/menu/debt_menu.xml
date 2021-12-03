@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
         <item android:id="@+id/setting_c"
-            android:title="Setting"
+            android:title="Forgive"
 
             />
         <item android:id="@+id/ratting_c"
 
             app:showAsAction="never"
-            android:title="Ratting Bar"/>
+            android:title="Edit debt"/>
         <item android:id="@+id/share_c"
             app:showAsAction="never"
-            android:title="Share"
+            android:title="Delet debt"
 
             />
 
