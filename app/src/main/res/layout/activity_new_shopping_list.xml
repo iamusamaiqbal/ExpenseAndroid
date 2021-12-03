@@ -20,7 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
         <ImageButton
-            android:id="@+id/imageButton13"
+            android:id="@+id/newShoppingListBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -70,6 +70,7 @@
             />
 
        <EditText
+           android:id="@+id/newShoppingListName"
            android:layout_width="320dp"
            android:layout_height="wrap_content"
            android:layout_gravity="center"
@@ -79,7 +80,7 @@
            />
 
         <Button
-            android:id="@+id/button6"
+            android:id="@+id/newShoppingListSave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"

@@ -75,9 +75,10 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     public static String KEY_IID = "iid";
     public static String KEY_INAME = "iname";
     public static String KEY_IAMOUNT = "iamount";
+    public static String KEY_ICHECKED = "checked";
 
     public SQLiteHandler(@Nullable Context context) {
-        super(context, "ExpenseDB5", null, 1);
+        super(context, "ExpenseDB6", null, 1);
     }
 
     @Override
@@ -137,6 +138,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
                 + KEY_IID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + KEY_IAMOUNT + " INTEGER,"
                 + KEY_SID + " INTEGER,"
+                + KEY_ICHECKED + " INTEGER,"
                 + KEY_INAME + " VARCHAR(20),"
                 + " FOREIGN KEY ("+ KEY_SID +") REFERENCES "+ TABLE_SHOPPING_ITEM +" ("+ KEY_SID +") ON UPDATE CASCADE ON DELETE CASCADE)";
 
@@ -850,7 +852,8 @@ public class SQLiteHandler extends SQLiteOpenHelper {
                 cursor.getInt(cursor.getColumnIndexOrThrow(KEY_IID)),
                 cursor.getString(cursor.getColumnIndexOrThrow(KEY_INAME)),
                 cursor.getInt(cursor.getColumnIndexOrThrow(KEY_IAMOUNT)),
-                cursor.getInt(cursor.getColumnIndexOrThrow(KEY_SID))
+                cursor.getInt(cursor.getColumnIndexOrThrow(KEY_SID)),
+                cursor.getInt(cursor.getColumnIndexOrThrow(KEY_ICHECKED))
         );
 
         //db.close();
@@ -872,7 +875,8 @@ public class SQLiteHandler extends SQLiteOpenHelper {
                         cursor.getInt(cursor.getColumnIndexOrThrow(KEY_IID)),
                         cursor.getString(cursor.getColumnIndexOrThrow(KEY_INAME)),
                         cursor.getInt(cursor.getColumnIndexOrThrow(KEY_IAMOUNT)),
-                        cursor.getInt(cursor.getColumnIndexOrThrow(KEY_SID))
+                        cursor.getInt(cursor.getColumnIndexOrThrow(KEY_SID)),
+                        cursor.getInt(cursor.getColumnIndexOrThrow(KEY_ICHECKED))
                 );
                 shoppingList.add(shoppingItemModel);
             } while (cursor.moveToNext());

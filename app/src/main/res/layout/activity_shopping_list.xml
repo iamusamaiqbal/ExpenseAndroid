@@ -1,27 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"    xmlns:app="http://schemas.android.com/apk/res-auto"    xmlns:tools="http://schemas.android.com/tools"    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/relaa"
     tools:context=".shopping_list">
+
+
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/shooping_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/calculater">
-        <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/shooping_toolbar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Shopping list"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold"/>
-
-    </androidx.appcompat.widget.Toolbar>
-
+            android:background="@color/calculater">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Shopping list"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+        </androidx.appcompat.widget.Toolbar>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/shoppingListRV"
+        android:layout_width="match_parent"
+        android:layout_below="@id/shooping_toolbar"
+        android:layout_height="match_parent"/>
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:id="@+id/shopping_list_floating_btn"
@@ -40,16 +43,5 @@
             app:fab_colorNormal="@color/white"
             app:fab_icon="@drawable/ic_i_lent"
             app:fab_title="new record" />
-
-
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
-
-    <include
-        android:layout_below="@+id/shooping_toolbar"
-        layout="@layout/shopping_list_model"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content">
-
-    </include>
-
 </RelativeLayout>

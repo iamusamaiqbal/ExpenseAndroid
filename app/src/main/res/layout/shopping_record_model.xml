@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
@@ -42,7 +42,7 @@
                     android:orientation="horizontal">
 
                     <CheckBox
-                        android:id="@+id/simpleCheckBox"
+                        android:id="@+id/listItemCB"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -50,7 +50,7 @@
                         />
 
                     <TextView
-                        android:id="@+id/shopping_record_text_2"
+                        android:id="@+id/listItemName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -61,7 +61,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/shopping_record_text_3"
+                        android:id="@+id/listItemAmount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="44.44"
