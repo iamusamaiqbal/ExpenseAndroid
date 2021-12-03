@@ -50,33 +50,33 @@ public class i_lent_record extends AppCompatActivity {
             int amt = (amount.getText().length() > 0) ? Integer.parseInt(amount.getText().toString()) : 0;
 
             if (name.getText().length() > 4) {
-                if(description.getText().length()>5){
-                    if(!amount.getText().toString().isEmpty()){
-                        if(amt>0){
-                            if(!date.getText().toString().isEmpty()){
-                                if(!duedate.getText().toString().isEmpty()){
+                if (description.getText().length() > 5) {
+                    if (!amount.getText().toString().isEmpty()) {
+                        if (amt > 0) {
+                            if (!date.getText().toString().isEmpty()) {
+                                if (!duedate.getText().toString().isEmpty()) {
 
-                                   boolean f = database.addDebt(new DebtModel(name.getText().toString(),description.getText().toString(),"Cash",date.getText().toString(),duedate.getText().toString(),amt,type,1));
+                                    boolean f = database.addDebt(new DebtModel(name.getText().toString(), description.getText().toString(), "Cash", date.getText().toString(), duedate.getText().toString(), amt, type, 1));
 
-                                   if(f){
-                                       Toast.makeText(this, "Done", Toast.LENGTH_LONG).show();
-                                       onBackPressed();
-                                   } else {
-                                       Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
-                                   }
-                                } else{
+                                    if (f) {
+                                        Toast.makeText(this, "Done", Toast.LENGTH_LONG).show();
+                                        onBackPressed();
+                                    } else {
+                                        Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
+                                    }
+                                } else {
                                     Toast.makeText(this, "Select due date", Toast.LENGTH_LONG).show();
                                 }
-                            } else{
+                            } else {
                                 Toast.makeText(this, "Select date", Toast.LENGTH_LONG).show();
                             }
-                        } else{
+                        } else {
                             Toast.makeText(this, "Amount should be greater than zero", Toast.LENGTH_LONG).show();
                         }
                     } else {
                         Toast.makeText(this, "Amount is empty", Toast.LENGTH_LONG).show();
                     }
-                } else{
+                } else {
                     Toast.makeText(this, "Description is not enough", Toast.LENGTH_LONG).show();
                 }
             } else {
