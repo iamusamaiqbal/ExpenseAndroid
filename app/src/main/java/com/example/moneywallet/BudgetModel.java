@@ -2,15 +2,6 @@ package com.example.moneywallet;
 
 public class BudgetModel {
 
-
-    public static String KEY_BID = "id";
-    public static String KEY_BAMOUNT = "amount";
-    public static String KEY_BNAME = "name";
-    public static String KEY_BCURRENCY = "currency";
-    public static String KEY_BACCOUNT = "account";
-    public static String KEY_BSTARTDATE = "start_date";
-    public static String KEY_BENDDATE = "end_date";
-
     int id;
     String name;
     int amount;

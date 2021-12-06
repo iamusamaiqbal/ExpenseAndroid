@@ -68,6 +68,7 @@ public class DebtActiveAdapter extends RecyclerView.Adapter<DebtActiveAdapter.Vi
 
             itemView.setOnClickListener(v -> {
                 Intent intent=new Intent(context,debt_add_record_list.class);
+                intent.putExtra("did",""+id);
                 context.startActivity(intent);
             });
 
@@ -81,14 +82,17 @@ public class DebtActiveAdapter extends RecyclerView.Adapter<DebtActiveAdapter.Vi
                 mDialog.setContentView(R.layout.activity_debt_popup);
 
                 TextView te = mDialog.findViewById(R.id.popup_debt_linear_4);
+                TextView tv = mDialog.findViewById(R.id.popup_debt_linear_5);
+
                 te.setOnClickListener(v1 -> {
                     Intent intent=new Intent(context,Create_debt_record.class);
+                    intent.putExtra("did",""+id);
                     context.startActivity(intent);
                 });
 
-                TextView tv = mDialog.findViewById(R.id.popup_debt_linear_5);
                 tv.setOnClickListener(v1 -> {
                     Intent intent=new Intent(context,Create_debt_record.class);
+                    intent.putExtra("did",""+id);
                     context.startActivity(intent);
                 });
 

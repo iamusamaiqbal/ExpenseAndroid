@@ -77,6 +77,13 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     public static String KEY_IAMOUNT = "iamount";
     public static String KEY_ICHECKED = "checked";
 
+    public static String TABLE_DEBT_RECORD = "DebtRecordTable";
+
+    public static String KEY_RID = "rid";
+    public static String KEY_RACTION = "raction";
+    public static String KEY_RAMOUNT = "ramount";
+    public static String KEY_RACCOUNT = "raccount";
+
     public SQLiteHandler(@Nullable Context context) {
         super(context, "ExpenseDB6", null, 1);
     }
@@ -142,6 +149,15 @@ public class SQLiteHandler extends SQLiteOpenHelper {
                 + KEY_INAME + " VARCHAR(20),"
                 + " FOREIGN KEY ("+ KEY_SID +") REFERENCES "+ TABLE_SHOPPING_ITEM +" ("+ KEY_SID +") ON UPDATE CASCADE ON DELETE CASCADE)";
 
+
+        String CREATE_RECORD_TABLE = "CREATE TABLE " + TABLE_DEBT_RECORD + "("
+                + KEY_RID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + KEY_RAMOUNT + " INTEGER,"
+                + KEY_DID + " INTEGER,"
+                + KEY_RACCOUNT + " VARCHAR(10),"
+                + KEY_RACTION + " VARCHAR(10),"
+                + " FOREIGN KEY ("+ KEY_DID +") REFERENCES "+ TABLE_DEBT_RECORD +" ("+ KEY_DID +") ON UPDATE CASCADE ON DELETE CASCADE)";
+
         db.execSQL(CREATE_EXPENSE_TABLE);
         db.execSQL(CREATE_CATEGORY_TABLE);
         db.execSQL(CREATE_BUDGET_TABLE);
@@ -149,6 +165,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         db.execSQL(CREATE_DEBT_TABLE);
         db.execSQL(CREATE_SHOPPING_TABLE);
         db.execSQL(CREATE_ITEM_TABLE);
+        db.execSQL(CREATE_RECORD_TABLE);
 
     }
 
@@ -826,6 +843,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         values.put(KEY_INAME, shoppingItemModel.name);
         values.put(KEY_IAMOUNT, shoppingItemModel.amount);
         values.put(KEY_SID, shoppingItemModel.sid);
+        values.put(KEY_ICHECKED, shoppingItemModel.isChecked);
 
 
         if (db.insert(TABLE_SHOPPING_ITEM, null, values) > 0) {
@@ -894,13 +912,14 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         return flag;
     }
 
-    public boolean updateShopping(ShoppingItemModel shoppingItemModel, int id) {
+    public boolean updateItem(ShoppingItemModel shoppingItemModel, int id) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(KEY_INAME, shoppingItemModel.name);
         values.put(KEY_IAMOUNT, shoppingItemModel.amount);
         values.put(KEY_SID, shoppingItemModel.sid);
+        values.put(KEY_ICHECKED, shoppingItemModel.isChecked);
 
         if (db.update(TABLE_SHOPPING_ITEM, values, "" + KEY_IID + " = ?", new String[]{String.valueOf(id)}) >= 0) {
             db.close();
@@ -908,6 +927,90 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         } else {
             return false;
         }
+    }
+
+    public int getItemSum(String sum,String id) {
+        String selectQuery = "SELECT (SUM(" + sum + ")) AS total FROM " + TABLE_SHOPPING_ITEM + " WHERE "+ KEY_SID +"=? BY " + KEY_IID;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{id});
+        if (cursor.moveToFirst()) {
+            return cursor.getInt(cursor.getColumnIndexOrThrow("total"));
+        } else {
+            return 0;
+        }
+    }
+
+    public int getCountByChecked() {
+        String selectQuery = "SELECT (COUNT(" + KEY_IID + ")) AS total FROM " + TABLE_SHOPPING_ITEM + " WHERE " + KEY_ICHECKED + " = 1 ORDER BY " + KEY_IID;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            return cursor.getInt(cursor.getColumnIndexOrThrow("total"));
+        } else {
+            return 0;
+        }
+    }
+
+    public int getCount() {
+        String selectQuery = "SELECT (COUNT(" + KEY_IID + ")) AS total FROM " + TABLE_SHOPPING_ITEM + " ORDER BY " + KEY_IID;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            return cursor.getInt(cursor.getColumnIndexOrThrow("total"));
+        } else {
+            return 0;
+        }
+    }
+
+    //Debt Record CRUD
+
+
+    public boolean addRecord(RecordModel recordModel) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_RACCOUNT, recordModel.account);
+        values.put(KEY_RACTION, recordModel.action);
+        values.put(KEY_DID, recordModel.did);
+        values.put(KEY_RAMOUNT, recordModel.amount);
+
+
+        if (db.insert(TABLE_DEBT_RECORD, null, values) > 0) {
+            return true;
+        } else {
+            return false;
+        }
+        //db.close();
+
+    }
+
+
+    public List<RecordModel> getAllRecord(String id) {
+        List<RecordModel> recordList = new ArrayList<RecordModel>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_DEBT_RECORD + " WHERE " + KEY_RID + " =? ORDER BY " + KEY_RID;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{id});
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                RecordModel recordModel = new RecordModel(
+                        cursor.getInt(cursor.getColumnIndexOrThrow(KEY_RID)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(KEY_RACTION)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(KEY_RACCOUNT)),
+                        cursor.getInt(cursor.getColumnIndexOrThrow(KEY_DID)),
+                        cursor.getInt(cursor.getColumnIndexOrThrow(KEY_RAMOUNT))
+                );
+                recordList.add(recordModel);
+            } while (cursor.moveToNext());
+        }
+        db.close();
+        return recordList;
     }
 
 }

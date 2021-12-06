@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/imageButton5"
+        android:id="@+id/newDebtBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -28,7 +28,7 @@
         app:srcCompat="@drawable/clear" />
 
     <ImageButton
-        android:id="@+id/imageButton10"
+        android:id="@+id/newDebtSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -92,7 +92,7 @@
         app:layout_constraintTop_toBottomOf="@+id/spinner9" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/newDebtAmount"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

@@ -51,6 +51,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
             amount = itemView.findViewById(R.id.shoppingListAmount);
             item = itemView.findViewById(R.id.shoppingListItems);
             itemView.setOnClickListener(this);
+
         }
 
         @Override

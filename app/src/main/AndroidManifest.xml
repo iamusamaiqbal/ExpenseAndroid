@@ -17,6 +17,9 @@
             android:name=".New_Shopping_List"
             android:exported="false" />
         <activity
+            android:name=".FingerprintActivity"
+            android:exported="false"/>
+        <activity
             android:name=".debt_add_record_list"
             android:exported="false" />
         <activity
@@ -87,6 +90,9 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".splach_screen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -94,6 +100,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".PinActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".UserPinActivity"
+            android:exported="false"/>
 
         <meta-data
             android:name="preloaded_fonts"

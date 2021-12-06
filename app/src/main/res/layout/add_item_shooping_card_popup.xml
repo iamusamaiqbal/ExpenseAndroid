@@ -21,7 +21,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/item_name_edit_text"
+        android:id="@+id/newItemName"
         android:layout_width="300dp"
         android:layout_marginLeft="10dp"
         android:layout_height="wrap_content"
@@ -33,26 +33,28 @@
         android:id="@+id/item_price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/item_name_edit_text"
+        android:layout_below="@+id/newItemName"
         android:layout_marginTop="20dp"
         android:gravity="center"
         android:text="Item Price"
         android:textSize="20sp"
         android:textStyle="bold" />
+
     <EditText
-        android:id="@+id/item_name_edit_text_2"
+        android:id="@+id/newItemPrice"
         android:layout_width="300dp"
-        android:layout_marginLeft="10dp"
         android:layout_height="wrap_content"
-        android:inputType="number"
         android:layout_below="@+id/item_price"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp"
-        android:hint="price"/>
+        android:hint="price"
+        android:inputType="number" />
 
     <Button
+        android:id="@+id/newItemAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/item_name_edit_text_2"
+        android:layout_below="@id/newItemPrice"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
