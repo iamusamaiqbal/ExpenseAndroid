@@ -16,11 +16,10 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
+import com.example.moneywallet.models.BudgetModel;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -28,7 +27,7 @@ public class new_budget extends AppCompatActivity implements AdapterView.OnItemS
     EditText budgetName, budgetAmount;
     ImageView saveBudget;
     ImageButton imageButton_cross;
-    String currency, category, account;
+    String currency, category, account,time;
     Spinner spinner_1, spinner3, spinner4, spinner5;
 
     SQLiteHandler database;
@@ -84,6 +83,7 @@ public class new_budget extends AppCompatActivity implements AdapterView.OnItemS
         spinner5.setAdapter(adapteeerrr);
         spinner5.setOnItemSelectedListener(this);
 
+        time = spinner_1.getSelectedItem().toString();
         currency = spinner3.getSelectedItem().toString();
         account = spinner5.getSelectedItem().toString();
         category = spinner4.getSelectedItem().toString();
@@ -94,17 +94,29 @@ public class new_budget extends AppCompatActivity implements AdapterView.OnItemS
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E MMM dd HH:mm:ss 'GMT'z yyyy", Locale.ENGLISH);
         LocalDate currentDate = LocalDate.parse(dateInString, formatter);
         LocalDate currentDatePlus7 = currentDate.plusDays(7);
-        LocalDate currentDatePlus30 = currentDate.plusDays(30);
-        LocalDate currentDatePlus365 = currentDate.plusDays(365);
+        LocalDate currentDatePlusMonth = currentDate.plusMonths(1);
+        LocalDate currentDatePlusYear = currentDate.plusYears(1);
 
 
         saveBudget.setOnClickListener(v -> {
-            Log.e("yy","yyyyyyyyyyy");
             if (!budgetName.getText().toString().isEmpty()) {
 
                 if (!budgetAmount.getText().toString().isEmpty()) {
-                    database.addBudget(new BudgetModel(budgetName.getText().toString(), Integer.parseInt(budgetAmount.getText().toString()), 3, account, currency, currentDate.toString(), currentDatePlus7.toString()));
-                    onBackPressed();
+                    if(time.equals("Week")){
+                        database.addBudget(new BudgetModel(budgetName.getText().toString(), Integer.parseInt(budgetAmount.getText().toString()), 3, account, currency, currentDate.toString(), currentDatePlus7.toString()));
+                        onBackPressed();
+
+                    } else if(time.equals("Month")){
+                        database.addBudget(new BudgetModel(budgetName.getText().toString(), Integer.parseInt(budgetAmount.getText().toString()), 3, account, currency, currentDate.toString(), currentDatePlusMonth.toString()));
+                        onBackPressed();
+
+                    } else if(time.equals("Year")){
+                        database.addBudget(new BudgetModel(budgetName.getText().toString(), Integer.parseInt(budgetAmount.getText().toString()), 3, account, currency, currentDate.toString(), currentDatePlusYear.toString()));
+                        onBackPressed();
+                    } else {
+                        database.addBudget(new BudgetModel(budgetName.getText().toString(), Integer.parseInt(budgetAmount.getText().toString()), 3, account, currency, currentDate.toString(), currentDate.toString()));
+                        onBackPressed();
+                    }
                 } else {
                     Toast.makeText(this, "Amount cannot be Zero or less", Toast.LENGTH_LONG).show();
                 }

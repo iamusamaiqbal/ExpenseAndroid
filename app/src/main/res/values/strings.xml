@@ -58,16 +58,16 @@
     </string-array>
 
     <string-array name="categories">
-        <item>All</item>
-        <item>Food/drink</item>
+        <item>Food &amp; Drinks</item>
         <item>Shopping</item>
         <item>Housing</item>
         <item>Transportation</item>
-        <item>Vechicel</item>
-        <item>life Entertainment</item>
-        <item>Communication,PC</item>
-        <item>Financial expenses</item>
-        <item>Investment</item>
+        <item>Vehicle</item>
+        <item>Life &amp; Entertainment</item>
+        <item>Communication</item>
+        <item>Financial Expenses</item>
+        <item>Investments</item>
+        <item>Other</item>
     </string-array>
 
     <string-array name="account">

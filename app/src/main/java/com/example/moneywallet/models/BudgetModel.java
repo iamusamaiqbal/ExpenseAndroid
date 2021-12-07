@@ -1,15 +1,15 @@
-package com.example.moneywallet;
+package com.example.moneywallet.models;
 
 public class BudgetModel {
 
-    int id;
-    String name;
-    int amount;
-    String currency;
-    int category;
-    String account;
-    String start;
-    String end;
+    public int id;
+    public String name;
+    public int amount;
+    public String currency;
+    public int category;
+    public String account;
+    public String start;
+    public String end;
 
     public BudgetModel(int id, String name, int amount, int category, String account, String currency, String start, String end) {
         this.account = account;

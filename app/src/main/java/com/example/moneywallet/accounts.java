@@ -8,21 +8,17 @@ import android.os.Bundle;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
-import android.widget.Toast;
+import android.widget.TextView;
 
+import com.example.moneywallet.models.TransactionModel;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -30,7 +26,6 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import java.time.LocalDate;
@@ -47,8 +42,9 @@ public class accounts extends Fragment {
     Date date;
     LocalDate dateTime;
     View v;
+    TextView cash_price;
 
-    int sum;
+    int expsum, incsum;
     String StringDate;
 
     SQLiteHandler database;
@@ -88,6 +84,7 @@ public class accounts extends Fragment {
         listView = v.findViewById(R.id.list_view_account);
         showMore = v.findViewById(R.id.show_more);
         pieChartShowMore = v.findViewById(R.id.PieChartShowMore);
+        cash_price = v.findViewById(R.id.cash_price);
         date = new Date();
 
         String dateInString = date.toString();
@@ -112,7 +109,7 @@ public class accounts extends Fragment {
         PieChart chart = v.findViewById(R.id.pieChart);
         LineChart lineChart = v.findViewById(R.id.lineChart);
         database = new SQLiteHandler(getActivity());
-        sum = database.getSum(SQLiteHandler.KEY_AMOUNT);
+//        sum = database.getSum(SQLiteHandler.KEY_AMOUNT);
 
         ArrayList<Integer> colors = new ArrayList<Integer>();
 
@@ -141,27 +138,48 @@ public class accounts extends Fragment {
             getContext().startActivity(intent);
         });
 
+        expsum=incsum=0;
+
         transactionList.forEach(transactionModel -> {
             if (transactionModel.isExpense == 1) {
                 if (!cat.contains(transactionModel.cat)) {
                     cat.add(transactionModel.cat);
                 }
+                expsum += transactionModel.amount;
+            } else {
+                incsum += transactionModel.amount;
             }
         });
 
+        if (incsum != 0 && expsum != 0) {
+            if (expsum > incsum) {
+                cash_price.setText(""+((expsum - incsum) * 1));
+                cash_price.setTextColor(Color.RED);
+            } else {
+                cash_price.setText(""+((expsum - incsum) * 1));
+                cash_price.setTextColor(Color.BLUE);
+            }
+        }
 
+
+        entries.clear();
         cat.forEach(cat -> {
             int total = database.getSumByCat(SQLiteHandler.KEY_AMOUNT, cat);
-            float result = total * 100 / sum;
+            float result = total * 100 / expsum;
 
             entries.add(new PieEntry(result * 1f, "" + cat));
         });
 
         //PieChart
 
-        PieDataSet set = new PieDataSet(entries, " Total : " + sum);
+        PieDataSet set = new PieDataSet(entries, " Total : " + expsum);
         PieData data = new PieData(set);
-        set.setColors(colors);
+
+
+
+        set.setColors(
+                colors
+        );
         chart.setDrawHoleEnabled(false);
         chart.setData(data);
 

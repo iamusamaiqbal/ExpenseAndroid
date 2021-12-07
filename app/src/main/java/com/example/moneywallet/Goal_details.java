@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.moneywallet.models.GoalModel;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 public class Goal_details extends AppCompatActivity {

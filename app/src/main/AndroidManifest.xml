@@ -92,6 +92,9 @@
             android:name=".MainActivity"
             android:exported="false"/>
         <activity
+            android:name=".change_password_activity"
+            android:exported="false"/>
+        <activity
             android:name=".splach_screen"
             android:exported="true">
             <intent-filter>

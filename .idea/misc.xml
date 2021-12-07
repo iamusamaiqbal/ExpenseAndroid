@@ -58,6 +58,7 @@
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/activity_budget_deatail.xml" value="0.14270833333333333" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/activity_budget_detail.xml" value="0.25" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/activity_catogries.xml" value="0.14270833333333333" />
+        <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/activity_change_password.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/activity_create_debt_record.xml" value="0.2" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/activity_currency_rates.xml" value="0.13385416666666666" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/activity_custom_category_list.xml" value="0.13385416666666666" />
@@ -104,7 +105,7 @@
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/goal_reached_model.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/haider.xml" value="0.146875" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/ic_baseline_fingerprint_24.xml" value="0.27291666666666664" />
-        <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/record_overview_tail.xml" value="0.14270833333333333" />
+        <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/record_overview_tail.xml" value="0.25" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/row.xml" value="0.146875" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/shopping_list_model.xml" value="0.25729166666666664" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/shopping_record_model.xml" value="0.27291666666666664" />

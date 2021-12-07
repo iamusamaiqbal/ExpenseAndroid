@@ -6,11 +6,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.moneywallet.models.BudgetModel;
 
 public class PeriodicAdapter extends RecyclerView.Adapter<PeriodicAdapter.ViewHolder> {
 
@@ -37,7 +38,7 @@ public class PeriodicAdapter extends RecyclerView.Adapter<PeriodicAdapter.ViewHo
     public void onBindViewHolder(@NonNull PeriodicAdapter.ViewHolder holder, int position) {
 
         holder.budgetTotal.setText(""+budgetList[position].amount);
-        holder.period.setText(""+budgetList[position].account);
+        holder.period.setText("Last : "+budgetList[position].end);
         holder.name.setText(""+budgetList[position].name);
         holder.id = budgetList[position].id;
 

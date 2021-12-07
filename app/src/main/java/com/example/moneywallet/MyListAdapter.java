@@ -1,6 +1,7 @@
 package com.example.moneywallet;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,9 +12,10 @@ import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 
+import com.example.moneywallet.models.TransactionModel;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 
 class MyListAdapter extends ArrayAdapter<TransactionModel> {
 
@@ -52,6 +54,14 @@ class MyListAdapter extends ArrayAdapter<TransactionModel> {
         subtitleText.setText(output);
 
         //System.out.println(s);
+
+        if(mylist[position].isExpense==1){
+            amount.setTextColor(Color.RED);
+        } else if(mylist[position].isIncome == 1){
+            amount.setTextColor(Color.BLUE);
+        } else {
+            amount.setTextColor(Color.BLACK);
+        }
 
         if (mylist[position].cat.equals("Food & Drinks")) {
             imageView.setImageResource(R.drawable.ic_dinner);

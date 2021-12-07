@@ -1,14 +1,14 @@
-package com.example.moneywallet;
+package com.example.moneywallet.models;
 
 public class TransactionModel {
 
-    int id;
-    int amount;
-    String cat;
-    int isExpense;
-    int isIncome;
-    int isTransfer;
-    String date;
+    public int id;
+    public int amount;
+    public String cat;
+    public int isExpense;
+    public int isIncome;
+    public int isTransfer;
+    public String date;
 
     public TransactionModel(int id, String cat, int amount, int isTransfer, int isExpense, int isIncome, String date) {
         this.id = id;

@@ -8,6 +8,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import com.example.moneywallet.models.BudgetModel;
+import com.example.moneywallet.models.CategoryModel;
+import com.example.moneywallet.models.DebtModel;
+import com.example.moneywallet.models.GoalModel;
+import com.example.moneywallet.models.RecordModel;
+import com.example.moneywallet.models.ShoppingListModel;
+import com.example.moneywallet.models.TransactionModel;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -319,7 +327,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     }
 
     public int getSumByDate(String sum, String date) {
-        String selectQuery = "SELECT (SUM(" + sum + ")) AS total FROM " + TABLE_TRANSACTION + " WHERE DATE (" + KEY_DATE + ") =? ORDER BY " + KEY_DATE;
+        String selectQuery = "SELECT (SUM(" + sum + ")) AS total FROM " + TABLE_TRANSACTION + " WHERE DATE (" + KEY_DATE + ") =? AND "+ KEY_ISEXPENSE +" = 1 ORDER BY " + KEY_DATE;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, new String[]{date});
