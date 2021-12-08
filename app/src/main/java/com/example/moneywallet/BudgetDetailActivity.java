@@ -1,13 +1,24 @@
 package com.example.moneywallet;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.appcompat.widget.Toolbar;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.moneywallet.models.BudgetModel;
 import com.example.moneywallet.models.TransactionModel;
@@ -69,6 +80,19 @@ public class BudgetDetailActivity extends AppCompatActivity {
         dates = new ArrayList<>();
         categories = new ArrayList<>();
         database = new SQLiteHandler(this);
+
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_titel);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        toolbar.getOverflowIcon().setColorFilter(Color.WHITE , PorterDuff.Mode.SRC_ATOP);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.calculater)));
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+
+
+
 
 
         Intent i = getIntent();
@@ -194,6 +218,37 @@ public class BudgetDetailActivity extends AppCompatActivity {
         chart.setDrawHoleEnabled(false);
         chart.setData(data);
 
+
+    }
+
+    @SuppressLint("RestrictedApi")
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.budget_detail_meu, menu);
+        ((MenuBuilder) menu).setOptionalIconsVisible(true);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if (item.getItemId() == R.id.edit) {
+
+
+            Toast.makeText(this, "clicked edit", Toast.LENGTH_SHORT).show();
+
+        } else if (item.getItemId() == R.id.delete) {
+            Toast.makeText(this, "delete", Toast.LENGTH_SHORT).show();
+
+
+        } else if (item.getItemId() == R.id.close) {
+            Toast.makeText(this, "close", Toast.LENGTH_SHORT).show();
+
+
+        }
+        return super.onOptionsItemSelected(item);
 
     }
 }
