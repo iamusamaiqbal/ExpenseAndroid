@@ -30,7 +30,8 @@ public class debit extends AppCompatActivity {
         new_lent_btn_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(debit.this,shopping_item_list.class);
+                Intent intent=new Intent(debit.this,i_lent_record.class);
+                intent.putExtra("type","borrow");
                 startActivity(intent);
             }
         });

@@ -2,22 +2,35 @@ package com.example.moneywallet;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.moneywallet.models.DebtModel;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class i_lent_record extends AppCompatActivity {
     Spinner accountSpinner12;
-    String type;
+    String type, enddate = "", startdate = "", datepicked;
     EditText name, amount, description, date, duedate, account;
     ImageView save, back;
-
+    Button start, end;
+    TextView debtType;
     SQLiteHandler database;
+
+    Calendar calendar = Calendar.getInstance();
+    int year, month, dayOfMonth;
+    DatePickerDialog datePickerDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,16 +40,38 @@ public class i_lent_record extends AppCompatActivity {
         name = findViewById(R.id.debtName);
         amount = findViewById(R.id.debtAmount);
         description = findViewById(R.id.debtDescription);
-        date = findViewById(R.id.debtDate);
-        duedate = findViewById(R.id.debtDueDate);
         back = findViewById(R.id.debtBack);
         save = findViewById(R.id.debtSave);
+        debtType = findViewById(R.id.debtType);
+        start = findViewById(R.id.calendar_btn);
+        end = findViewById(R.id.calendar_btn2);
         //account = findViewById(R.id.);
 
         database = new SQLiteHandler(this);
 
         Intent i = getIntent();
         type = i.getStringExtra("type");
+
+        String newStr = "I " + type.substring(0, 1).toUpperCase() + type.substring(1);
+
+        debtType.setText(newStr);
+
+        start.setOnClickListener(v -> {
+            datePicker();
+            if (datepicked != "") {
+                startdate = datepicked;
+                datepicked="";
+                start.setText(startdate);
+            }
+        });
+        end.setOnClickListener(v -> {
+            datePicker();
+            if (datepicked != "") {
+                enddate = datepicked;
+                datepicked="";
+                end.setText(enddate);
+            }
+        });
 
         back.setOnClickListener(v -> {
             onBackPressed();
@@ -49,8 +84,8 @@ public class i_lent_record extends AppCompatActivity {
                 if (description.getText().length() > 5) {
                     if (!amount.getText().toString().isEmpty()) {
                         if (amt > 0) {
-                            if (!date.getText().toString().isEmpty()) {
-                                if (!duedate.getText().toString().isEmpty()) {
+                            if (startdate!="") {
+                                if (enddate!="") {
 
                                     boolean f = database.addDebt(new DebtModel(name.getText().toString(), description.getText().toString(), "Cash", date.getText().toString(), duedate.getText().toString(), amt, type, 1));
 
@@ -79,6 +114,25 @@ public class i_lent_record extends AppCompatActivity {
                 Toast.makeText(this, "Name should be greater than 4", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    public void datePicker() {
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH);
+        dayOfMonth = calendar.get(Calendar.DATE);
+        datePickerDialog = new DatePickerDialog(this, this::onDateSet, year, month, dayOfMonth);
+
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+        datePickerDialog.show();
+    }
+
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, dayOfMonth);
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+        datepicked = format.format(calendar.getTime());
     }
 
 }

@@ -89,6 +89,10 @@ public class BudgetDetailActivity extends AppCompatActivity {
 
         transactionList = database.getAllTransaction();
 
+
+        //========================================== BarChart =====================================================
+
+
         ArrayList NoOfEmp = new ArrayList();
 
 
@@ -99,49 +103,10 @@ public class BudgetDetailActivity extends AppCompatActivity {
             if ((dateTime.isEqual(LocalDate.parse(budget.start)) || dateTime.isAfter(LocalDate.parse(budget.start))) && (dateTime.isEqual(LocalDate.parse(budget.end)) || dateTime.isBefore(LocalDate.parse(budget.end)))) {
                 if (!dates.contains(dateTime.toString())) {
                     total = database.getSumByDate(SQLiteHandler.KEY_AMOUNT, dateTime.toString());
-                    NoOfEmp.add(new BarEntry(transactionModel.id * 100f, total * 1));
+                    NoOfEmp.add(new BarEntry( transactionModel.id * 100f, total * 1));
                     dates.add(dateTime.toString());
                 }
             }
-        });
-
-        //========================================== BarChart =====================================================
-
-        XAxis xAxis = barChart.getXAxis();
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-
-        xAxis.setDrawGridLines(false);
-        xAxis.setValueFormatter((value, axis) -> {
-            String label = "";
-            if (value == 0) {
-                LocalDate day = currentDate.minusDays(6);
-                DateTimeFormatter fLocalDate = DateTimeFormatter.ofPattern("E");
-                label = day.format(fLocalDate);
-            } else if (value == 100) {
-                LocalDate day = currentDate.minusDays(5);
-                DateTimeFormatter fLocalDate = DateTimeFormatter.ofPattern("E");
-                label = day.format(fLocalDate);
-            } else if (value == 200) {
-                LocalDate day = currentDate.minusDays(4);
-                DateTimeFormatter fLocalDate = DateTimeFormatter.ofPattern("E");
-                label = day.format(fLocalDate);
-            } else if (value == 300) {
-                LocalDate day = currentDate.minusDays(3);
-                DateTimeFormatter fLocalDate = DateTimeFormatter.ofPattern("E");
-                label = day.format(fLocalDate);
-            } else if (value == 400) {
-                LocalDate day = currentDate.minusDays(2);
-                DateTimeFormatter fLocalDate = DateTimeFormatter.ofPattern("E");
-                label = day.format(fLocalDate);
-            } else if (value == 500) {
-                LocalDate day = currentDate.minusDays(1);
-                DateTimeFormatter fLocalDate = DateTimeFormatter.ofPattern("E");
-                label = day.format(fLocalDate);
-            } else if (value == 600) {
-                DateTimeFormatter fLocalDate = DateTimeFormatter.ofPattern("E");
-                label = currentDate.format(fLocalDate);
-            }
-            return label;
         });
 
         BarDataSet bardataset = new BarDataSet(NoOfEmp, "Expenses");
@@ -149,6 +114,44 @@ public class BudgetDetailActivity extends AppCompatActivity {
         BarData data2 = new BarData(bardataset);
         data2.setBarWidth(25f);
         bardataset.setColors(ColorTemplate.COLORFUL_COLORS);
+
+        XAxis xAxis = barChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+
+        xAxis.setDrawGridLines(false);
+        xAxis.setValueFormatter((value, axis) -> {
+            String label = "";
+            if (value == 100) {
+                LocalDate day = currentDate.minusDays(6);
+                DateTimeFormatter fLocalDate = DateTimeFormatter.ofPattern("E");
+                label = day.format(fLocalDate);
+            } else if (value == 200) {
+                LocalDate day = currentDate.minusDays(5);
+                DateTimeFormatter fLocalDate = DateTimeFormatter.ofPattern("E");
+                label = day.format(fLocalDate);
+            } else if (value == 300) {
+                LocalDate day = currentDate.minusDays(4);
+                DateTimeFormatter fLocalDate = DateTimeFormatter.ofPattern("E");
+                label = day.format(fLocalDate);
+            } else if (value == 400) {
+                LocalDate day = currentDate.minusDays(3);
+                DateTimeFormatter fLocalDate = DateTimeFormatter.ofPattern("E");
+                label = day.format(fLocalDate);
+            } else if (value == 500) {
+                LocalDate day = currentDate.minusDays(2);
+                DateTimeFormatter fLocalDate = DateTimeFormatter.ofPattern("E");
+                label = day.format(fLocalDate);
+            } else if (value == 600) {
+                LocalDate day = currentDate.minusDays(1);
+                DateTimeFormatter fLocalDate = DateTimeFormatter.ofPattern("E");
+                label = day.format(fLocalDate);
+            } else if (value == 700) {
+                DateTimeFormatter fLocalDate = DateTimeFormatter.ofPattern("E");
+                label = currentDate.format(fLocalDate);
+            }
+            return label;
+        });
+
         barChart.setData(data2);
 
 

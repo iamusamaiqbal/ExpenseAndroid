@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -62,6 +63,9 @@ public class debt_add_record_list extends AppCompatActivity {
         });
 
         recordList = database.getAllRecord(id);
+
+
+
 
     }
 

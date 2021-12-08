@@ -93,7 +93,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     public static String KEY_RACCOUNT = "raccount";
 
     public SQLiteHandler(@Nullable Context context) {
-        super(context, "ExpenseDB6", null, 1);
+        super(context, "ExpenseDB7", null, 1);
     }
 
     @Override
