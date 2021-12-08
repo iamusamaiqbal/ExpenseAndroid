@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
@@ -20,17 +21,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.moneywallet.models.DebtModel;
 import com.example.moneywallet.models.RecordModel;
+import com.example.moneywallet.models.TransactionModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class debt_add_record_list extends AppCompatActivity {
 
 
     RecyclerView debtRV;
+    RecordAdapter recordAdapter;
     SQLiteHandler database;
-    List<RecordModel> recordList;
+    List<RecordModel> recordList = new ArrayList<>();
     ImageButton debtBack;
+    String  id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,14 +55,12 @@ public class debt_add_record_list extends AppCompatActivity {
 
 
 
-
-
         debtBack = findViewById(R.id.debtBack);
         debtRV = findViewById(R.id.debtRV);
         database = new SQLiteHandler(this);
 
         Intent i = getIntent();
-        String  id = i.getStringExtra("did");
+        id = i.getStringExtra("did");
 
         debtBack.setOnClickListener(v -> {
             onBackPressed();
@@ -64,7 +68,11 @@ public class debt_add_record_list extends AppCompatActivity {
 
         recordList = database.getAllRecord(id);
 
+        RecordModel[] recordArray = recordList.toArray(new RecordModel[0]);
 
+        debtRV.setLayoutManager(new LinearLayoutManager(this));
+        recordAdapter = new RecordAdapter(this,recordArray);
+        debtRV.setAdapter(recordAdapter);
 
 
     }
@@ -85,16 +93,32 @@ public class debt_add_record_list extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         if (item.getItemId() == R.id.forgive) {
+            DebtModel debtModel = database.getDebt(id);
 
-
-            Toast.makeText(this, "clicked setting", Toast.LENGTH_SHORT).show();
+            boolean f = database.updateDebt(new DebtModel(debtModel.name,debtModel.description,debtModel.account,debtModel.date,debtModel.duedate,debtModel.amount,debtModel.type,0),id);
+            if(f){
+                Toast.makeText(this, "Forgiven", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Something went wrong!", Toast.LENGTH_SHORT).show();
+            }
 
         } else if (item.getItemId() == R.id.edit_debit) {
+
+            Intent i =new Intent(this,i_lent_record.class);
+            i.putExtra("did",""+id);
+            startActivity(i);
+
             Toast.makeText(this, "edit click", Toast.LENGTH_SHORT).show();
 
 
         } else if (item.getItemId() == R.id.delet_debt) {
-            Toast.makeText(this, "delete share", Toast.LENGTH_SHORT).show();
+
+            boolean f = database.deleteDebt(id);
+            if(f){
+                Toast.makeText(this, "Deleted", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Something went wrong!", Toast.LENGTH_SHORT).show();
+            }
 
 
         }

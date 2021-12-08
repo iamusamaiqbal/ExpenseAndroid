@@ -22,7 +22,7 @@ import java.util.Calendar;
 public class i_lent_record extends AppCompatActivity {
     Spinner accountSpinner12;
     String type, enddate = "", startdate = "", datepicked;
-    EditText name, amount, description, date, duedate, account;
+    EditText name, amount, description;
     ImageView save, back;
     Button start, end;
     TextView debtType;
@@ -87,7 +87,7 @@ public class i_lent_record extends AppCompatActivity {
                             if (startdate!="") {
                                 if (enddate!="") {
 
-                                    boolean f = database.addDebt(new DebtModel(name.getText().toString(), description.getText().toString(), "Cash", date.getText().toString(), duedate.getText().toString(), amt, type, 1));
+                                    boolean f = database.addDebt(new DebtModel(name.getText().toString(), description.getText().toString(), "Cash", startdate, enddate, amt, type, 1));
 
                                     if (f) {
                                         Toast.makeText(this, "Done", Toast.LENGTH_LONG).show();

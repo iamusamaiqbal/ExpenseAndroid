@@ -16,7 +16,7 @@
         app:srcCompat="@drawable/bbbbb" />
 
     <TextView
-        android:id="@+id/textView52"
+        android:id="@+id/recordName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView53"
+        android:id="@+id/recordAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -40,7 +40,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView54"
+        android:id="@+id/recordAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
@@ -48,10 +48,10 @@
         android:text="Cash"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toBottomOf="@+id/textView52" />
+        app:layout_constraintTop_toBottomOf="@+id/recordName" />
 
     <TextView
-        android:id="@+id/textView55"
+        android:id="@+id/recordDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -59,7 +59,7 @@
         android:text="Dec 3"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView53" />
+        app:layout_constraintTop_toBottomOf="@+id/recordAmount" />
 
     <View
         android:id="@+id/divider4"

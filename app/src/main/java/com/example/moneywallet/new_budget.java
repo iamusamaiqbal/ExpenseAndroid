@@ -20,6 +20,7 @@ import com.example.moneywallet.models.BudgetModel;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
 
@@ -29,6 +30,7 @@ public class new_budget extends AppCompatActivity implements AdapterView.OnItemS
     ImageButton imageButton_cross;
     String currency, category, account,time;
     Spinner spinner_1, spinner3, spinner4, spinner5;
+    int id;
 
     SQLiteHandler database;
 
@@ -57,6 +59,8 @@ public class new_budget extends AppCompatActivity implements AdapterView.OnItemS
 
         database = new SQLiteHandler(this);
 
+        Intent i = getIntent();
+        id = Integer.parseInt( i.getStringExtra("bid"));
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.number,
                 android.R.layout.simple_spinner_item);
@@ -96,6 +100,18 @@ public class new_budget extends AppCompatActivity implements AdapterView.OnItemS
         LocalDate currentDatePlus7 = currentDate.plusDays(7);
         LocalDate currentDatePlusMonth = currentDate.plusMonths(1);
         LocalDate currentDatePlusYear = currentDate.plusYears(1);
+
+        if(id>0){
+            BudgetModel budgetModel = database.getBudget(id);
+
+            budgetName.setText(budgetModel.name);
+            budgetAmount.setText(budgetModel.amount);
+
+            String[] s = getResources().getStringArray(R.array.number);
+
+//            switch (Arrays.asList(s).indexOf(budgetModel.))
+//            mSpnBaths.setSelection(Arrays.asList(baths).indexOf());
+        }
 
 
         saveBudget.setOnClickListener(v -> {

@@ -51,7 +51,6 @@
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/debtBack"
         app:layout_constraintEnd_toStartOf="@+id/debtSave"
-        app:layout_constraintStart_toEndOf="@+id/debtBack"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout

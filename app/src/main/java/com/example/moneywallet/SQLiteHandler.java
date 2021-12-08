@@ -91,9 +91,10 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     public static String KEY_RACTION = "raction";
     public static String KEY_RAMOUNT = "ramount";
     public static String KEY_RACCOUNT = "raccount";
+    public static String KEY_RDATE = "rdate";
 
     public SQLiteHandler(@Nullable Context context) {
-        super(context, "ExpenseDB7", null, 1);
+        super(context, "ExpenseDB", null, 1);
     }
 
     @Override
@@ -164,6 +165,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
                 + KEY_DID + " INTEGER,"
                 + KEY_RACCOUNT + " VARCHAR(10),"
                 + KEY_RACTION + " VARCHAR(10),"
+                + KEY_RDATE + " VARCHAR(10),"
                 + " FOREIGN KEY ("+ KEY_DID +") REFERENCES "+ TABLE_DEBT_RECORD +" ("+ KEY_DID +") ON UPDATE CASCADE ON DELETE CASCADE)";
 
         db.execSQL(CREATE_EXPENSE_TABLE);
@@ -665,7 +667,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 
     }
 
-    public DebtModel getDebt(int id) {
+    public DebtModel getDebt(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
 
@@ -721,7 +723,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         return debtList;
     }
 
-    public boolean deleteDebt(int id) {
+    public boolean deleteDebt(String id) {
 
         SQLiteDatabase db = this.getReadableDatabase();
         boolean flag = db.delete(TABLE_DEBT, KEY_DID + "=?", new String[]{String.valueOf(id)}) > 0;
@@ -730,7 +732,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         return flag;
     }
 
-    public boolean updateDebt(DebtModel debtModel, int id) {
+    public boolean updateDebt(DebtModel debtModel, String id) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -984,6 +986,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         values.put(KEY_RACTION, recordModel.action);
         values.put(KEY_DID, recordModel.did);
         values.put(KEY_RAMOUNT, recordModel.amount);
+        values.put(KEY_RDATE, recordModel.date);
 
 
         if (db.insert(TABLE_DEBT_RECORD, null, values) > 0) {
@@ -999,7 +1002,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     public List<RecordModel> getAllRecord(String id) {
         List<RecordModel> recordList = new ArrayList<RecordModel>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_DEBT_RECORD + " WHERE " + KEY_RID + " =? ORDER BY " + KEY_RID;
+        String selectQuery = "SELECT  * FROM " + TABLE_DEBT_RECORD + " WHERE " + KEY_DID + " =? ORDER BY " + KEY_RID;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, new String[]{id});
@@ -1012,7 +1015,8 @@ public class SQLiteHandler extends SQLiteOpenHelper {
                         cursor.getString(cursor.getColumnIndexOrThrow(KEY_RACTION)),
                         cursor.getString(cursor.getColumnIndexOrThrow(KEY_RACCOUNT)),
                         cursor.getInt(cursor.getColumnIndexOrThrow(KEY_DID)),
-                        cursor.getInt(cursor.getColumnIndexOrThrow(KEY_RAMOUNT))
+                        cursor.getInt(cursor.getColumnIndexOrThrow(KEY_RAMOUNT)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(KEY_RDATE))
                 );
                 recordList.add(recordModel);
             } while (cursor.moveToNext());

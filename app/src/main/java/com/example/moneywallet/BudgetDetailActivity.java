@@ -92,9 +92,6 @@ public class BudgetDetailActivity extends AppCompatActivity {
 
 
 
-
-
-
         Intent i = getIntent();
         id = Integer.parseInt(i.getStringExtra("bid"));
 
@@ -236,17 +233,26 @@ public class BudgetDetailActivity extends AppCompatActivity {
 
         if (item.getItemId() == R.id.edit) {
 
+            Intent i = new Intent(this,new_budget.class);
+            i.putExtra("bid",""+id);
+            startActivity(i);
 
             Toast.makeText(this, "clicked edit", Toast.LENGTH_SHORT).show();
 
         } else if (item.getItemId() == R.id.delete) {
-            Toast.makeText(this, "delete", Toast.LENGTH_SHORT).show();
+
+            boolean f = database.deleteBudget(id);
+            if(f){
+                Toast.makeText(this, "delete", Toast.LENGTH_SHORT).show();
+            } else {
+
+                Toast.makeText(this, "Something went wrong!", Toast.LENGTH_SHORT).show();
+            }
 
 
         } else if (item.getItemId() == R.id.close) {
+            onBackPressed();
             Toast.makeText(this, "close", Toast.LENGTH_SHORT).show();
-
-
         }
         return super.onOptionsItemSelected(item);
 

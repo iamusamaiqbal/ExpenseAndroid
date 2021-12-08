@@ -21,7 +21,7 @@ import java.util.Calendar;
 
 public class New_Goal extends AppCompatActivity {
     EditText name, amount,alreadySaved,note;
-    String enddate;
+    String enddate="";
     Button cv;
     ImageView saveGoal;
     SQLiteHandler database;
@@ -72,7 +72,7 @@ public class New_Goal extends AppCompatActivity {
                 if(name.getText().length()>4){
 
                     if (!amount.getText().toString().isEmpty()){
-                        if(!enddate.isEmpty()){
+                        if( enddate!=""){
                             if(amt>0){
 
                                 boolean f = database.updateGoal(new GoalModel(name.getText().toString(),note.getText().toString(),enddate,amt,Integer.parseInt(alreadySaved.getText().toString()),"active"),id);
