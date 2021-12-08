@@ -9,7 +9,7 @@
 
 
     <TextView
-        android:id="@+id/budgetPeriod"
+        android:id="@+id/budgetName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -33,14 +33,14 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/budgetName"
+        android:id="@+id/budgetPeriod"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="name"
+        android:text="Period"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/budgetPeriod" />
+        app:layout_constraintTop_toBottomOf="@+id/budgetName" />
 
     <TextView
         android:id="@+id/textView11"

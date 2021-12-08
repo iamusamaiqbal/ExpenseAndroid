@@ -1,18 +1,19 @@
-package com.example.moneywallet;
+package com.example.moneywallet.models;
 
 public class DebtModel {
 
-    int id;
-    String name;
-    String description;
-    String account;
-    String date;
-    String duedate;
-    int amount;
-    String type;
-    int isActive;
+    public int id;
+    public String name;
+    public String description;
+    public String account;
+    public String date;
+    public String duedate;
+    public int amount;
+    public String type;
+    public int isActive;
 
-    DebtModel(int id, String name, String description, String account, String date, String duedate, int amount, String type, int isActive ){
+    public DebtModel(int id, String name, String description, String account, String date, String duedate, int amount, String type, int isActive){
+
         this.id = id;
         this.name = name;
         this.description = description;
@@ -22,9 +23,10 @@ public class DebtModel {
         this.amount = amount;
         this.type = type;
         this.isActive = isActive;
+
     }
 
-    DebtModel(String name, String description, String account, String date, String duedate, int amount, String type, int isActive){
+    public DebtModel(String name, String description, String account, String date, String duedate, int amount, String type, int isActive){
 
         this.name = name;
         this.description = description;

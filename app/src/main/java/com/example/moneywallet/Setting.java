@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 public class Setting extends AppCompatActivity {
     TextView user_profile_setting,user_profile_setting_1,categories_setting,categories_setting_1;
-    Switch isFingerPrint;
+    Switch isFingerPrint,pin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +29,7 @@ public class Setting extends AppCompatActivity {
         categories_setting=findViewById(R.id.categories_setting);
         categories_setting_1=findViewById(R.id.categories_setting_1);
         isFingerPrint = findViewById(R.id.fingerPrint);
+        pin = findViewById(R.id.settingPinSwitch);
 
         isFingerPrint.setChecked(Constants.isFingerPrint);
         SharedPreferences preferences = getSharedPreferences("MyPref",MODE_PRIVATE);
@@ -112,8 +113,11 @@ public class Setting extends AppCompatActivity {
                     editor.apply();
                 }
             }
+        });
 
-
+        pin.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            Intent i = new Intent(this,PinActivity.class);
+            startActivity(i);
         });
 
     }

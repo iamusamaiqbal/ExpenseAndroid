@@ -12,13 +12,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.moneywallet.models.TransactionModel;
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import java.time.LocalDate;
@@ -64,6 +63,9 @@ public class Balance_statistic extends Fragment {
         String dateInString = date.toString();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E MMM dd HH:mm:ss 'GMT'z yyyy", Locale.ENGLISH);
         dateTime = LocalDate.parse(dateInString, formatter);
+
+        yExpense.add(new Entry(100f, 0));
+        yIncome.add(new Entry(100f, 0));
 
         int j=0;
         for (int i = 6; i >-1; i--) {

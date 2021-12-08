@@ -6,11 +6,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
+import com.example.moneywallet.models.ShoppingListModel;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class shopping_list extends AppCompatActivity {

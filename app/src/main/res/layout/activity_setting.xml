@@ -85,6 +85,7 @@
             android:layout_marginTop="0dp"
             android:layout_marginLeft="10dp"/>
         <Switch
+            android:id="@+id/settingPinSwitch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="end"/>

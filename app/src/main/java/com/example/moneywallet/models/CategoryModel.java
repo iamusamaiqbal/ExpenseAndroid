@@ -1,11 +1,11 @@
-package com.example.moneywallet;
+package com.example.moneywallet.models;
 
 public class CategoryModel {
 
-    int id;
-    String name;
+    public int id;
+    public String name;
 
-    CategoryModel(int id, String name){
+    public CategoryModel(int id, String name){
         this.id = id;
         this.name = name;
     }

@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.moneywallet.models.DebtModel;
+
 import java.util.List;
 
 public class Active extends Fragment {
