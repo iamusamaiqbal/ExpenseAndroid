@@ -2,15 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-        <item android:id="@+id/setting_c"
+        <item android:id="@+id/forgive"
             android:title="Forgive"
-
+            app:showAsAction="never"
             />
-        <item android:id="@+id/ratting_c"
-
+        <item android:id="@+id/edit_debit"
             app:showAsAction="never"
             android:title="Edit debt"/>
-        <item android:id="@+id/share_c"
+        <item android:id="@+id/delet_debt"
             app:showAsAction="never"
             android:title="Delet debt"
 

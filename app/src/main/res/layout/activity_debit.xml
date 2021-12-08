@@ -60,11 +60,14 @@
         </com.google.android.material.tabs.TabLayout>
 
         <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpage_debit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/tab_debit"
-            android:id="@+id/viewpage_debit"
-            />
+            android:layout_below="@+id/tab_debit" >
+
+
+        </androidx.viewpager.widget.ViewPager>
+
 
         <com.getbase.floatingactionbutton.FloatingActionsMenu
             android:layout_width="wrap_content"
@@ -92,6 +95,8 @@
                 app:fab_title="I Borrowed" />
         </com.getbase.floatingactionbutton.FloatingActionsMenu>
     </RelativeLayout>
+
+
 
 
 

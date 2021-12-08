@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
@@ -45,6 +46,7 @@ public class accounts extends Fragment {
     ListView listView;
     Button showMore, pieChartShowMore;
     Date date;
+    ImageView crd_menu_id;
     LocalDate dateTime;
     View v;
 
@@ -76,6 +78,7 @@ public class accounts extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
     }
 
 
@@ -86,9 +89,14 @@ public class accounts extends Fragment {
         v = inflater.inflate(R.layout.fragment_accounts, container, false);
 
         listView = v.findViewById(R.id.list_view_account);
+        crd_menu_id=v.findViewById(R.id.crd_menu_id);
+
         showMore = v.findViewById(R.id.show_more);
+
         pieChartShowMore = v.findViewById(R.id.PieChartShowMore);
         date = new Date();
+
+
 
         String dateInString = date.toString();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E MMM dd HH:mm:ss 'GMT'z yyyy", Locale.ENGLISH);
@@ -132,13 +140,15 @@ public class accounts extends Fragment {
         );
 
         showMore.setOnClickListener(v1 -> {
-            Intent intent = new Intent(getActivity(), TransactionActivity.class);
+            Intent intent = new Intent(getActivity(),TransactionActivity.class);
             startActivity(intent);
         });
 
         pieChartShowMore.setOnClickListener(v1 -> {
             Intent intent = new Intent(getActivity(), statistic.class);
             getContext().startActivity(intent);
+
+
         });
 
         transactionList.forEach(transactionModel -> {

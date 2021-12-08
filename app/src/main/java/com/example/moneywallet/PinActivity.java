@@ -26,7 +26,6 @@ public class PinActivity extends AppCompatActivity {
 
         pin = findViewById(R.id.pin1);
         pin2 = findViewById(R.id.pin2);
-        checkBox = findViewById(R.id.pincheck);
         submit = findViewById(R.id.submitPin);
 
         SharedPreferences preferences = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);

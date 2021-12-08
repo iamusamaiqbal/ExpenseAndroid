@@ -110,21 +110,24 @@
         android:id="@+id/divider3"
         android:layout_width="409dp"
         android:layout_height="1dp"
+        android:layout_marginTop="72dp"
         android:background="?android:attr/listDivider"
         android:backgroundTint="@color/black"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="462dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newDebtAmount" />
 
     <TextView
         android:id="@+id/textView49"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="68dp"
         android:layout_marginTop="16dp"
         android:text="Create Debt Record"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/imageButton5"
+        app:layout_constraintStart_toStartOf="@+id/newDebtBack"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -50,6 +50,7 @@ public class Setting extends AppCompatActivity {
         });
         categories_setting_1.setOnClickListener(v -> {
             Intent intent=new Intent(Setting.this,catogries.class);
+            startActivity(intent);
         });
 
         isFingerPrint.setOnCheckedChangeListener((buttonView, isChecked) -> {

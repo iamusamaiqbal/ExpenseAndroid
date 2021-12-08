@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -62,8 +63,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
 
         navigationView.bringToFront();
+
         toggle=new ActionBarDrawerToggle(this ,drawerLayout,toolbar,
                 R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white));
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);

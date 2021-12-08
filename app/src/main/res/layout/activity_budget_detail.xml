@@ -11,19 +11,48 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/budget_toolbar"
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/calculater">
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp" >
             <TextView
+                android:id="@+id/toolbar_titel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="This week"
+                android:text="This Week"
                 android:textColor="@color/white"
-                android:textSize="20sp"/>
+                android:textStyle="bold"
+                android:textSize="20sp"
+                />
         </androidx.appcompat.widget.Toolbar>
+
+
+        <!--        <androidx.appcompat.widget.Toolbar-->
+<!--            android:id="@+id/budget_toolbar"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="?attr/actionBarSize"-->
+<!--            android:background="@color/calculater"-->
+<!--            android:theme="@style/ThemeOverlay.AppCompat.ActionBar">-->
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="This week"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="20sp"/>-->
+<!--&lt;!&ndash;            <ImageView&ndash;&gt;-->
+<!--&lt;!&ndash;                android:id="@+id/menu_budget_detail"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:src="@drawable/moree_menu"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_gravity="end"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_marginRight="10dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:padding="10dp"/>&ndash;&gt;-->
+<!--        </androidx.appcompat.widget.Toolbar>-->
 
         <include
             android:id="@+id/include"
