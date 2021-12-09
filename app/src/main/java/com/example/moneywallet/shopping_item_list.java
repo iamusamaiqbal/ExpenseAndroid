@@ -41,6 +41,10 @@ public class shopping_item_list extends AppCompatActivity {
         floting_item_shopping_1=findViewById(R.id.floting_item_shopping_1);
         debtActiveAddtv=findViewById(R.id.debtActiveAdd);
 
+
+
+
+
         Intent i = getIntent();
         id = Integer.parseInt(i.getStringExtra("sid"));
 

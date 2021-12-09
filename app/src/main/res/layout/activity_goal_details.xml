@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:backgroundTint="@color/yellow"
+        android:backgroundTint="@color/calculater"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/backkk_arow" />
@@ -44,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:backgroundTint="@color/yellow"
+        android:backgroundTint="@color/calculater"
         app:layout_constraintEnd_toEndOf="@+id/toolbar6"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_edit_24" />

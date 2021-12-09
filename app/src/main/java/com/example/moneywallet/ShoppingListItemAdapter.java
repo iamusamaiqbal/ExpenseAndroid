@@ -1,13 +1,18 @@
 package com.example.moneywallet;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import android.content.Context;
 import android.graphics.Paint;
+import android.nfc.Tag;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,7 +21,9 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ShoppingListItemAdapter extends RecyclerView.Adapter<ShoppingListItemAdapter.VewHolder> {
     ShoppingItemModel[] itemlist;
     Context context;
+    ImageView image_menu;
     SQLiteHandler database = new SQLiteHandler(context);
+
 
     ShoppingListItemAdapter(ShoppingItemModel[] itemlist, Context context) {
         this.itemlist = itemlist;
@@ -29,7 +36,9 @@ public class ShoppingListItemAdapter extends RecyclerView.Adapter<ShoppingListIt
 
         View view = LayoutInflater.from(context).inflate(R.layout.shopping_record_model, parent, false);
 
+
         return new VewHolder(view);
+
     }
 
     @Override
@@ -59,6 +68,7 @@ public class ShoppingListItemAdapter extends RecyclerView.Adapter<ShoppingListIt
             }
         });
 
+
     }
 
     @Override
@@ -66,7 +76,10 @@ public class ShoppingListItemAdapter extends RecyclerView.Adapter<ShoppingListIt
         return itemlist.length;
     }
 
-    public class VewHolder extends RecyclerView.ViewHolder{
+    public class VewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+
+        private static final String TAG="MyViewHolder";
+
         TextView name, amount;
         CheckBox checkBox;
         int isChecked;
@@ -76,6 +89,21 @@ public class ShoppingListItemAdapter extends RecyclerView.Adapter<ShoppingListIt
             name = itemView.findViewById(R.id.listItemName);
             amount = itemView.findViewById(R.id.listItemAmount);
             checkBox = itemView.findViewById(R.id.listItemCB);
+            image_menu=itemView.findViewById(R.id.image_menu);
+            image_menu.setOnClickListener((View.OnClickListener) this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            Log.d(TAG,"onClick:"+getAbsoluteAdapterPosition());
+            showPopupmenu(v);
+
+        }
+        private void showPopupmenu(View view){
+            PopupMenu popupMenu=new PopupMenu(view .getContext(),view);
+            popupMenu.inflate(R.menu.shoping_list_item_menu);
+            popupMenu.show();
+
         }
     }
 }

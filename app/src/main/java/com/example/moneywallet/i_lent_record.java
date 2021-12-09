@@ -2,8 +2,12 @@ package com.example.moneywallet;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -11,13 +15,18 @@ import android.widget.Toast;
 
 import com.example.moneywallet.models.DebtModel;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class i_lent_record extends AppCompatActivity {
     Spinner accountSpinner12;
     String type;
-    EditText name, amount, description, date, duedate, account;
+    EditText name, amount,date,duedate, description, account;
     ImageView save, back;
 
+
     SQLiteHandler database;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +36,14 @@ public class i_lent_record extends AppCompatActivity {
         name = findViewById(R.id.debtName);
         amount = findViewById(R.id.debtAmount);
         description = findViewById(R.id.debtDescription);
-        date = findViewById(R.id.debtDate);
-        duedate = findViewById(R.id.debtDueDate);
+        date = findViewById(R.id.date);
+        duedate = findViewById(R.id.duedate);
         back = findViewById(R.id.debtBack);
         save = findViewById(R.id.debtSave);
         //account = findViewById(R.id.);
+
+
+
 
         database = new SQLiteHandler(this);
 
@@ -79,6 +91,8 @@ public class i_lent_record extends AppCompatActivity {
                 Toast.makeText(this, "Name should be greater than 4", Toast.LENGTH_LONG).show();
             }
         });
+
     }
+
 
 }

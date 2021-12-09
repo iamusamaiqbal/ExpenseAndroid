@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="200dp"
-    android:background="@color/yellow"
+    android:background="@color/calculater"
     android:gravity="bottom"
     android:padding="20dp"
     >
@@ -26,7 +26,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/aclonica"
-        android:text="User Name"
+        android:text="Ali Raza"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"

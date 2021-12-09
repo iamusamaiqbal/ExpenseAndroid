@@ -117,16 +117,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         startActivity(warr);
                         Toast.makeText(MainActivity.this, "warranties clicked", Toast.LENGTH_SHORT).show();
                         return true;
-                    case R.id.nav_currency_rate:
-                        Intent curency=new Intent(MainActivity.this,Currency_rates.class);
-                        startActivity(curency);
-                        Toast.makeText(MainActivity.this, "currency clicked", Toast.LENGTH_SHORT).show();
-                        return true;
-                    case R.id.nav_export:
-//                        Intent intent=new Intent(MainActivity.this,accounts.class);
-//                        startActivity(intent);
-                        Toast.makeText(MainActivity.this, "export clicked", Toast.LENGTH_SHORT).show();
-                        return true;
+
                     case R.id.nav_location:
 //                        Intent intent=new Intent(MainActivity.this,accounts.class);
 //                        startActivity(intent);

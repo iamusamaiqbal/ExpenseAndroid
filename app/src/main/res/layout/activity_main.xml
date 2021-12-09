@@ -70,6 +70,7 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:padding="8dp">
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
@@ -77,6 +78,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
+
+
         app:fab_labelStyle="@style/LabelStyle"
         app:fab_labelsPosition="left">
 
@@ -84,17 +87,19 @@
             android:id="@+id/new_record_float"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:fab_colorNormal="@color/light_gree"
+            app:fab_colorNormal="@color/calculater"
             app:fab_icon="@drawable/ic_pen"
             app:fab_title="New record" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:fab_colorNormal="@color/light_gree"
+            app:fab_colorNormal="@color/calculater"
             app:fab_icon="@drawable/ic_baseline_highlight_24"
             app:fab_size="mini"
-            app:fab_title="Create first template" />
+            app:fab_title="Create first template"
+
+            />
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 </RelativeLayout>
 
