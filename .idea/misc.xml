@@ -88,6 +88,7 @@
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/card_model.xml" value="0.13385416666666666" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/curency_model.xml" value="0.13385416666666666" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/custom_list_row.xml" value="0.1265625" />
+        <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/debt_close_model.xml" value="0.26403985507246375" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/debts_model.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/debts_records_model.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/fragment_accounts.xml" value="0.19882246376811594" />
@@ -95,6 +96,7 @@
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/fragment_active_goals.xml" value="0.1" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/fragment_balance_statistic.xml" value="0.14270833333333333" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/fragment_cash_flow_statistic.xml" value="0.14270833333333333" />
+        <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/fragment_close.xml" value="0.26403985507246375" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/fragment_cridit_statistiic.xml" value="0.14270833333333333" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/fragment_outlook_statistic.xml" value="0.14270833333333333" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/fragment_periodic.xml" value="0.27291666666666664" />

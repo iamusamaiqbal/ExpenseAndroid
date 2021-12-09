@@ -36,23 +36,23 @@ public class debt_add_record_list extends AppCompatActivity {
     SQLiteHandler database;
     List<RecordModel> recordList = new ArrayList<>();
     ImageButton debtBack;
-    String  id;
+    String id;
+    DebtModel debtModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_debt_add_record_list);
-        debtBack=findViewById(R.id.debtBack);
+        debtBack = findViewById(R.id.debtBack);
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar10);
         setSupportActionBar(toolbar);
         TextView mTitle = (TextView) toolbar.findViewById(R.id.textView43);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        toolbar.getOverflowIcon().setColorFilter(Color.WHITE , PorterDuff.Mode.SRC_ATOP);
+        toolbar.getOverflowIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.calculater)));
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-
 
 
         debtBack = findViewById(R.id.debtBack);
@@ -67,16 +67,17 @@ public class debt_add_record_list extends AppCompatActivity {
         });
 
         recordList = database.getAllRecord(id);
+        debtModel = database.getDebt(id);
+
 
         RecordModel[] recordArray = recordList.toArray(new RecordModel[0]);
 
         debtRV.setLayoutManager(new LinearLayoutManager(this));
-        recordAdapter = new RecordAdapter(this,recordArray);
+        recordAdapter = new RecordAdapter(this, recordArray);
         debtRV.setAdapter(recordAdapter);
 
 
     }
-
 
 
     @SuppressLint("RestrictedApi")
@@ -93,10 +94,10 @@ public class debt_add_record_list extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         if (item.getItemId() == R.id.forgive) {
-            DebtModel debtModel = database.getDebt(id);
 
-            boolean f = database.updateDebt(new DebtModel(debtModel.name,debtModel.description,debtModel.account,debtModel.date,debtModel.duedate,debtModel.amount,debtModel.type,0),id);
-            if(f){
+
+            boolean f = database.updateDebt(new DebtModel(debtModel.name, debtModel.description, debtModel.account, debtModel.date, debtModel.duedate, debtModel.amount, debtModel.type, 0), id);
+            if (f) {
                 Toast.makeText(this, "Forgiven", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "Something went wrong!", Toast.LENGTH_SHORT).show();
@@ -104,8 +105,9 @@ public class debt_add_record_list extends AppCompatActivity {
 
         } else if (item.getItemId() == R.id.edit_debit) {
 
-            Intent i =new Intent(this,i_lent_record.class);
-            i.putExtra("did",""+id);
+            Intent i = new Intent(this, i_lent_record.class);
+            i.putExtra("did", "" + id);
+            i.putExtra("type", "" +debtModel.type);
             startActivity(i);
 
             Toast.makeText(this, "edit click", Toast.LENGTH_SHORT).show();
@@ -114,7 +116,7 @@ public class debt_add_record_list extends AppCompatActivity {
         } else if (item.getItemId() == R.id.delet_debt) {
 
             boolean f = database.deleteDebt(id);
-            if(f){
+            if (f) {
                 Toast.makeText(this, "Deleted", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "Something went wrong!", Toast.LENGTH_SHORT).show();
@@ -126,4 +128,4 @@ public class debt_add_record_list extends AppCompatActivity {
 
     }
 
-    }
+}

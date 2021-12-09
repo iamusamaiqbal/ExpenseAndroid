@@ -50,7 +50,7 @@ public class PeriodicAdapter extends RecyclerView.Adapter<PeriodicAdapter.ViewHo
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView period,name,budgetTotal;
+        TextView period,name,budgetTotal,expanse;
         int id;
 
         public ViewHolder(View view) {
@@ -58,6 +58,7 @@ public class PeriodicAdapter extends RecyclerView.Adapter<PeriodicAdapter.ViewHo
             period = view.findViewById(R.id.budgetPeriod);
             name = view.findViewById(R.id.budgetName);
             budgetTotal = view.findViewById(R.id.budgetTotal);
+            expanse = view.findViewById(R.id.budgetExpanse);
 //            day = view.findViewById(R.id.OverviewTileDay);
 //            imageView = view.findViewById(R.id.imageView3);
 

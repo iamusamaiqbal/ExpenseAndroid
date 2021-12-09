@@ -46,7 +46,7 @@ public class Active extends Fragment {
 
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        activeAdapter = new DebtActiveAdapter(debtArray,getActivity());
+        activeAdapter = new DebtActiveAdapter(debtArray,getActivity(),1);
 
         rv.setAdapter(activeAdapter);
 
@@ -63,7 +63,7 @@ public class Active extends Fragment {
 
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        activeAdapter = new DebtActiveAdapter(debtArray,getActivity());
+        activeAdapter = new DebtActiveAdapter(debtArray,getActivity(),1);
 
         rv.setAdapter(activeAdapter);
     }

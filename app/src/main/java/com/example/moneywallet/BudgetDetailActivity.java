@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,8 +50,10 @@ public class BudgetDetailActivity extends AppCompatActivity {
     List<String> dates;
     List<String> categories;
     BudgetModel budget;
-    int total = 0, id = 0, sum = 0;
+    int total = 0, sum = 0;
+    TextView period,budgetTotal,name,expanse;
 
+    String id;
     SQLiteHandler database;
 
 
@@ -75,6 +78,10 @@ public class BudgetDetailActivity extends AppCompatActivity {
 
         PieChart chart = findViewById(R.id.budgetDetailPieChart);
         BarChart barChart = findViewById(R.id.budgetDetailBarChart);
+        period = findViewById(R.id.budgetPeriod);
+        name = findViewById(R.id.budgetName);
+        budgetTotal = findViewById(R.id.budgetTotal);
+        expanse = findViewById(R.id.budgetExpanse);
         transactionList = new ArrayList<>();
         colors = new ArrayList<>();
         dates = new ArrayList<>();
@@ -82,9 +89,9 @@ public class BudgetDetailActivity extends AppCompatActivity {
         database = new SQLiteHandler(this);
 
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_titel);
+        TextView mTitle = toolbar.findViewById(R.id.toolbar_titel);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.getOverflowIcon().setColorFilter(Color.WHITE , PorterDuff.Mode.SRC_ATOP);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.calculater)));
@@ -93,7 +100,7 @@ public class BudgetDetailActivity extends AppCompatActivity {
 
 
         Intent i = getIntent();
-        id = Integer.parseInt(i.getStringExtra("bid"));
+        id = i.getStringExtra("bid");
 
         budget = database.getBudget(id);
         Date date = new Date();
@@ -110,6 +117,54 @@ public class BudgetDetailActivity extends AppCompatActivity {
 
         transactionList = database.getAllTransaction();
 
+
+        BudgetModel budgetModel = database.getBudget(id);
+
+        LocalDate s = LocalDate.parse(budgetModel.start);
+        LocalDate e = LocalDate.parse(budgetModel.end);
+
+        int diff = (int) java.time.temporal.ChronoUnit.DAYS.between(s, e);
+
+        switch (diff) {
+            case 0:
+                mTitle.setText("One Time");
+                break;
+            case 7:
+                mTitle.setText("This Week");
+                break;
+            case 30:
+            case 31:
+                mTitle.setText("This Month");
+                break;
+            case 365:
+            case 366:
+                mTitle.setText("This Year");
+                break;
+            default:
+                Log.e("No Match", " non of these case matches");
+        }
+
+        name.setText(budgetModel.name);
+        budgetTotal.setText(""+budgetModel.amount);
+        period.setVisibility(View.INVISIBLE);
+
+        transactionList.forEach(transactionModel -> {
+
+            LocalDate dateTime = LocalDate.parse(transactionModel.date);
+
+            if ((dateTime.isEqual(LocalDate.parse(budget.start)) || dateTime.isAfter(LocalDate.parse(budget.start))) && (dateTime.isEqual(LocalDate.parse(budget.end)) || dateTime.isBefore(LocalDate.parse(budget.end)))) {
+                if (!dates.contains(dateTime.toString())) {
+                    total += database.getSumByDate(SQLiteHandler.KEY_AMOUNT, dateTime.toString());
+                    dates.add(dateTime.toString());
+                }
+            }
+        });
+
+        if(total>0){
+            expanse.setText("Expanses : "+total);
+        } else {
+            expanse.setText("Expanses : 0");
+        }
 
         //========================================== BarChart =====================================================
 
