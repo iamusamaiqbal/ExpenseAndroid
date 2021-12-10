@@ -1,20 +1,29 @@
 package com.example.moneywallet;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.moneywallet.models.DebtModel;
 import com.example.moneywallet.models.ShoppingListModel;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 
@@ -40,6 +49,17 @@ public class shopping_item_list extends AppCompatActivity {
         setContentView(R.layout.activity_shopping_item_list);
         floting_item_shopping_1=findViewById(R.id.floting_item_shopping_1);
         debtActiveAddtv=findViewById(R.id.debtActiveAdd);
+
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_shopping_item_list);
+        setSupportActionBar(toolbar);
+        TextView mTitle = (TextView) toolbar.findViewById(R.id.texttt);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        toolbar.getOverflowIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.calculater)));
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+
 
 
 
@@ -102,6 +122,34 @@ public class shopping_item_list extends AppCompatActivity {
 
         });
     }
+    @SuppressLint("RestrictedApi")
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.shopping_list_menu, menu);
+        ((MenuBuilder) menu).setOptionalIconsVisible(true);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if (item.getItemId() == R.id.edit_item) {
+            Toast.makeText(this, "edit click", Toast.LENGTH_SHORT).show();
+
+        } else if (item.getItemId() == R.id.delet_item) {
+
+            Toast.makeText(this, "delete click", Toast.LENGTH_SHORT).show();
+
+        }
+        return super.onOptionsItemSelected(item);
+
+    }
+
+
+
+
 
     @Override
     protected void onResume() {

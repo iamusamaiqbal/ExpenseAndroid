@@ -3,27 +3,39 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/ExpenseAndroid/app/src/main/res/drawable/back_example.xml" value="0.2203125" />
+        <entry key="..\:/ExpenseAndroid/app/src/main/res/drawable/background_label.xml" value="0.2203125" />
+        <entry key="..\:/ExpenseAndroid/app/src/main/res/drawable/backkk_arow.xml" value="0.2203125" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/drawable/cash_background.xml" value="0.21614583333333334" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/drawable/custom_prgress_bar.xml" value="0.2203125" />
+        <entry key="..\:/ExpenseAndroid/app/src/main/res/drawable/ic_baseline_edit_24.xml" value="0.2203125" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/drawable/ic_food_dinner.xml" value="0.2203125" />
+        <entry key="..\:/ExpenseAndroid/app/src/main/res/drawable/layout_active_item_rv.xml" value="0.2203125" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/active_goal_model.xml" value="0.20416666666666666" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_add_warranty.xml" value="0.20416666666666666" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_budget.xml" value="0.2" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_catogries.xml" value="0.20416666666666666" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_custom_category_list.xml" value="0.20416666666666666" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_debit.xml" value="0.19010416666666666" />
+        <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_debt_add_record_list.xml" value="0.20416666666666666" />
+        <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_goal_details.xml" value="0.20416666666666666" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_goals.xml" value="0.20416666666666666" />
+        <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_ilent_record.xml" value="0.19074074074074074" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_new_budget.xml" value="0.2" />
+        <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_new_goal.xml" value="0.18703703703703703" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_new_record.xml" value="0.20416666666666666" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_setting.xml" value="0.20416666666666666" />
+        <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_shopping_item_list.xml" value="0.19814814814814816" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_shopping_list.xml" value="0.19010416666666666" />
+        <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_splach_screen.xml" value="0.19814814814814816" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/activity_warranty.xml" value="0.20416666666666666" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/add_warranty.xml" value="0.20416666666666666" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/budget_view.xml" value="0.2" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/custom_list.xml" value="0.20416666666666666" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/custom_list_row.xml" value="0.20416666666666666" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/debts_model.xml" value="0.20416666666666666" />
+        <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/example.xml" value="0.20416666666666666" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/fragment_accounts.xml" value="0.2" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/fragment_active.xml" value="0.20416666666666666" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/fragment_active_goals.xml" value="0.20416666666666666" />
@@ -37,9 +49,14 @@
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/goal_model.xml" value="0.20416666666666666" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/goal_reached_model.xml" value="0.20416666666666666" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/haider.xml" value="0.2" />
+        <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/layout_activ_item_rv.xml" value="0.20416666666666666" />
+        <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/layout_sub_item_active_rv.xml" value="0.20416666666666666" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/report_model.xml" value="0.22" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/shopping_list_model.xml" value="0.20416666666666666" />
+        <entry key="..\:/ExpenseAndroid/app/src/main/res/layout/shopping_record_model.xml" value="0.18703703703703703" />
         <entry key="..\:/ExpenseAndroid/app/src/main/res/menu/main_menu.xml" value="0.20416666666666666" />
+        <entry key="..\:/ExpenseAndroid/app/src/main/res/menu/shoping_list_item_menu.xml" value="0.19814814814814816" />
+        <entry key="..\:/ExpenseAndroid/app/src/main/res/menu/shopping_list_menu.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Admin/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_spinner_dropdown_item.xml" value="0.1203125" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/drawable-v24/background_finger.xml" value="0.2890625" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/drawable-v24/buttonn.xml" value="0.1609375" />
@@ -88,7 +105,6 @@
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/card_model.xml" value="0.13385416666666666" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/curency_model.xml" value="0.13385416666666666" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/custom_list_row.xml" value="0.1265625" />
-        <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/debt_close_model.xml" value="0.26403985507246375" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/debts_model.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/debts_records_model.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/fragment_accounts.xml" value="0.19882246376811594" />
@@ -96,7 +112,6 @@
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/fragment_active_goals.xml" value="0.1" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/fragment_balance_statistic.xml" value="0.14270833333333333" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/fragment_cash_flow_statistic.xml" value="0.14270833333333333" />
-        <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/fragment_close.xml" value="0.26403985507246375" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/fragment_cridit_statistiic.xml" value="0.14270833333333333" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/fragment_outlook_statistic.xml" value="0.14270833333333333" />
         <entry key="..\:/Users/Admin/Desktop/MoneyWallet/app/src/main/res/layout/fragment_periodic.xml" value="0.27291666666666664" />

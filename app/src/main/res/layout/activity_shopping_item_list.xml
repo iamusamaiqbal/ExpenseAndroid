@@ -15,6 +15,7 @@
 
         <androidx.appcompat.widget.Toolbar
 
+            android:id="@+id/toolbar_shopping_item_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/calculater">
@@ -24,6 +25,7 @@
                 android:src="@drawable/backkk_arow"
                 />
             <TextView
+                android:id="@+id/texttt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="name"

@@ -1,56 +1,61 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<?xml version="1.0" encoding="UTF-8"?>
+    <LinearLayout tools:context=".Goals"
     android:orientation="vertical"
-    tools:context=".Goals">
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
     <androidx.appcompat.widget.Toolbar
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/calculater"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Goals"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold"/>
+        android:layout_width="match_parent"
+        android:background="@color/calculater">
 
-    </androidx.appcompat.widget.Toolbar>
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:text="Goals"/>
+
+</androidx.appcompat.widget.Toolbar>
+
+
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_goals"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        app:tabTextColor="@color/black"
-        app:tabSelectedTextColor="@color/calculater"
-        app:tabIndicatorColor="@color/calculater"
-        >
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/item_goal_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ACTIVE"/>
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/item_goal_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="PAUSED"/>
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/item_goal_3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="REACHED"/>
-
-    </com.google.android.material.tabs.TabLayout>
-    <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"
+        android:background="@color/white"
+        app:tabIndicatorColor="@color/calculater"
+        app:tabSelectedTextColor="@color/calculater"
+        app:tabTextColor="@color/black"
+        android:id="@+id/tab_goals">
+
+    <com.google.android.material.tabs.TabItem
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="ACTIVE"
+        android:id="@+id/item_goal_1"/>
+
+    <com.google.android.material.tabs.TabItem
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="PAUSED"
+        android:id="@+id/item_goal_2"/>
+
+    <com.google.android.material.tabs.TabItem
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="REACHED"
+        android:id="@+id/item_goal_3"/>
+
+</com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager.widget.ViewPager
         android:layout_height="match_parent"
-        android:id="@+id/viewpager_goals"
-        />
+        android:layout_width="match_parent"
+        android:id="@+id/viewpager_goals"/>
 
 </LinearLayout>
