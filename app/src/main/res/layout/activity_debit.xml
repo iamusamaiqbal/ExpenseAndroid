@@ -63,7 +63,7 @@
             android:id="@+id/viewpage_debit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/tab_debit" >
+            android:layout_below="@+id/tab_debit">
 
 
         </androidx.viewpager.widget.ViewPager>

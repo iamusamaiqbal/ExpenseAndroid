@@ -6,12 +6,12 @@ public class BudgetModel {
     public String name;
     public int amount;
     public String currency;
-    public int category;
+    public String category;
     public String account;
     public String start;
     public String end;
 
-    public BudgetModel(int id, String name, int amount, int category, String account, String currency, String start, String end) {
+    public BudgetModel(int id, String name, int amount, String category, String account, String currency, String start, String end) {
         this.account = account;
         this.amount = amount;
         this.category = category;
@@ -22,7 +22,7 @@ public class BudgetModel {
         this.end = end;
     }
 
-    public BudgetModel(String name, int amount, int category, String account, String currency, String start, String end) {
+    public BudgetModel(String name, int amount, String category, String account, String currency, String start, String end) {
         this.account = account;
         this.amount = amount;
         this.category = category;

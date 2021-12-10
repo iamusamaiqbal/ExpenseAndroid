@@ -456,7 +456,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 
     }
 
-    public BudgetModel getBudget(int id) {
+    public BudgetModel getBudget(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
 
@@ -471,7 +471,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
                 cursor.getInt(cursor.getColumnIndexOrThrow(KEY_BID)),
                 cursor.getString(cursor.getColumnIndexOrThrow(KEY_BNAME)),
                 cursor.getInt(cursor.getColumnIndexOrThrow(KEY_BAMOUNT)),
-                cursor.getInt(cursor.getColumnIndexOrThrow(KEY_CAT)),
+                cursor.getString(cursor.getColumnIndexOrThrow(KEY_CAT)),
                 cursor.getString(cursor.getColumnIndexOrThrow(KEY_BACCOUNT)),
                 cursor.getString(cursor.getColumnIndexOrThrow(KEY_BCURRENCY)),
                 cursor.getString(cursor.getColumnIndexOrThrow(KEY_BSTARTDATE)),
@@ -497,7 +497,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
                         cursor.getInt(cursor.getColumnIndexOrThrow(KEY_BID)),
                         cursor.getString(cursor.getColumnIndexOrThrow(KEY_BNAME)),
                         cursor.getInt(cursor.getColumnIndexOrThrow(KEY_BAMOUNT)),
-                        cursor.getInt(cursor.getColumnIndexOrThrow(KEY_CAT)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(KEY_CAT)),
                         cursor.getString(cursor.getColumnIndexOrThrow(KEY_BACCOUNT)),
                         cursor.getString(cursor.getColumnIndexOrThrow(KEY_BCURRENCY)),
                         cursor.getString(cursor.getColumnIndexOrThrow(KEY_BSTARTDATE)),
@@ -510,7 +510,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         return budgetList;
     }
 
-    public boolean deleteBudget(int id) {
+    public boolean deleteBudget(String id) {
 
         SQLiteDatabase db = this.getReadableDatabase();
         boolean flag = db.delete(TABLE_BUDGET, KEY_BID + "=?", new String[]{String.valueOf(id)}) > 0;
@@ -519,7 +519,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         return flag;
     }
 
-    public boolean updateBudget(BudgetModel budgetModel, int id) {
+    public boolean updateBudget(BudgetModel budgetModel, String id) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();

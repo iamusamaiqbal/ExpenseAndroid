@@ -21,7 +21,7 @@ import java.util.Calendar;
 
 public class i_lent_record extends AppCompatActivity {
     Spinner accountSpinner12;
-    String type, enddate = "", startdate = "", datepicked;
+    String type,id, enddate = "", startdate = "", datepicked;
     EditText name, amount, description;
     ImageView save, back;
     Button start, end;
@@ -51,10 +51,23 @@ public class i_lent_record extends AppCompatActivity {
 
         Intent i = getIntent();
         type = i.getStringExtra("type");
+        id = i.getStringExtra("did");
 
         String newStr = "I " + type.substring(0, 1).toUpperCase() + type.substring(1);
 
         debtType.setText(newStr);
+
+        if(id!=null){
+            DebtModel debtModel = database.getDebt(id);
+
+            name.setText(debtModel.name);
+            amount.setText(""+debtModel.amount);
+            description.setText(debtModel.description);
+            enddate=debtModel.duedate;
+            startdate=debtModel.date;
+            end.setText(enddate);
+            start.setText(startdate);
+        }
 
         start.setOnClickListener(v -> {
             datePicker();
@@ -80,38 +93,74 @@ public class i_lent_record extends AppCompatActivity {
         save.setOnClickListener(v -> {
             int amt = (amount.getText().length() > 0) ? Integer.parseInt(amount.getText().toString()) : 0;
 
-            if (name.getText().length() > 4) {
-                if (description.getText().length() > 5) {
-                    if (!amount.getText().toString().isEmpty()) {
-                        if (amt > 0) {
-                            if (startdate!="") {
-                                if (enddate!="") {
+            if(id!=null){
+                if (name.getText().length() > 4) {
+                    if (description.getText().length() > 5) {
+                        if (!amount.getText().toString().isEmpty()) {
+                            if (amt > 0) {
+                                if (startdate!="") {
+                                    if (enddate!="") {
 
-                                    boolean f = database.addDebt(new DebtModel(name.getText().toString(), description.getText().toString(), "Cash", startdate, enddate, amt, type, 1));
+                                        boolean f = database.updateDebt(new DebtModel(name.getText().toString(), description.getText().toString(), "Cash", startdate, enddate, amt, type, 1),id);
 
-                                    if (f) {
-                                        Toast.makeText(this, "Done", Toast.LENGTH_LONG).show();
-                                        onBackPressed();
+                                        if (f) {
+                                            Toast.makeText(this, "Done", Toast.LENGTH_LONG).show();
+                                            onBackPressed();
+                                        } else {
+                                            Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
+                                        }
                                     } else {
-                                        Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(this, "Select due date", Toast.LENGTH_LONG).show();
                                     }
                                 } else {
-                                    Toast.makeText(this, "Select due date", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(this, "Select date", Toast.LENGTH_LONG).show();
                                 }
                             } else {
-                                Toast.makeText(this, "Select date", Toast.LENGTH_LONG).show();
+                                Toast.makeText(this, "Amount should be greater than zero", Toast.LENGTH_LONG).show();
                             }
                         } else {
-                            Toast.makeText(this, "Amount should be greater than zero", Toast.LENGTH_LONG).show();
+                            Toast.makeText(this, "Amount is empty", Toast.LENGTH_LONG).show();
                         }
                     } else {
-                        Toast.makeText(this, "Amount is empty", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, "Description is not enough", Toast.LENGTH_LONG).show();
                     }
                 } else {
-                    Toast.makeText(this, "Description is not enough", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Name should be greater than 4", Toast.LENGTH_LONG).show();
                 }
             } else {
-                Toast.makeText(this, "Name should be greater than 4", Toast.LENGTH_LONG).show();
+                if (name.getText().length() > 4) {
+                    if (description.getText().length() > 5) {
+                        if (!amount.getText().toString().isEmpty()) {
+                            if (amt > 0) {
+                                if (startdate!="") {
+                                    if (enddate!="") {
+
+                                        boolean f = database.addDebt(new DebtModel(name.getText().toString(), description.getText().toString(), "Cash", startdate, enddate, amt, type, 1));
+
+                                        if (f) {
+                                            Toast.makeText(this, "Done", Toast.LENGTH_LONG).show();
+                                            onBackPressed();
+                                        } else {
+                                            Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
+                                        }
+                                    } else {
+                                        Toast.makeText(this, "Select due date", Toast.LENGTH_LONG).show();
+                                    }
+                                } else {
+                                    Toast.makeText(this, "Select date", Toast.LENGTH_LONG).show();
+                                }
+                            } else {
+                                Toast.makeText(this, "Amount should be greater than zero", Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            Toast.makeText(this, "Amount is empty", Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        Toast.makeText(this, "Description is not enough", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(this, "Name should be greater than 4", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }

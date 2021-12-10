@@ -4,9 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".close">
-    <include layout="@layout/debts_model">
 
-    </include>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/debtCloseRV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 
 
