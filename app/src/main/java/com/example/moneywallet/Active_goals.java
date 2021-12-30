@@ -7,12 +7,15 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.moneywallet.models.GoalModel;
 import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.tsuryo.swipeablerv.SwipeLeftRightCallback;
+import com.tsuryo.swipeablerv.SwipeableRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,13 +61,31 @@ public class Active_goals extends Fragment {
 
         goalList = database.getAllGoal("active");
 
-        GoalModel[] goalArray = goalList.toArray(new GoalModel[0]);
+//        GoalModel[] goalArray = goalList.toArray(new GoalModel[0]);
 
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        goalAdapter = new GoalAdapter(getActivity(),goalArray);
+        goalAdapter = new GoalAdapter(getActivity(),goalList);
 
         rv.setAdapter(goalAdapter);
+
+//        rv.setListener(new SwipeLeftRightCallback.Listener() {
+//            @Override
+//            public void onSwipedLeft(int position) {
+//
+//                int id = goalList.get(position).id;
+//
+//                boolean f = database.deleteTransaction(id);
+//
+//                Log.e("eee","jjjjjjjjjjj"+position);
+//                goalAdapter.remove(position);
+//                goalAdapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onSwipedRight(int position) {
+//            }
+//        });
 
         return view;
     }
@@ -75,11 +96,11 @@ public class Active_goals extends Fragment {
 
         goalList = database.getAllGoal("active");
 
-        GoalModel[] goalArray = goalList.toArray(new GoalModel[0]);
+//        GoalModel[] goalArray = goalList.toArray(new GoalModel[0]);
 
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        goalAdapter = new GoalAdapter(getActivity(),goalArray);
+        goalAdapter = new GoalAdapter(getActivity(),goalList);
 
         rv.setAdapter(goalAdapter);
     }

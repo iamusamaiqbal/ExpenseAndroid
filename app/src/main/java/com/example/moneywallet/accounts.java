@@ -109,6 +109,14 @@ public class accounts extends Fragment {
     public void onResume() {
         super.onResume();
         content(v);
+
+        transactionList = database.getAllTransaction();
+
+        TransactionModel[] transactionArray = transactionList.toArray(new TransactionModel[0]);
+
+        adapter = new MyListAdapter(getActivity(), transactionArray);
+        listView.setAdapter(adapter);
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -314,4 +322,5 @@ public class accounts extends Fragment {
 
         lineChart.setData(data12);
     }
+
 }

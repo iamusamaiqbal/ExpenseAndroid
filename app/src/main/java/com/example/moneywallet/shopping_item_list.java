@@ -136,11 +136,17 @@ public class shopping_item_list extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         if (item.getItemId() == R.id.edit_item) {
-            Toast.makeText(this, "edit click", Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(this,New_Shopping_List.class);
+            i.putExtra("sid",""+id);
+            startActivity(i);
 
         } else if (item.getItemId() == R.id.delet_item) {
-
-            Toast.makeText(this, "delete click", Toast.LENGTH_SHORT).show();
+            boolean f = database.deleteShopping(id);
+            if(f){
+                Toast.makeText(this, "Deleted", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
+            }
 
         }
         return super.onOptionsItemSelected(item);

@@ -16,13 +16,14 @@ import com.example.moneywallet.models.TransactionModel;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.ViewHolder> {
 
-    TransactionModel[] transactionList;
+    List<TransactionModel> transactionList;
     Context context;
 
-    public TransactionAdapter(Context context, TransactionModel[] list) {
+    public TransactionAdapter(Context context, List<TransactionModel> list) {
         this.transactionList = list;
         this.context = context;
     }
@@ -42,39 +43,39 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        String dateInString = transactionList[position].date;
+        String dateInString = transactionList.get(position).date;
         LocalDate dateTime = LocalDate.parse(dateInString);
 
 
         DateTimeFormatter fLocalDate = DateTimeFormatter.ofPattern( "E dd" );
         String output = dateTime.format( fLocalDate) ;
 
-        holder.amount.setText(""+transactionList[position].amount);
-        holder.title.setText(""+transactionList[position].cat);
+        holder.amount.setText(""+ transactionList.get(position).amount);
+        holder.title.setText(""+ transactionList.get(position).cat);
         holder.date.setText(output);
         holder.day.setText(output);
 
-        if (transactionList[position].cat.equals("Food & Drinks")) {
+        if (transactionList.get(position).cat.equals("Food & Drinks")) {
             holder.imageView.setImageResource(R.drawable.ic_dinner);
-        } else if (transactionList[position].cat.equals("Shopping")) {
+        } else if (transactionList.get(position).cat.equals("Shopping")) {
             holder.imageView.setImageResource(R.drawable.ic_shoppinggg);
-        } else if (transactionList[position].cat.equals("Housing")) {
+        } else if (transactionList.get(position).cat.equals("Housing")) {
             holder.imageView.setImageResource(R.drawable.ic_house);
-        } else if (transactionList[position].cat.equals("Transportation")) {
+        } else if (transactionList.get(position).cat.equals("Transportation")) {
             holder.imageView.setImageResource(R.drawable.ic_bus);
-        } else if (transactionList[position].cat.equals("Vehicle")) {
+        } else if (transactionList.get(position).cat.equals("Vehicle")) {
             holder.imageView.setImageResource(R.drawable.ic_carrrr);
-        } else if (transactionList[position].cat.equals("Life & Entertainment")) {
+        } else if (transactionList.get(position).cat.equals("Life & Entertainment")) {
             holder.imageView.setImageResource(R.drawable.ic_entertainment);
-        } else if (transactionList[position].cat.equals("Communication")) {
+        } else if (transactionList.get(position).cat.equals("Communication")) {
             holder.imageView.setImageResource(R.drawable.ic_laptop_svgrepo_com);
-        } else if (transactionList[position].cat.equals("Financial Expenses")) {
+        } else if (transactionList.get(position).cat.equals("Financial Expenses")) {
             holder.imageView.setImageResource(R.drawable.ic_investment_svgrepo_com);
-        } else if (transactionList[position].cat.equals("Investments")) {
+        } else if (transactionList.get(position).cat.equals("Investments")) {
             holder.imageView.setImageResource(R.drawable.ic_investment);
-        } else if (transactionList[position].cat.equals("Income")) {
+        } else if (transactionList.get(position).cat.equals("Income")) {
             holder.imageView.setImageResource(R.drawable.ic_incom);
-        } else if (transactionList[position].cat.equals("Other")) {
+        } else if (transactionList.get(position).cat.equals("Other")) {
             holder.imageView.setImageResource(R.drawable.ic_other);
         } else {
             holder.imageView.setImageResource(R.drawable.setting_back);
@@ -84,7 +85,11 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
     @Override
     public int getItemCount() {
-        return transactionList.length;
+        return transactionList.size();
+    }
+
+    public void remove(int position) {
+        transactionList.remove(position);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -93,7 +98,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
         public ViewHolder(View view) {
             super(view);
-            title = (TextView) view.findViewById(R.id.textView2);
+            title = view.findViewById(R.id.textView2);
             amount = view.findViewById(R.id.textView6);
             date = view.findViewById(R.id.textView3);
             day = view.findViewById(R.id.OverviewTileDay);

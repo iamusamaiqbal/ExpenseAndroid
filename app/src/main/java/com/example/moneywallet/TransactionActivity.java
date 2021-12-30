@@ -1,6 +1,7 @@
 package com.example.moneywallet;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.moneywallet.models.TransactionModel;
+import com.tsuryo.swipeablerv.SwipeLeftRightCallback;
+import com.tsuryo.swipeablerv.SwipeableRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +20,7 @@ public class TransactionActivity extends AppCompatActivity {
     int expanse, income, result;
 
     TextView cashTV;
-    RecyclerView recyclerView;
+    SwipeableRecyclerView recyclerView;
     SQLiteHandler database;
     TransactionAdapter adapter;
     List<TransactionModel> transactionList = new ArrayList<>();
@@ -34,11 +37,27 @@ public class TransactionActivity extends AppCompatActivity {
 
         transactionList = database.getAllTransaction();
 
-        TransactionModel[] transactionArray = transactionList.toArray(new TransactionModel[0]);
-
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new TransactionAdapter(this,transactionArray);
+        adapter = new TransactionAdapter(this,transactionList);
         recyclerView.setAdapter(adapter);
+
+        recyclerView.setListener(new SwipeLeftRightCallback.Listener() {
+            @Override
+            public void onSwipedLeft(int position) {
+
+                int id = transactionList.get(position).id;
+
+                boolean f = database.deleteTransaction(id);
+
+                Log.e("eee","jjjjjjjjjjj"+position);
+                adapter.remove(position);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onSwipedRight(int position) {
+            }
+        });
 
         income = database.getSum(SQLiteHandler.KEY_ISEXPENSE);
         expanse = database.getSum(SQLiteHandler.KEY_ISINCOME);

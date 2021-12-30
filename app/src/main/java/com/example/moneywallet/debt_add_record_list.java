@@ -13,6 +13,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -24,6 +25,8 @@ import android.widget.Toast;
 import com.example.moneywallet.models.DebtModel;
 import com.example.moneywallet.models.RecordModel;
 import com.example.moneywallet.models.TransactionModel;
+import com.tsuryo.swipeablerv.SwipeLeftRightCallback;
+import com.tsuryo.swipeablerv.SwipeableRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +34,7 @@ import java.util.List;
 public class debt_add_record_list extends AppCompatActivity {
 
 
-    RecyclerView debtRV;
+    SwipeableRecyclerView debtRV;
     RecordAdapter recordAdapter;
     SQLiteHandler database;
     List<RecordModel> recordList = new ArrayList<>();
@@ -69,11 +72,29 @@ public class debt_add_record_list extends AppCompatActivity {
         recordList = database.getAllRecord(id);
         debtModel = database.getDebt(id);
 
-
-        RecordModel[] recordArray = recordList.toArray(new RecordModel[0]);
+//
+//        RecordModel[] recordArray = recordList.toArray(new RecordModel[0]);
 
         debtRV.setLayoutManager(new LinearLayoutManager(this));
-        recordAdapter = new RecordAdapter(this, recordArray);
+        recordAdapter = new RecordAdapter(this, recordList);
+
+        debtRV.setListener(new SwipeLeftRightCallback.Listener() {
+            @Override
+            public void onSwipedLeft(int position) {
+
+                int id = recordList.get(position).id;
+
+               // boolean f = database.delete(id);
+
+                Log.e("eee","jjjjjjjjjjj"+position);
+                recordAdapter.remove(position);
+                recordAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onSwipedRight(int position) {
+            }
+        });
         debtRV.setAdapter(recordAdapter);
 
 

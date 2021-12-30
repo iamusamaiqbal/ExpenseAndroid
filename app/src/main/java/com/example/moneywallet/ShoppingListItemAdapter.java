@@ -3,10 +3,12 @@ package com.example.moneywallet;
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.nfc.Tag;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -14,6 +16,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -49,6 +52,7 @@ public class ShoppingListItemAdapter extends RecyclerView.Adapter<ShoppingListIt
         holder.name.setText(itemlist[position].name);
         holder.amount.setText("" + itemlist[position].amount);
         holder.isChecked = itemlist[position].isChecked;
+        holder.id = itemlist[position].id;
 
         if (holder.isChecked == 1) {
             holder.checkBox.setChecked(true);
@@ -83,6 +87,7 @@ public class ShoppingListItemAdapter extends RecyclerView.Adapter<ShoppingListIt
         TextView name, amount;
         CheckBox checkBox;
         int isChecked;
+        int id;
 
         public VewHolder(@NonNull View itemView) {
             super(itemView);
@@ -90,7 +95,7 @@ public class ShoppingListItemAdapter extends RecyclerView.Adapter<ShoppingListIt
             amount = itemView.findViewById(R.id.listItemAmount);
             checkBox = itemView.findViewById(R.id.listItemCB);
             image_menu=itemView.findViewById(R.id.image_menu);
-            image_menu.setOnClickListener((View.OnClickListener) this);
+            image_menu.setOnClickListener(this);
         }
 
         @Override
@@ -102,8 +107,25 @@ public class ShoppingListItemAdapter extends RecyclerView.Adapter<ShoppingListIt
         private void showPopupmenu(View view){
             PopupMenu popupMenu=new PopupMenu(view .getContext(),view);
             popupMenu.inflate(R.menu.shoping_list_item_menu);
+
+            popupMenu.setOnMenuItemClickListener(item -> {
+                switch (item.getItemId()) {
+                    case R.id.delet_item:
+                        boolean f = database.deleteItem(id);
+                        if(f){
+                            Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(context, "Something went wrong!", Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+                }
+                return false;
+            });
+            //displaying the popup
             popupMenu.show();
 
         }
+
     }
+
 }

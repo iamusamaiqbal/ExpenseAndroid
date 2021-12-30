@@ -12,11 +12,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.moneywallet.models.GoalModel;
 
+import java.util.List;
+
 public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.ViewHolder> {
     Context context;
-    GoalModel[] goallist;
+    List<GoalModel> goallist;
 
-    GoalAdapter(Context context, GoalModel[] goallist){
+    GoalAdapter(Context context, List<GoalModel> goallist){
         this.context= context;
         this.goallist = goallist;
     }
@@ -34,17 +36,21 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        holder.goaldate.setText(goallist[position].date);
-        holder.goalamount.setText(""+goallist[position].amount);
-        holder.goalname.setText(goallist[position].name);
-        holder.goalAS.setText(""+goallist[position].alreadySaved);
-        holder.id = goallist[position].id;
+        holder.goaldate.setText(goallist.get(position).date);
+        holder.goalamount.setText(""+ goallist.get(position).amount);
+        holder.goalname.setText(goallist.get(position).name);
+        holder.goalAS.setText(""+ goallist.get(position).alreadySaved);
+        holder.id = goallist.get(position).id;
 
     }
 
     @Override
     public int getItemCount() {
-        return goallist.length;
+        return goallist.size();
+    }
+
+    public void remove(int position) {
+        goallist.remove(position);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{

@@ -6,13 +6,16 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.moneywallet.models.DebtModel;
 
+import java.util.Currency;
 import java.util.List;
+import java.util.Locale;
 
 public class Active extends Fragment {
     RecyclerView rv,debtActiveRV_2;
@@ -39,6 +42,11 @@ public class Active extends Fragment {
 
         rv = view.findViewById(R.id.debtActiveRV);
         debtActiveRV_2=view.findViewById(R.id.debtActiveRV_2);
+
+//        Currency currency = Currency.getInstance(new Locale("PKR"));
+//        String currencyCode = currency.getCurrencyCode();
+//
+//        Log.e("Currency",currencyCode);
 
         database = new SQLiteHandler(getActivity());
 

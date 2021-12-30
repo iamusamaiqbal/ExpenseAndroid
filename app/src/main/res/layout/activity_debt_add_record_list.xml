@@ -30,19 +30,32 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/backkk_arow" />
 
-    <androidx.recyclerview.widget.RecyclerView
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/debtRV"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_marginTop="60dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/toolbar10" >-->
+
+
+<!--    </androidx.recyclerview.widget.RecyclerView>-->
+
+    <com.tsuryo.swipeablerv.SwipeableRecyclerView
         android:id="@+id/debtRV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="55dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar10" >
-
-
-    </androidx.recyclerview.widget.RecyclerView>
+        app:rightBgColor="@color/RED"
+        app:rightImage="@drawable/ic_baseline_delete_sweep_24"
+        app:textColor="@android:color/white"
+        app:textSize="20sp" />
 
     <Button
         android:id="@+id/button4"

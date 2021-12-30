@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">MoneyWallet</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="navigation_drawer_open">open navigation drawer</string>
-    <string name="navigation_drawer_close">close navigation drawer</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="navigation_drawer_open" translatable="false">open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">close navigation drawer</string>
     <string name="delete">Delete</string>
     <string name="edit">Edit</string>
 
@@ -52,6 +52,7 @@
 
     <string-array name="currency">
         <item>PKR</item>
+        <item>USD</item>
         <!--        <item>Week</item>-->
         <!--        <item>Month</item>-->
         <!--        <item>Year</item>-->
